@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<!-- Base Definition -->
+	<definition name="base-definition"
+		template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/tiles/template/defaultHeader.jsp" />
+		<put-attribute name="pageCSS" value=""></put-attribute>
+		<put-attribute name="body" value="" />
+
+		<put-attribute name="footer"
+			value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />
+
+		<put-list-attribute name="requiredCSSFiles">
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles">
+		</put-list-attribute>
+
+	</definition>
+
+
+
+	<!-- Admin page -->
+	<definition name="adminRoot" extends="base-definition">
+		<put-attribute name="title" value="Stock" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/root.jsp" />
+		<put-attribute name="adminBody" value="" cascade="true" />
+
+		<put-list-attribute name="requiredCSSFiles">
+			<add-attribute value="bootstrap" />
+			<add-attribute value="font-awesome" />
+			<add-attribute value="jquery-ui" />
+			<add-attribute value="jquery.dataTables" />
+			<add-attribute value="incomes" />
+			<add-attribute value="app" />
+			<add-attribute value="admin" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles">
+			<add-attribute value="jquery" />
+			<add-attribute value="jquery-ui" />
+			<add-attribute value="bootstrap" />
+			<add-attribute value="jquery.serializejson" />
+			<add-attribute value="jquery.dataTables" />
+			<!-- S-DataTableLib -->
+			<add-attribute value="dt/dataTables.buttons.min" />
+			<add-attribute value="dt/buttons.flash.min" />
+			<add-attribute value="dt/jszip.min" />
+			<add-attribute value="dt/pdfmake.min" />
+			<add-attribute value="dt/vfs_fonts" />
+			<add-attribute value="dt/buttons.html5.min" />
+			<add-attribute value="dt/buttons.print.min" />
+			<!-- E-DataTableLib -->
+			<add-attribute value="app" />
+			<add-attribute value="admin" />
+		</put-list-attribute>
+
+	</definition>
+
+
+
+	<!-- Incomes -->
+	<definition name="incomes" extends="adminRoot">
+		<put-attribute name="title" value="Incomes" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/income/incomes.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="incomes" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="incomes" />
+		</put-list-attribute>
+	</definition>
+	
+	
+	<definition name="getIncome" extends="adminRoot">
+		<put-attribute name="title" value="GetIncome" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/income/income.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="income" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="income" />
+		</put-list-attribute>
+	</definition>
+	
+	
+	<!-- Incomes Categories -->
+	<definition name="incomeCategories" extends="adminRoot">
+		<put-attribute name="title" value="Income Categoreis" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/incomeCategory/incomeCategories.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="incomeCategories" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="incomeCategories" />
+		</put-list-attribute>
+	</definition>
+	
+	
+	
+	<!-- Expenses -->
+	<definition name="expenses" extends="adminRoot">
+		<put-attribute name="title" value="expenses" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/expense/expenses.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="expenses" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="expenses" />
+		</put-list-attribute>
+	</definition>
+	
+	
+	<definition name="getExpense" extends="adminRoot">
+		<put-attribute name="title" value="GetExpense" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/expense/expense.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="expense" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="expense" />
+		</put-list-attribute>
+	</definition>
+	
+	
+	
+	<!-- Expenses Categories -->
+	<definition name="expenseCategories" extends="adminRoot">
+		<put-attribute name="title" value="Expense Categoreis" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/expenseCategory/expenseCategories.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="expenseCategories" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="expenseCategories" />
+		</put-list-attribute>
+	</definition>
+
+
+
+
+</tiles-definitions>

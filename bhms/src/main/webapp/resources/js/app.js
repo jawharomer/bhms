@@ -1,7 +1,7 @@
-var $$ContextURL = "/mms";
+var $$ContextURL = "/bhms";
 
 
-$.datepicker.setDefaults({ changeMonth: true,changeYear: true});
+$.datepicker.setDefaults({ changeMonth: true,changeYear: true,yearRange: "-100:+0"});
 
 function cusConfirm() {
 	var deferred=$.Deferred();

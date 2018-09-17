@@ -65,108 +65,21 @@
 
 
 
-	<!-- Incomes -->
-	<definition name="incomes" extends="adminRoot">
-		<put-attribute name="title" value="Incomes" />
+	<!-- Patients -->
+	<definition name="patients" extends="adminRoot">
+		<put-attribute name="title" value="Patient" />
 		<put-attribute name="adminBody"
-			value="/WEB-INF/views/income/incomes.jsp" cascade="true" />
+			value="/WEB-INF/views/patient/patients.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
 			inherit="true">
-			<add-attribute value="incomes" />
+			<add-attribute value="patients" />
 		</put-list-attribute>
 
 		<put-list-attribute name="requiredJSFiles"
 			inherit="true">
-			<add-attribute value="incomes" />
+			<add-attribute value="patients" />
 		</put-list-attribute>
 	</definition>
-	
-	
-	<definition name="getIncome" extends="adminRoot">
-		<put-attribute name="title" value="GetIncome" />
-		<put-attribute name="adminBody"
-			value="/WEB-INF/views/income/income.jsp" cascade="true" />
-		<put-list-attribute name="requiredCSSFiles"
-			inherit="true">
-			<add-attribute value="income" />
-		</put-list-attribute>
-
-		<put-list-attribute name="requiredJSFiles"
-			inherit="true">
-			<add-attribute value="income" />
-		</put-list-attribute>
-	</definition>
-	
-	
-	<!-- Incomes Categories -->
-	<definition name="incomeCategories" extends="adminRoot">
-		<put-attribute name="title" value="Income Categoreis" />
-		<put-attribute name="adminBody"
-			value="/WEB-INF/views/incomeCategory/incomeCategories.jsp" cascade="true" />
-		<put-list-attribute name="requiredCSSFiles"
-			inherit="true">
-			<add-attribute value="incomeCategories" />
-		</put-list-attribute>
-
-		<put-list-attribute name="requiredJSFiles"
-			inherit="true">
-			<add-attribute value="incomeCategories" />
-		</put-list-attribute>
-	</definition>
-	
-	
-	
-	<!-- Expenses -->
-	<definition name="expenses" extends="adminRoot">
-		<put-attribute name="title" value="expenses" />
-		<put-attribute name="adminBody"
-			value="/WEB-INF/views/expense/expenses.jsp" cascade="true" />
-		<put-list-attribute name="requiredCSSFiles"
-			inherit="true">
-			<add-attribute value="expenses" />
-		</put-list-attribute>
-
-		<put-list-attribute name="requiredJSFiles"
-			inherit="true">
-			<add-attribute value="expenses" />
-		</put-list-attribute>
-	</definition>
-	
-	
-	<definition name="getExpense" extends="adminRoot">
-		<put-attribute name="title" value="GetExpense" />
-		<put-attribute name="adminBody"
-			value="/WEB-INF/views/expense/expense.jsp" cascade="true" />
-		<put-list-attribute name="requiredCSSFiles"
-			inherit="true">
-			<add-attribute value="expense" />
-		</put-list-attribute>
-
-		<put-list-attribute name="requiredJSFiles"
-			inherit="true">
-			<add-attribute value="expense" />
-		</put-list-attribute>
-	</definition>
-	
-	
-	
-	<!-- Expenses Categories -->
-	<definition name="expenseCategories" extends="adminRoot">
-		<put-attribute name="title" value="Expense Categoreis" />
-		<put-attribute name="adminBody"
-			value="/WEB-INF/views/expenseCategory/expenseCategories.jsp" cascade="true" />
-		<put-list-attribute name="requiredCSSFiles"
-			inherit="true">
-			<add-attribute value="expenseCategories" />
-		</put-list-attribute>
-
-		<put-list-attribute name="requiredJSFiles"
-			inherit="true">
-			<add-attribute value="expenseCategories" />
-		</put-list-attribute>
-	</definition>
-
-
 
 
 </tiles-definitions>

@@ -6,7 +6,7 @@
 	<artifactId>mms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>mms</name>
+	<name>bhms</name>
 	<description>money managment system</description>
 
 	<properties>

@@ -15,9 +15,8 @@
 <section id="admin-body">
 	<section id="section-right" class="card">
 		<ul class="list-group">
-			<li class="list-group-item"><a
-				href="<c:url value="/incomes"/>?from=${currentDate}&to=${tomorrow}">
-					Incomes</a></li>
+			<li class="list-group-item"><a href="<c:url value="/patients"/>">
+					Patients</a></li>
 			<li class="list-group-item"><a
 				href="<c:url value="/expenses"/>?from=${currentDate}&to=${tomorrow}">
 					Expenses</a></li>

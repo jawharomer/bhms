@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = { "com.joh.mms.dao" })
+@EnableJpaRepositories(basePackages = { "com.joh.bhms.dao" })
 @PropertySource(value = { "classpath:application.properties" })
 public class RepositoryConfig {
 
@@ -32,7 +32,7 @@ public class RepositoryConfig {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setPackagesToScan(new String[] { "com.joh.mms.model" });
+		sessionFactory.setPackagesToScan(new String[] { "com.joh.bhms.model" });
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}
@@ -54,7 +54,7 @@ public class RepositoryConfig {
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactoryBean.setDataSource(dataSource);
 		entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-		entityManagerFactoryBean.setPackagesToScan("com.joh.mms.model");
+		entityManagerFactoryBean.setPackagesToScan("com.joh.bhms.model");
 		entityManagerFactoryBean.setJpaProperties(hibernateProperties());
 		return entityManagerFactoryBean;
 	}

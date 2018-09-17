@@ -1,19 +1,10 @@
 $(document)
 		.ready(
 				function() {
-
-					$("#from").datepicker({
-						dateFormat : "yy-mm-dd"
-					}).datepicker("setDate", $("#from").val());
-
-					$("#to").datepicker({
-						dateFormat : "yy-mm-dd"
-					}).datepicker("setDate", $("#to").val());
-
 					console.log("Activate data table");
 
 					// S-DataTable
-					$('#expenses-table tfoot th:not(.cus-not-search)')
+					$('#patients-table tfoot th:not(.cus-not-search)')
 							.each(
 									function() {
 										var title = $(this).text();
@@ -22,7 +13,7 @@ $(document)
 														'<input class="form-control fomt-control-sm cus-inline" type="text" />');
 									});
 
-					var table = $('#expenses-table').DataTable({
+					var table = $('#patients-table').DataTable({
 						paginate : false,
 						dom : 'Bfrtip',
 						buttons : [ {
@@ -59,10 +50,10 @@ $(document)
 
 				});
 
-function getAddingExpense() {
-	console.log("getAddingExpense->fired");
+function getAddingPatient() {
+	console.log("getAddingPatient->fired");
 	$.ajax({
-		url : $$ContextURL + '/expenses/add',
+		url : $$ContextURL + '/patients/add',
 		type : 'GET',
 		success : function(response) {
 			$("#modal-body").html(response);
@@ -76,13 +67,13 @@ function getAddingExpense() {
 
 }
 
-function deleteExpense(id) {
-	console.log("deleteExpense->fired");
+function deleteIncome(id) {
+	console.log("deleteIncome->fired");
 	console.log("id=" + id);
 
 	$.when(cusConfirm()).done(function() {
 		$.ajax({
-			url : $$ContextURL + '/expenses/delete/' + id,
+			url : $$ContextURL + '/incomes/delete/' + id,
 			type : 'POST',
 			success : function(response) {
 				$("#modal-body").html(response);

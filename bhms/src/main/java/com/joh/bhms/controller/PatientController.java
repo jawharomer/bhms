@@ -20,6 +20,7 @@ import com.joh.bhms.service.VisitReferenceService;
 @Controller
 @RequestMapping(path = "/patients")
 public class PatientController {
+	
 	private static final Logger logger = Logger.getLogger(PatientController.class);
 
 	@Autowired

@@ -17,6 +17,9 @@
 		<ul class="list-group">
 			<li class="list-group-item"><a href="<c:url value="/patients"/>">
 					Patients</a></li>
+
+			<li class="list-group-item"><a
+				href="<c:url value="/patientVisits"/>"> PV</a></li>
 			<li class="list-group-item"><a
 				href="<c:url value="/expenses"/>?from=${currentDate}&to=${tomorrow}">
 					Expenses</a></li>

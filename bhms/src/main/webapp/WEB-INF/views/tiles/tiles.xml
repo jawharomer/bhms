@@ -46,6 +46,7 @@
 			<add-attribute value="jquery" />
 			<add-attribute value="jquery-ui" />
 			<add-attribute value="bootstrap" />
+			<add-attribute value="angular" />
 			<add-attribute value="jquery.serializejson" />
 			<add-attribute value="jquery.dataTables" />
 			<!-- S-DataTableLib -->
@@ -78,6 +79,62 @@
 		<put-list-attribute name="requiredJSFiles"
 			inherit="true">
 			<add-attribute value="patients" />
+		</put-list-attribute>
+	</definition>
+
+
+
+	<!-- PatientVisits -->
+	<definition name="patientVisits" extends="adminRoot">
+		<put-attribute name="title" value="Patient" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/patientVisit/patientVisits.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="patients" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="patients" />
+		</put-list-attribute>
+	</definition>
+
+
+
+	<!-- AddPatientVisit -->
+	<definition name="addPatientVisit" extends="adminRoot">
+		<put-attribute name="title" value="AddPatienVisit" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/patientVisit/addPatientVisit.jsp"
+			cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="addPatientVisit" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="addPatientVisit" />
+		</put-list-attribute>
+	</definition>
+
+
+
+	<!-- PatientVisitPayments -->
+	<definition name="patientVisitPayments" extends="adminRoot">
+		<put-attribute name="title" value="AddPatienVisit" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/visitPayment/patientVisitPayments.jsp"
+			cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="patientVisitPayments" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="patientVisitPayments" />
 		</put-list-attribute>
 	</definition>
 

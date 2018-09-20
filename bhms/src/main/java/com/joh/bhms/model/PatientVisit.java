@@ -1,5 +1,6 @@
 package com.joh.bhms.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,6 +28,10 @@ public class PatientVisit {
 	@Column(name = "I_PATIENT_VISIT")
 	private Integer id;
 
+	@ManyToOne()
+	@JoinColumn(name = "I_PATIENT", nullable = false)
+	private Patient patient;
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	@Column(name = "VISIT_DATE", updatable = false)
@@ -34,15 +40,15 @@ public class PatientVisit {
 	@Column(name = "NOTE")
 	private String note;
 
-	@Column(name = "PAYMENT_AMOUNT")
-	private Double paymentAmount;
-
 	@OneToMany()
 	@JoinTable(name = "PATIENT_VISIT_DOCTORS", joinColumns = @JoinColumn(name = "I_VISIT"), inverseJoinColumns = @JoinColumn(name = "I_DOCTOR"))
-	private List<Doctor> doctor;
+	private List<Doctor> doctors = new ArrayList<>();
 
 	@OneToMany(mappedBy = "patientVisit")
-	private List<PatientOperation> patientOperations;
+	private List<PatientOperation> patientOperations = new ArrayList<>();
+
+	@OneToMany(mappedBy = "patientVisit")
+	private List<VisitPayment> visitPayments = new ArrayList<>();
 
 	public Integer getId() {
 		return id;
@@ -68,20 +74,24 @@ public class PatientVisit {
 		this.note = note;
 	}
 
-	public Double getPaymentAmount() {
-		return paymentAmount;
+	public List<VisitPayment> getVisitPayments() {
+		return visitPayments;
 	}
 
-	public void setPaymentAmount(Double paymentAmount) {
-		this.paymentAmount = paymentAmount;
+	public Patient getPatient() {
+		return patient;
 	}
 
-	public List<Doctor> getDoctor() {
-		return doctor;
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 
-	public void setDoctor(List<Doctor> doctor) {
-		this.doctor = doctor;
+	public List<Doctor> getDoctors() {
+		return doctors;
+	}
+
+	public void setDoctors(List<Doctor> doctors) {
+		this.doctors = doctors;
 	}
 
 	public List<PatientOperation> getPatientOperations() {
@@ -92,10 +102,15 @@ public class PatientVisit {
 		this.patientOperations = patientOperations;
 	}
 
+	public void setVisitPayments(List<VisitPayment> visitPayments) {
+		this.visitPayments = visitPayments;
+	}
+
 	@Override
 	public String toString() {
-		return "PatientVisit [id=" + id + ", visitDate=" + visitDate + ", note=" + note + ", paymentAmount="
-				+ paymentAmount + ", doctor=" + doctor + ", patientOperations=" + patientOperations + "]";
+		return "PatientVisit [id=" + id + ", patient=" + patient + ", visitDate=" + visitDate + ", note=" + note
+				+ ", doctors=" + doctors + ", patientOperations=" + patientOperations + ", visitPayments="
+				+ visitPayments + "]";
 	}
 
 }

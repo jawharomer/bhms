@@ -8,4 +8,6 @@ public interface PatienService {
 
 	Patient save(Patient patient);
 
+	Patient findOne(int id);
+
 }

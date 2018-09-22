@@ -12,7 +12,6 @@ public class AppController {
 	@GetMapping("/login")
 	public String login() {
 		logger.info("login->fired");
-
 		return "login";
 	}
 

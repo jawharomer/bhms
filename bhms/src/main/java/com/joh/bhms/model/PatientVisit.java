@@ -13,11 +13,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.joh.bhms.validator.PatientVisitValidation;
 
 @Entity
 @Table(name = "PATIENT_VISITS")
@@ -28,14 +34,17 @@ public class PatientVisit {
 	@Column(name = "I_PATIENT_VISIT")
 	private Integer id;
 
+	@Valid
+	@NotNull(groups = { PatientVisitValidation.Insert.class })
 	@ManyToOne()
 	@JoinColumn(name = "I_PATIENT", nullable = false)
 	private Patient patient;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Temporal(TemporalType.DATE)
-	@Column(name = "VISIT_DATE", updatable = false)
-	private Date visitDate;
+	@Column(name = "VISIT_TIME")
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
+	@ColumnDefault("CURRENT_TIMESTAMP")
+	private Date time;
 
 	@Column(name = "NOTE")
 	private String note;
@@ -58,12 +67,20 @@ public class PatientVisit {
 		this.id = id;
 	}
 
-	public Date getVisitDate() {
-		return visitDate;
+	public Patient getPatient() {
+		return patient;
 	}
 
-	public void setVisitDate(Date visitDate) {
-		this.visitDate = visitDate;
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
 	}
 
 	public String getNote() {
@@ -72,18 +89,6 @@ public class PatientVisit {
 
 	public void setNote(String note) {
 		this.note = note;
-	}
-
-	public List<VisitPayment> getVisitPayments() {
-		return visitPayments;
-	}
-
-	public Patient getPatient() {
-		return patient;
-	}
-
-	public void setPatient(Patient patient) {
-		this.patient = patient;
 	}
 
 	public List<Doctor> getDoctors() {
@@ -102,15 +107,18 @@ public class PatientVisit {
 		this.patientOperations = patientOperations;
 	}
 
+	public List<VisitPayment> getVisitPayments() {
+		return visitPayments;
+	}
+
 	public void setVisitPayments(List<VisitPayment> visitPayments) {
 		this.visitPayments = visitPayments;
 	}
 
 	@Override
 	public String toString() {
-		return "PatientVisit [id=" + id + ", patient=" + patient + ", visitDate=" + visitDate + ", note=" + note
-				+ ", doctors=" + doctors + ", patientOperations=" + patientOperations + ", visitPayments="
-				+ visitPayments + "]";
+		return "PatientVisit [id=" + id + ", patient=" + patient + ", time=" + time + ", note=" + note + ", doctors="
+				+ doctors + ", patientOperations=" + patientOperations + ", visitPayments=" + visitPayments + "]";
 	}
 
 }

@@ -68,4 +68,23 @@ app.controller('addPatientVisit', function($scope, $http) {
 		$scope.patientVisit.doctors.splice(index, 1);
 	}
 
+	$scope.save = function() {
+		console.log("save->fired");
+		console.log("$scope.patientVisit=", $scope.patientVisit);
+
+		$http({
+			method : 'POST',
+			data : $scope.patientVisit,
+			url : $$ContextURL + '/patientVisits/add'
+		}).then(function(response) {
+			console.log(response);
+			$("#modal-body").html(response.data.message);
+			$("#modal").modal("show");
+		}, function(response) {
+			$("#modal-body").html(response.data);
+			$("#modal").modal("show");
+		});
+
+	}
+
 });

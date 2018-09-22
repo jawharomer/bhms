@@ -17,5 +17,10 @@ public class VisitPaymentServiceImpl implements VisitPaymentService {
 	public List<VisitPayment> findAllByPatientVisitId(int id) {
 		return visitPaymentDAO.findAllByPatientVisitId(id);
 	}
+	
+	@Override
+	public VisitPayment save(VisitPayment visitPayment) {
+		return visitPaymentDAO.save(visitPayment);
+	}
 
 }

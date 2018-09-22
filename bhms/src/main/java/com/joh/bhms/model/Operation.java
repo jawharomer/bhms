@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "OPERATIONS")
@@ -16,9 +19,11 @@ public class Operation {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	@NotBlank(message = "name is blank")
 	@Column(name = "OPERATION_NAME")
 	private String name;
 
+	@NotNull(message = "price is null")
 	@Column(name = "PRICE")
 	private Double price;
 

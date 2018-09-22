@@ -1,17 +1,13 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
-<%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
 
 <div>
 	<sf:form id="add-visit-payment-form" method="POST"
 		commandName="visitPayment" onsubmit="addVisitPayment(event)">
 
-		<input name="patientVisit[id]" value="visitPayment.patientVisit[id]">
+		<input name="patientVisit[id]" value="${visitPayment.patientVisit.id}">
 		<table class="w-100">
 			<tbody>
 
@@ -53,19 +49,19 @@
 		var data = $("#add-visit-payment-form").serializeJSON();
 		console.log("data=", data);
 
-		$
-				.ajax({
-					type : "POST",
-					url : "<c:url value="/classSubjects/add/classLevel/"/>${classLevelId}",
-					data : JSON.stringify(data),
-					contentType : "application/json",
-					success : function(response) {
-						$("#add-class-subject-container").html(response);
-					},
-					error : function(response) {
-						$("#modal-body").html(response.responseText);
-						$("#modal").modal("show");
-					}
-				});
+		$.ajax({
+			type : "POST",
+			url : "<c:url value="/visitPayments/add"/>",
+			data : JSON.stringify(data),
+			contentType : "application/json",
+			success : function(response) {
+				$("#modal-body").html(response);
+				$("#modal").modal("show");
+			},
+			error : function(response) {
+				$("#modal-body").html(response.responseText);
+				$("#modal").modal("show");
+			}
+		});
 	}
 </script>

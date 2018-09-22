@@ -2,12 +2,17 @@ package com.joh.bhms.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.joh.bhms.model.PatientVisit;
@@ -27,8 +32,11 @@ public class VisitPaymentController {
 	public String getAllVisitPatientPayment(@PathVariable int id, Model model) {
 		logger.info("getAllVisitPatientPayment->fired");
 
+		logger.info("patientVisitId=" + id);
+
 		List<VisitPayment> visitPayments = visitPaymentService.findAllByPatientVisitId(id);
 
+		model.addAttribute("patientVisitId", id);
 		model.addAttribute("visitPayments", visitPayments);
 
 		return "patientVisitPayments";
@@ -49,6 +57,24 @@ public class VisitPaymentController {
 		model.addAttribute("visitPayment", visitPayment);
 
 		return "visitPayment/addVisitPayment";
+	}
+
+	@PostMapping(path = "/add")
+	public String addVisitPayment(@RequestBody @Valid VisitPayment visitPayment, BindingResult result, Model model) {
+		logger.info("addVisitPayment->fired");
+		logger.info("visitPayment=" + visitPayment);
+		logger.info("visitPayment.patientVisit=" + visitPayment.getPatientVisit());
+
+		logger.info("errors=" + result.getAllErrors());
+
+		if (result.hasErrors()) {
+			model.addAttribute("visitPayment", visitPayment);
+			return "visitPayment/addVisitPayment";
+		} else {
+			visitPaymentService.save(visitPayment);
+			return "success";
+		}
+
 	}
 
 }

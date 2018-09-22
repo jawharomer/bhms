@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,11 +17,12 @@ import com.joh.bhms.model.Patient;
 import com.joh.bhms.model.VisitReference;
 import com.joh.bhms.service.PatienService;
 import com.joh.bhms.service.VisitReferenceService;
+import com.joh.bhms.validator.PatientValidation;
 
 @Controller
 @RequestMapping(path = "/patients")
 public class PatientController {
-	
+
 	private static final Logger logger = Logger.getLogger(PatientController.class);
 
 	@Autowired
@@ -52,7 +54,8 @@ public class PatientController {
 	}
 
 	@PostMapping(path = "/add")
-	public String addPatient(@RequestBody @Valid Patient patient, BindingResult result, Model model) {
+	public String addPatient(@RequestBody @Validated(PatientValidation.Insert.class) Patient patient,
+			BindingResult result, Model model) {
 		logger.info("addPatient->fired");
 
 		logger.info("patient=" + patient);

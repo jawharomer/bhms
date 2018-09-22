@@ -21,6 +21,13 @@
 			<li class="list-group-item"><a
 				href="<c:url value="/patientVisits"/>"> PV</a></li>
 			<li class="list-group-item"><a
+				href="<c:url value="/operations"/>">Operations</a></li>
+
+
+			<li class="list-group-item"><a
+				href="<c:url value="/doctors"/>">Doctors</a></li>
+
+			<li class="list-group-item"><a
 				href="<c:url value="/expenses"/>?from=${currentDate}&to=${tomorrow}">
 					Expenses</a></li>
 			<li class="list-group-item"><a
@@ -29,6 +36,7 @@
 
 			<li class="list-group-item"><a
 				href="<c:url value="/expenseCategories"/>"> Expense Categories</a></li>
+
 
 
 		</ul>

@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name = "DOCTORS")
 public class Doctor {
@@ -15,6 +17,7 @@ public class Doctor {
 	@Column(name = "I_DOCTOR")
 	private Integer id;
 
+	@NotBlank(message = "full name is blank")
 	@Column(name = "FULL_NAME", nullable = false, unique = true)
 	private String fullName;
 

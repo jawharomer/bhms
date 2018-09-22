@@ -57,7 +57,7 @@
 					<td>VisitReference</td>
 					<td><select class="form-control form-control-sm"
 						name="visitReference[id]">
-							<option>Choose</option>
+							<option value="">Choose</option>
 							<c:forEach items="${visitReferences}" var="item">
 								<c:choose>
 									<c:when test="${patient.visitReference.id==item.id}">

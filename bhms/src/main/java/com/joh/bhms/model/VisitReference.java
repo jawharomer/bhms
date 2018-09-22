@@ -6,10 +6,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import com.joh.bhms.validator.PatientValidation;
 
 @Entity
 @Table(name = "VISIT_REFERENCES")
 public class VisitReference {
+
+	@NotNull(groups = { PatientValidation.Insert.class },message="visit reference is null")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "I_VISIT_REFERENCE")

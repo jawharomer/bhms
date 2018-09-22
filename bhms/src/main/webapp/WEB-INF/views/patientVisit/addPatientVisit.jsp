@@ -121,5 +121,9 @@
 
 	</div>
 
+	<button class="btn btn-success" ng-click="save()">
+		<i class="fa fa-save"></i>
+	</button>
+
 
 </div>

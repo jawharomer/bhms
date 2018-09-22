@@ -12,8 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "VISIT_PAYMENTS")
@@ -28,14 +31,17 @@ public class VisitPayment {
 	@JoinColumn(name = "I_PATIENT_VISIT", nullable = false)
 	private PatientVisit patientVisit;
 
+	@NotNull(message = "payment amount is null")
 	@Column(name = "PAYMENT_AMOUNT")
 	private Double paymentAmount;
 
 	@Column(name = "NOTE")
 	private String note;
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "PAYMENT_TIME", updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
+	@ColumnDefault("CURRENT_TIMESTAMP")
 	private Date time;
 
 	public Integer getId() {

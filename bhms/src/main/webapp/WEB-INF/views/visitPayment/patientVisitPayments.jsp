@@ -2,12 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-
 <div>
 	<div class="py-2">
 		<h3>Patient Visit Payments</h3>
-		<button class="btn btn-success" onclick="getAddingVisitPayment()">
+		<button class="btn btn-success"
+			onclick="getAddingVisitPayment(${patientVisitId})">
 			<i class="fa fa-plus"></i>
 		</button>
 

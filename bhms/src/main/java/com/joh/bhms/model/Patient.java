@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -21,24 +22,28 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.joh.bhms.validator.PatientValidation;
+import com.joh.bhms.validator.PatientVisitValidation;
+
 @Entity
 
 @Table(name = "PATIENTS")
 public class Patient {
 
+	@NotNull(groups = { PatientVisitValidation.Insert.class }, message = "patient id is null")
 	@Column(name = "I_PATIENT")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	@NotBlank(message = "full name is balnk")
+	@NotBlank(groups = { PatientValidation.Insert.class }, message = "full name is balnk")
 	@Column(name = "FULL_NAME", nullable = false, unique = true)
 	private String fullName;
 
 	@Column(name = "PHONE")
 	private String phone;
 
-	@NotNull(message = "birthDate is blank")
+	@NotNull(groups = { PatientValidation.Insert.class }, message = "birthDate is blank")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	@Column(name = "BIRTH_DATE")
@@ -50,10 +55,11 @@ public class Patient {
 	@Column(name = "MARITAL_STATUS")
 	private String maritalStatus;
 
-	@Min(value = 0)
-	@Max(value = 1)
+	@NotNull(groups = { PatientValidation.Insert.class }, message = "gender is null")
+	@Min(groups = { PatientValidation.Insert.class }, value = 0)
+	@Max(groups = { PatientValidation.Insert.class }, value = 1)
 	@Column(name = "GENDER")
-	private int gender;
+	private Integer gender;
 
 	@Column(name = "ENROLLMENT_TIME", insertable = false)
 	@Temporal(TemporalType.TIMESTAMP)
@@ -61,7 +67,9 @@ public class Patient {
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	private Date time;
 
-	@ManyToOne
+	@Valid()
+	@NotNull(groups = { PatientValidation.Insert.class }, message = "visit reference is null")
+	@ManyToOne()
 	@JoinColumn(name = "I_VISIT_REFERENCE")
 	private VisitReference visitReference;
 
@@ -113,6 +121,22 @@ public class Patient {
 		this.maritalStatus = maritalStatus;
 	}
 
+	public Integer getGender() {
+		return gender;
+	}
+
+	public void setGender(Integer gender) {
+		this.gender = gender;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
+	}
+
 	public VisitReference getVisitReference() {
 		return visitReference;
 	}
@@ -121,18 +145,10 @@ public class Patient {
 		this.visitReference = visitReference;
 	}
 
-	public int getGender() {
-		return gender;
-	}
-
-	public void setGender(int gender) {
-		this.gender = gender;
-	}
-
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", fullName=" + fullName + ", phone=" + phone + ", birthDate=" + birthDate
-				+ ", address=" + address + ", maritalStatus=" + maritalStatus + ", gender=" + gender
+				+ ", address=" + address + ", maritalStatus=" + maritalStatus + ", gender=" + gender + ", time=" + time
 				+ ", visitReference=" + visitReference + "]";
 	}
 

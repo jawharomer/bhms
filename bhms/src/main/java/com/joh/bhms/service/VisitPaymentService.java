@@ -8,4 +8,6 @@ public interface VisitPaymentService {
 
 	List<VisitPayment> findAllByPatientVisitId(int id);
 
+	VisitPayment save(VisitPayment visitPayment);
+
 }

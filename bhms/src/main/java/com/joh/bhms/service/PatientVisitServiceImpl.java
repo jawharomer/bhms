@@ -1,6 +1,7 @@
 package com.joh.bhms.service;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -31,8 +32,8 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 	}
 
 	@Override
-	public Iterable<PatientVisit> findAll() {
-		return patientVisitDAO.findAll();
+	public Iterable<PatientVisit> findAllByTimeBetween(Date from,Date to) {
+		return patientVisitDAO.findAllByTimeBetween(from, to);
 	}
 
 	@Transactional

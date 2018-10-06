@@ -19,26 +19,17 @@
 					Patients</a></li>
 
 			<li class="list-group-item"><a
-				href="<c:url value="/patientVisits"/>"> PV</a></li>
+				href="<c:url value="/patientVisits"/>?from=${currentDate}&to=${tomorrow}">
+					Patient Visits</a></li>
+
+
+			<li class="list-group-item"><a
+				href="<c:url value="/patientVisits/patientProductUseds"/>?from=${currentDate}&to=${tomorrow}">
+					Patient Product Used</a></li>
+
 			<li class="list-group-item"><a
 				href="<c:url value="/operations"/>">Operations</a></li>
-
-
-			<li class="list-group-item"><a
-				href="<c:url value="/doctors"/>">Doctors</a></li>
-
-			<li class="list-group-item"><a
-				href="<c:url value="/expenses"/>?from=${currentDate}&to=${tomorrow}">
-					Expenses</a></li>
-			<li class="list-group-item"><a
-				href="<c:url value="/incomeCategories"/>"> Income Categories</a></li>
-
-
-			<li class="list-group-item"><a
-				href="<c:url value="/expenseCategories"/>"> Expense Categories</a></li>
-
-
-
+			<li class="list-group-item"><a href="<c:url value="/doctors"/>">Doctors</a></li>
 		</ul>
 	</section>
 

@@ -104,6 +104,7 @@ app.controller('addPatientVisit', function($scope, $http) {
 
 		var formData = new FormData();
 		formData.append("file", document.getElementById('file').files[0]);
+		
 		$http(
 				{
 					method : 'POST',
@@ -117,6 +118,9 @@ app.controller('addPatientVisit', function($scope, $http) {
 						return data;
 					}
 				}).then(function(response) {
+
+			document.getElementById('file').value = "";// reset
+
 			console.log(response);
 			$("#modal-body").html(response.data);
 			$("#modal").modal("show");

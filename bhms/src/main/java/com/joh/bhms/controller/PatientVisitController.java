@@ -1,11 +1,13 @@
 package com.joh.bhms.controller;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +28,6 @@ import com.joh.bhms.model.Doctor;
 import com.joh.bhms.model.Operation;
 import com.joh.bhms.model.Patient;
 import com.joh.bhms.model.PatientVisit;
-import com.joh.bhms.service.AttachedFileService;
 import com.joh.bhms.service.DoctorService;
 import com.joh.bhms.service.OperationService;
 import com.joh.bhms.service.PatienService;
@@ -50,18 +51,21 @@ public class PatientVisitController {
 	@Autowired
 	private PatientVisitService patientVisitService;
 
-	@Autowired
-	private AttachedFileService attachedFileService;
-
 	@GetMapping()
-	public String getAllPatientVisit(Model model) {
+	public String getAllPatientVisit(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date to, Model model) {
 		logger.info("getAllPatientVisit->fired");
 
-		Iterable<PatientVisit> patientVisits = patientVisitService.findAll();
+		logger.info("from=" + from);
+		logger.info("to=" + to);
+
+		Iterable<PatientVisit> patientVisits = patientVisitService.findAllByTimeBetween(from, to);
 
 		logger.info("patientVisits=" + patientVisits);
 
 		model.addAttribute("patientVisits", patientVisits);
+		model.addAttribute("from", from);
+		model.addAttribute("to", to);
 
 		return "patientVisits";
 	}
@@ -178,6 +182,25 @@ public class PatientVisitController {
 
 		return "success";
 
+	}
+
+	@GetMapping(path = "/patientProductUseds")
+	public String getAllPatietnProductUsed(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date to, Model model) {
+		logger.info("getAllPatietnProductUsed->fired");
+
+		logger.info("from=" + from);
+		logger.info("to=" + to);
+
+		Iterable<PatientVisit> patientVisits = patientVisitService.findAllByTimeBetween(from, to);
+
+		logger.info("patientVisits=" + patientVisits);
+
+		model.addAttribute("patientVisits", patientVisits);
+		model.addAttribute("from", from);
+		model.addAttribute("to", to);
+
+		return "patientProductUseds";
 	}
 
 }

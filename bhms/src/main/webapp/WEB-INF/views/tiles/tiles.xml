@@ -37,7 +37,6 @@
 			<add-attribute value="font-awesome" />
 			<add-attribute value="jquery-ui" />
 			<add-attribute value="jquery.dataTables" />
-			<add-attribute value="incomes" />
 			<add-attribute value="app" />
 			<add-attribute value="admin" />
 		</put-list-attribute>
@@ -82,8 +81,6 @@
 		</put-list-attribute>
 	</definition>
 
-
-
 	<!-- PatientVisits -->
 	<definition name="patientVisits" extends="adminRoot">
 		<put-attribute name="title" value="Patient" />
@@ -91,12 +88,30 @@
 			value="/WEB-INF/views/patientVisit/patientVisits.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
 			inherit="true">
-			<add-attribute value="patients" />
+			<add-attribute value="patientVisits" />
 		</put-list-attribute>
 
 		<put-list-attribute name="requiredJSFiles"
 			inherit="true">
-			<add-attribute value="patients" />
+			<add-attribute value="patientVisits" />
+		</put-list-attribute>
+	</definition>
+
+
+	<!-- PatientProductUsed -->
+	<definition name="patientProductUseds" extends="adminRoot">
+		<put-attribute name="title" value="Patient" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/patientVisit/patientProductUseds.jsp"
+			cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="patientProductUseds" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="patientProductUseds" />
 		</put-list-attribute>
 	</definition>
 

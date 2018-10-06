@@ -79,6 +79,7 @@
 
 
 	<div>
+		{{selectedDoctor}}
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -119,6 +120,7 @@
 		</table>
 
 	</div>
+
 	<div>
 		<table class="table table-bordered">
 			<thead>
@@ -159,9 +161,38 @@
 
 	</div>
 
-	<button class="btn btn-success" ng-click="save()">
+	<div>
+		<div class="p-2">
+			<input class="form-contrl d-inline-block" id="file" type="file">
+			<button class="btn btn-sm btn-success" ng-click="addAttachedFile()">
+				<i class="fa fa-image"></i>
+			</button>
+		</div>
+
+		<div class="p-1">
+
+			<table style="width: auto;">
+				<tr ng-repeat="item in patientVisit.attachedFiles">
+					<td><a data-fancybox="gallery"
+						href="<c:url value="/attachedFiles/0/" />{{item.id}}"> <img
+							src="<c:url value="/attachedFiles/1/" />{{item.id}}">
+					</a></td>
+					<td>
+						<button class="btn btn-danger btn-sm roundled-circle"
+							ng-click="deleteAttachedFile(item.id)">
+							<i class="fa fa-times"></i>
+						</button>
+					</td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+
+	<button class="btn btn-warning" ng-click="save()">
 		<i class="fa fa-save"></i>
 	</button>
+
 
 
 </div>

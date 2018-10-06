@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.joh.bhms.model.PatientVisit;
 import com.joh.bhms.model.VisitPayment;
+import com.joh.bhms.service.PatientVisitService;
 import com.joh.bhms.service.VisitPaymentService;
 
 @Controller
@@ -28,6 +29,9 @@ public class VisitPaymentController {
 	@Autowired
 	private VisitPaymentService visitPaymentService;
 
+	@Autowired
+	private PatientVisitService patientVisitService;
+
 	@GetMapping(path = "/patientVisit/{id}")
 	public String getAllVisitPatientPayment(@PathVariable int id, Model model) {
 		logger.info("getAllVisitPatientPayment->fired");
@@ -36,7 +40,7 @@ public class VisitPaymentController {
 
 		List<VisitPayment> visitPayments = visitPaymentService.findAllByPatientVisitId(id);
 
-		model.addAttribute("patientVisitId", id);
+		model.addAttribute("patientVisit", patientVisitService.findOne(id));
 		model.addAttribute("visitPayments", visitPayments);
 
 		return "patientVisitPayments";

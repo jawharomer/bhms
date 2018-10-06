@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.joh.bhms.model.Doctor;
-import com.joh.bhms.model.Operation;
 import com.joh.bhms.service.DoctorService;
-import com.joh.bhms.service.OperationService;
 
 @Controller
 @RequestMapping(path = "/doctors")

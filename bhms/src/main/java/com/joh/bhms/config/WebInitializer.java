@@ -1,9 +1,13 @@
 package com.joh.bhms.config;
 
+import java.io.File;
+
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.FilterRegistration.Dynamic;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +16,8 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+	private final int maxUploadFileSize = 2 * 1024 * 1024; // 5 MB
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(WebInitializer.class);
 
@@ -50,6 +56,18 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		openEntityInViewFilter.setEntityManagerFactoryBeanName("entityManagerFactory");
 		Dynamic filterRegistration = servletContext.addFilter("openEntityInViewFilter", openEntityInViewFilter);
 		filterRegistration.addMappingForUrlPatterns(null, true, "/*");
+	}
+
+	@Override
+	protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+
+		File uploadDirectory = new File(System.getProperty("java.io.tmpdir"));
+
+		MultipartConfigElement multipartConfigElement = new MultipartConfigElement(uploadDirectory.getAbsolutePath(),
+				maxUploadFileSize, maxUploadFileSize * 2, maxUploadFileSize / 2);
+
+		registration.setMultipartConfig(multipartConfigElement);
+
 	}
 
 }

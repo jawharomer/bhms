@@ -4,25 +4,27 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.joh.bhms.validator.PatientVisitValidation;
 
 @Entity
@@ -49,7 +51,7 @@ public class PatientVisit {
 	@Column(name = "NOTE")
 	private String note;
 
-	@OneToMany()
+	@ManyToMany()
 	@JoinTable(name = "PATIENT_VISIT_DOCTORS", joinColumns = @JoinColumn(name = "I_VISIT"), inverseJoinColumns = @JoinColumn(name = "I_DOCTOR"))
 	private List<Doctor> doctors = new ArrayList<>();
 
@@ -58,6 +60,15 @@ public class PatientVisit {
 
 	@OneToMany(mappedBy = "patientVisit")
 	private List<VisitPayment> visitPayments = new ArrayList<>();
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "I_PATIENT_VISIT")
+	private List<PatientProductUsed> patientProductUseds = new ArrayList<>();
+
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "PATIENT_VISIT_ATTACHED_FILES", joinColumns = @JoinColumn(name = "I_PATIENT_VISIT"), inverseJoinColumns = @JoinColumn(name = "I_ATTACHED_FILE"))
+	private List<AttachedFile> attachedFiles = new ArrayList<>();
 
 	public Integer getId() {
 		return id;
@@ -115,10 +126,27 @@ public class PatientVisit {
 		this.visitPayments = visitPayments;
 	}
 
+	public List<AttachedFile> getAttachedFiles() {
+		return attachedFiles;
+	}
+
+	public void setAttachedFiles(List<AttachedFile> attachedFiles) {
+		this.attachedFiles = attachedFiles;
+	}
+
+	public List<PatientProductUsed> getPatientProductUseds() {
+		return patientProductUseds;
+	}
+
+	public void setPatientProductUseds(List<PatientProductUsed> patientProductUseds) {
+		this.patientProductUseds = patientProductUseds;
+	}
+
 	@Override
 	public String toString() {
 		return "PatientVisit [id=" + id + ", patient=" + patient + ", time=" + time + ", note=" + note + ", doctors="
-				+ doctors + ", patientOperations=" + patientOperations + ", visitPayments=" + visitPayments + "]";
+				+ doctors + ", patientOperations=" + patientOperations + ", visitPayments=" + visitPayments
+				+ ", patientProductUseds=" + patientProductUseds + ", attachedFiles=" + attachedFiles + "]";
 	}
 
 }

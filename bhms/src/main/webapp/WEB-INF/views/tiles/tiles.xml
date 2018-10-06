@@ -120,6 +120,26 @@
 	</definition>
 
 
+	<!-- EditPatientVisit -->
+	<definition name="editPatientVisit" extends="adminRoot">
+		<put-attribute name="title" value="EditPatienVisit" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/patientVisit/editPatientVisit.jsp"
+			cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="editPatientVisit" />
+			<add-attribute value="jquery.fancybox" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="editPatientVisit" />
+			<add-attribute value="jquery.fancybox" />
+		</put-list-attribute>
+	</definition>
+
+
 
 	<!-- PatientVisitPayments -->
 	<definition name="patientVisitPayments" extends="adminRoot">
@@ -155,9 +175,9 @@
 			<add-attribute value="operations" />
 		</put-list-attribute>
 	</definition>
-	
-	
-	
+
+
+
 	<!-- Doctors -->
 	<definition name="doctors" extends="adminRoot">
 		<put-attribute name="title" value="AddPatienVisit" />

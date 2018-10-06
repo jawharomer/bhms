@@ -20,6 +20,9 @@
 		<apachetiles.version>3.0.5</apachetiles.version>
 		<jackson.library>2.7.5</jackson.library>
 		<springsecurity.version>4.0.4.RELEASE</springsecurity.version>
+		<apache.commons.io.version>
+			2.5
+		</apache.commons.io.version>
 	</properties>
 
 	<dependencies>
@@ -179,6 +182,15 @@
 			<artifactId>gson</artifactId>
 			<version>2.3.1</version>
 		</dependency>
+
+
+		<!-- Appache Commond IO -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${apache.commons.io.version}</version>
+		</dependency>
+
 
 
 	</dependencies>

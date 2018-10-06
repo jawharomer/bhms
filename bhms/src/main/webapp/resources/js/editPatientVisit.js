@@ -6,12 +6,6 @@ app.controller('addPatientVisit', function($scope, $http) {
 	$scope.patientVisit = {};
 
 	$scope.operations = [];
-	$scope.newProductUsed = {
-		id : "",
-		name : "",
-		code : ""
-	};
-	$scope.resetNewProductUsed = angular.copy($scope.newProductUsed);
 
 	$scope.doctors;
 	$scope.selectedDoctor;
@@ -45,7 +39,6 @@ app.controller('addPatientVisit', function($scope, $http) {
 		$scope.doctors = JSON.parse(jsonDoctors);
 
 	};
-	
 	$scope.addOperation = function() {
 		console.log("addOperation->fired");
 		var item = {};
@@ -71,7 +64,6 @@ app.controller('addPatientVisit', function($scope, $http) {
 		}
 		$scope.selectedDoctor = null;
 	}
-	
 	$scope.deleteDoctor = function(index) {
 		$scope.patientVisit.doctors.splice(index, 1);
 	}
@@ -83,7 +75,7 @@ app.controller('addPatientVisit', function($scope, $http) {
 		$scope.newProductUsed = angular.copy($scope.resetNewProductUsed);
 
 	}
-	
+
 	$scope.deleteProductUsed = function(index) {
 		$scope.patientVisit.patientProductUseds.splice(index, 1);
 	}
@@ -95,24 +87,64 @@ app.controller('addPatientVisit', function($scope, $http) {
 		$http({
 			method : 'POST',
 			data : $scope.patientVisit,
-			url : $$ContextURL + '/patientVisits/add'
-		}).then(
-				function(response) {
-					console.log(response);
-					if (response.data.status == 200) {
-						$("#modal-body").html(response.data.message);
-						$("#modal").modal("show");
-						setTimeout(function() {
-							window.location.href = $$ContextURL
-									+ '/patientVisits/edit/'
-									+ response.data.etc;
-						}, 1000);
+			url : $$ContextURL + '/patientVisits/update'
+		}).then(function(response) {
+			console.log(response);
+			$("#modal-body").html(response.data);
+			$("#modal").modal("show");
+		}, function(response) {
+			$("#modal-body").html(response.data);
+			$("#modal").modal("show");
+		});
 
+	}
+
+	$scope.addAttachedFile = function() {
+		console.log("addAttachedFile->fired");
+
+		var formData = new FormData();
+		formData.append("file", document.getElementById('file').files[0]);
+		$http(
+				{
+					method : 'POST',
+					url : $$ContextURL + "/patientVisits/"
+							+ $scope.patientVisit.id + "/attachedFile",
+					headers : {
+						'Content-Type' : undefined
+					},
+					data : formData,
+					transformRequest : function(data, headersGetterFunction) {
+						return data;
 					}
-				}, function(response) {
-					$("#modal-body").html(response.data);
-					$("#modal").modal("show");
-				});
+				}).then(function(response) {
+			console.log(response);
+			$("#modal-body").html(response.data);
+			$("#modal").modal("show");
+		}, function(response) {
+			$("#modal-body").html(response.data);
+			$("#modal").modal("show");
+		});
+
+	}
+
+	$scope.deleteAttachedFile = function(attachedFileId) {
+		console.log("deleteAttachedFile->fired");
+		console.log("attachedFileId=", attachedFileId);
+		$http(
+				{
+					method : 'POST',
+					data : $scope.patientVisit,
+					url : $$ContextURL + '/patientVisits/'
+							+ $scope.patientVisit.id + '/attachedFiles/delete/'
+							+ attachedFileId
+				}).then(function(response) {
+			console.log(response);
+			$("#modal-body").html(response.data);
+			$("#modal").modal("show");
+		}, function(response) {
+			$("#modal-body").html(response.data);
+			$("#modal").modal("show");
+		});
 
 	}
 

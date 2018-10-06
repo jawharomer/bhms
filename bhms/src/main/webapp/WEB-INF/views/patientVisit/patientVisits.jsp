@@ -18,8 +18,11 @@
 		<thead>
 			<tr>
 				<th>#</th>
-				<th>P-FullName</th>
-				<th>Date</th>
+				<th>FullName</th>
+				<th>Time</th>
+				<th>T-Price</th>
+				<th>T-Payment</th>
+				<th>T-Unpaid</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -27,7 +30,26 @@
 				<tr>
 					<td>${item.id}</td>
 					<td>${item.patient.fullName}</td>
-					<td><fmt:formatDate value="${item.date}" pattern="yyyy-MM-dd" /></td>
+					<td><fmt:formatDate value="${item.time}"
+							pattern="yyyy-MM-dd hh:mm:ss" /></td>
+
+					<c:set var="totalPrice" value="${0}" />
+					<c:forEach items="${item.patientOperations}" var="oItem">
+						<c:set var="totalPrice" value="${totalPrice+oItem.price}" />
+					</c:forEach>
+					<td>${totalPrice}</td>
+
+					<c:set var="totalPayment" value="${0}" />
+					<c:forEach items="${item.visitPayments}" var="pItem">
+						<c:set var="totalPayment"
+							value="${totalPayment+pItem.paymentAmount}" />
+					</c:forEach>
+					<td><a class="btn btn-sm btn-info"
+						href="<c:url value="/visitPayments/patientVisit/" />${item.id}">
+							<i class="fa fa-eye"></i>
+					</a> &nbsp; ${totalPayment}</td>
+					<td>${totalPrice-totalPayment}</td>
+
 				</tr>
 			</c:forEach>
 		</tbody>

@@ -1,7 +1,6 @@
 package com.joh.bhms.controller;
 
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;

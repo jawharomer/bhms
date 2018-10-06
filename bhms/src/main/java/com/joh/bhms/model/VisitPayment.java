@@ -18,6 +18,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "VISIT_PAYMENTS")
 public class VisitPayment {
@@ -27,6 +29,7 @@ public class VisitPayment {
 	private Integer id;
 
 	// Do not put in toString()
+	// add @JsonIgnore on getter
 	@ManyToOne()
 	@JoinColumn(name = "I_PATIENT_VISIT", nullable = false)
 	private PatientVisit patientVisit;
@@ -44,16 +47,17 @@ public class VisitPayment {
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	private Date time;
 
+	@JsonIgnore
+	public PatientVisit getPatientVisit() {
+		return patientVisit;
+	}
+
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public PatientVisit getPatientVisit() {
-		return patientVisit;
 	}
 
 	public void setPatientVisit(PatientVisit patientVisit) {

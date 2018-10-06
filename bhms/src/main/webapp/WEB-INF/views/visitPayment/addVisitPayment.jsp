@@ -7,18 +7,21 @@
 	<sf:form id="add-visit-payment-form" method="POST"
 		commandName="visitPayment" onsubmit="addVisitPayment(event)">
 
-		<input name="patientVisit[id]" value="${visitPayment.patientVisit.id}">
+		<input type="hidden" name="patientVisit[id]"
+			value="${visitPayment.patientVisit.id}">
 		<table class="w-100">
 			<tbody>
 
 				<tr>
 					<td>Payment Amount</td>
-					<td><sf:input path="paymentAmount" /></td>
+					<td><sf:input cssClass="form-control form-control-sm"
+							path="paymentAmount" /></td>
 				</tr>
 
 				<tr>
 					<td>Note</td>
-					<td><sf:input path="note" /></td>
+					<td><sf:input cssClass="form-control form-control-sm"
+							path="note" /></td>
 				</tr>
 
 				<tr>

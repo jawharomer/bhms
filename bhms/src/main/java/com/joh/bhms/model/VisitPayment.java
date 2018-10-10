@@ -19,6 +19,9 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name = "VISIT_PAYMENTS")
@@ -29,7 +32,6 @@ public class VisitPayment {
 	private Integer id;
 
 	// Do not put in toString()
-	// add @JsonIgnore on getter
 	@ManyToOne()
 	@JoinColumn(name = "I_PATIENT_VISIT", nullable = false)
 	private PatientVisit patientVisit;
@@ -46,11 +48,6 @@ public class VisitPayment {
 	@CreationTimestamp
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	private Date time;
-
-	@JsonIgnore
-	public PatientVisit getPatientVisit() {
-		return patientVisit;
-	}
 
 	public Integer getId() {
 		return id;
@@ -86,6 +83,10 @@ public class VisitPayment {
 
 	public void setTime(Date time) {
 		this.time = time;
+	}
+
+	public PatientVisit getPatientVisit() {
+		return patientVisit;
 	}
 
 	@Override

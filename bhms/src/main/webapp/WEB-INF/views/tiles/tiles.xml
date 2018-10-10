@@ -64,6 +64,21 @@
 	</definition>
 
 
+	<!-- Notifications -->
+	<definition name="notifications" extends="adminRoot">
+		<put-attribute name="title" value="orderDetails" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/admin/notifications.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+		</put-list-attribute>
+	</definition>
+
+
 
 	<!-- Patients -->
 	<definition name="patients" extends="adminRoot">

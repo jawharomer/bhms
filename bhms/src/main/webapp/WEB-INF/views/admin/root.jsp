@@ -15,7 +15,12 @@
 <section id="admin-body">
 	<section id="section-right" class="card">
 		<ul class="list-group">
-			<li class="list-group-item"><a href="<c:url value="/patients"/>">
+			<li class="list-group-item"><a href="<c:url value="/admin"/>">
+					Dashboard</a></li>
+
+
+			<li class="list-group-item"><a
+				href="<c:url value="/patients"/>?from=${currentDate}&to=${tomorrow}">
 					Patients</a></li>
 
 			<li class="list-group-item"><a

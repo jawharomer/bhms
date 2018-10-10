@@ -1,6 +1,15 @@
 $(document)
 		.ready(
 				function() {
+
+					$("#from").datepicker({
+						dateFormat : "yy-mm-dd"
+					}).datepicker("setDate", $("#from").val());
+
+					$("#to").datepicker({
+						dateFormat : "yy-mm-dd"
+					}).datepicker("setDate", $("#to").val());
+
 					console.log("Activate data table");
 
 					// S-DataTable
@@ -54,6 +63,24 @@ function getAddingPatient() {
 	console.log("getAddingPatient->fired");
 	$.ajax({
 		url : $$ContextURL + '/patients/add',
+		type : 'GET',
+		success : function(response) {
+			$("#modal-body").html(response);
+			$("#modal").modal("show");
+		},
+		error : function(response) {
+			$("#modal-body").html(response.responseText);
+			$("#modal").modal("show");
+		}
+	});
+
+}
+
+function getEditingPatient(id) {
+	console.log("getEditingPatient->fired");
+	console.log("id=", id);
+	$.ajax({
+		url : $$ContextURL + '/patients/edit/' + id,
 		type : 'GET',
 		success : function(response) {
 			$("#modal-body").html(response);

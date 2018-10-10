@@ -10,8 +10,35 @@
 		<button class="btn btn-success" onclick="getAddingPatient()">
 			<i class="fa fa-plus"></i>
 		</button>
-
 	</div>
+
+	<div>
+		<form action="<c:url value="/patients" />">
+			<table>
+				<tr>
+					<td class="text-left">From</td>
+					<td><input readonly="readonly" class="form-control" id="from"
+						name="from"
+						value="<fmt:formatDate pattern = "yyyy-MM-dd"  
+         value = "${from}" />" /></td>
+				</tr>
+
+				<tr>
+					<td class="text-left">To</td>
+					<td><input readonly="readonly" class="form-control" id="to"
+						name="to"
+						value="<fmt:formatDate pattern = "yyyy-MM-dd"  
+         value = "${to}" />" /></td>
+				</tr>
+				<tr>
+					<td><input class="btn btn-outline-info" type="submit"
+						value="View" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<hr>
 
 
 	<table id="patients-table" class="display nowrap">
@@ -44,7 +71,14 @@
 						</c:choose></td>
 
 					<td>${item.visitReference.reference}</td>
-					<td>d</td>
+					<td><a href="<c:url value="/patientVisits/add/"/>${item.id}"
+						class="btn btn-sm btn-info" title="add patient visit"> <i
+							class="fa fa-ticket"></i>
+					</a>
+						<button class="btn btn-sm btn-warning"
+							onclick="getEditingPatient(${item.id})">
+							<i class="fa fa-edit"></i>
+						</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>

@@ -52,19 +52,16 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${patientVisits}" var="item">
-					<tr>
-
-						<c:forEach items="${item.patientProductUseds}" var="productItem">
-							<tr>
-								<td>${item.id}</td>
-								<td>${item.patient.fullName}</td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"
-										value="${item.time}" /></td>
-								<td>${productItem.code}</td>
-								<td>${productItem.name}</td>
-							</tr>
-						</c:forEach>
-					</tr>
+					<c:forEach items="${item.patientProductUseds}" var="productItem">
+						<tr>
+							<td>${item.id}</td>
+							<td>${item.patient.fullName}</td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"
+									value="${item.time}" /></td>
+							<td>${productItem.code}</td>
+							<td>${productItem.name}</td>
+						</tr>
+					</c:forEach>
 				</c:forEach>
 			</tbody>
 			<thead>

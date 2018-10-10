@@ -32,16 +32,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/login/**", "/logout").permitAll()
-				.antMatchers("/incomes/**", "/expenses/**", "/incomeCategories/**", "/expenseCategories/**")
-				.hasRole("MMS").anyRequest().authenticated().and().formLogin().loginPage("/login")
-				.defaultSuccessUrl("/admin").and().logout().logoutUrl("/logout").logoutSuccessUrl("/login").permitAll()
-				.and().exceptionHandling().accessDeniedPage("/WEB-INF/views/accessDenied.jsp").and().csrf().disable();
+		http.authorizeRequests().antMatchers("/login/**", "/logout").permitAll().antMatchers("/**").hasRole("BHMS")
+				.anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/admin").and()
+				.logout().logoutUrl("/logout").logoutSuccessUrl("/login").permitAll().and().exceptionHandling()
+				.accessDeniedPage("/WEB-INF/views/accessDenied.jsp").and().csrf().disable();
 	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("inetmms").password("mms2018Inet").roles("MMS");
+		auth.inMemoryAuthentication().withUser("inetbhms").password("bhms2018Inet").roles("BHMS");
 		// auth.userDetailsService(appUserDetailService).passwordEncoder(passwordEncoder());
 	}
 

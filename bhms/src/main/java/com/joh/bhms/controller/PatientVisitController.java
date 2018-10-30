@@ -31,7 +31,7 @@ import com.joh.bhms.model.PatientProductUsed;
 import com.joh.bhms.model.PatientVisit;
 import com.joh.bhms.service.DoctorService;
 import com.joh.bhms.service.OperationService;
-import com.joh.bhms.service.PatienService;
+import com.joh.bhms.service.PatientService;
 import com.joh.bhms.service.PatientVisitService;
 
 @Controller
@@ -41,7 +41,7 @@ public class PatientVisitController {
 	private static final Logger logger = Logger.getLogger(PatientVisitController.class);
 
 	@Autowired
-	private PatienService patienService;
+	private PatientService patienService;
 
 	@Autowired
 	private OperationService operationService;

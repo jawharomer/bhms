@@ -14,7 +14,12 @@
 	<table>
 		<tr>
 			<td>Patient</td>
-			<td>{{patientVisit.patient.fullName}}</td>
+			
+			<td>{{patientVisit.patient.fullName}} <a
+				href="<c:url value="/patients/edit/"/>{{patientVisit.patient.id}} "
+				class="btn btn-sm btn-warning"> <i class="fa fa-edit"></i>
+			</a>
+			</td>
 		</tr>
 	</table>
 
@@ -122,6 +127,7 @@
 	</div>
 
 	<div>
+		<h5 class="text-warning">Product Used</h5>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -168,6 +174,100 @@
 
 	</div>
 
+
+	<div>
+		<h5 class="text-info">Examination</h5>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Normal</th>
+					<th>Result</th>
+					<th>Note</th>
+					<th>F</th>
+				</tr>
+				<tr ng-form name="examinationForm">
+					<th><input ng-model="newExamination.name" required name="name"
+						class="form-control form-control-sm"></th>
+					<th><input ng-model="newExamination.normal" required
+						name="normal" class="form-control form-control-sm"></th>
+					<th><input ng-model="newExamination.result" required
+						name="result" class="form-control form-control-sm"></th>
+
+					<th><input ng-model="newExamination.note"
+						class="form-control form-control-sm"></th>
+					<th>
+						<button ng-disabled="examinationForm.$invalid"
+							class="btn btn-sm btn-success rounded-circle"
+							ng-click="addExamination()">
+							<i class="fa fa-plus"></i>
+						</button>
+					</th>
+				</tr>
+
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in patientVisit.examinations">
+					<td>{{item.name}}</td>
+					<td>{{item.normal}}</td>
+					<td>{{item.result}}</td>
+					<td class="cus-note-td" title="{{item.note}}">{{item.note}}</td>
+					<td>
+						<button class="btn btn-sm btn-danger rounded-circle"
+							ng-click="deleteExamination(item.id)">
+							<i class="fa fa-times"></i>
+						</button>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+
+	</div>
+
+
+
+	<div>
+		<h5 class="text-success">Treatment</h5>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Note</th>
+					<th>F</th>
+				</tr>
+				<tr ng-form name="treatmentForm">
+					<th><input ng-model="newTreatment.name" required name="name"
+						class="form-control form-control-sm"></th>
+					<th><input ng-model="newTreatment.note"
+						class="form-control form-control-sm"></th>
+					<th>
+						<button ng-disabled="treatmentForm.$invalid"
+							class="btn btn-sm btn-success rounded-circle"
+							ng-click="addTreatment()">
+							<i class="fa fa-plus"></i>
+						</button>
+					</th>
+				</tr>
+
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in patientVisit.treatments">
+					<td>{{item.name}}</td>
+					<td class="cus-note-td" title="{{item.note}}">{{item.note}}</td>
+					<td>
+						<button class="btn btn-sm btn-danger rounded-circle"
+							ng-click="deleteTreatment(item.id)">
+							<i class="fa fa-times"></i>
+						</button>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+
+	</div>
+
 	<div>
 		<div class="p-2">
 			<input class="form-contrl d-inline-block" id="file" type="file">
@@ -194,6 +294,13 @@
 
 			</table>
 		</div>
+	</div>
+
+	<div class="form-inline form-group">
+		<label class="mx-1">Next Session</label> <input required
+			name="nextSession" id="nextSession" readonly="readonly"
+			class="form-control form-control-sm"
+			ng-model="patientVisit.nextSession">
 	</div>
 
 	<button class="btn btn-warning" ng-click="save()">

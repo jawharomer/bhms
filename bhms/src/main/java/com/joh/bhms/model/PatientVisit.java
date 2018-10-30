@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -69,6 +70,14 @@ public class PatientVisit {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "PATIENT_VISIT_ATTACHED_FILES", joinColumns = @JoinColumn(name = "I_PATIENT_VISIT"), inverseJoinColumns = @JoinColumn(name = "I_ATTACHED_FILE"))
 	private List<AttachedFile> attachedFiles = new ArrayList<>();
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "I_PATIENT_VISIT")
+	private List<Examination> examinations = new ArrayList<>();
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "I_PATIENT_VISIT")
+	private List<Treatment> treatments = new ArrayList<>();
 
 	public Integer getId() {
 		return id;
@@ -142,11 +151,28 @@ public class PatientVisit {
 		this.patientProductUseds = patientProductUseds;
 	}
 
+	public List<Examination> getExaminations() {
+		return examinations;
+	}
+
+	public void setExaminations(List<Examination> examinations) {
+		this.examinations = examinations;
+	}
+
+	public List<Treatment> getTreatments() {
+		return treatments;
+	}
+
+	public void setTreatments(List<Treatment> treatments) {
+		this.treatments = treatments;
+	}
+
 	@Override
 	public String toString() {
 		return "PatientVisit [id=" + id + ", patient=" + patient + ", time=" + time + ", note=" + note + ", doctors="
 				+ doctors + ", patientOperations=" + patientOperations + ", visitPayments=" + visitPayments
-				+ ", patientProductUseds=" + patientProductUseds + ", attachedFiles=" + attachedFiles + "]";
+				+ ", patientProductUseds=" + patientProductUseds + ", attachedFiles=" + attachedFiles
+				+ ", examinations=" + examinations + ", treatments=" + treatments + "]";
 	}
 
 }

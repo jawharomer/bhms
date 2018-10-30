@@ -7,9 +7,10 @@
 <div>
 	<div class="py-2">
 		<h3>Patients</h3>
-		<button class="btn btn-success" onclick="getAddingPatient()">
-			<i class="fa fa-plus"></i>
-		</button>
+
+		<a href="<c:url value="/patients/add" />" class="btn btn-success"
+			onclick="getAddingPatient()"> <i class="fa fa-plus"></i>
+		</a>
 	</div>
 
 	<div>
@@ -74,10 +75,12 @@
 					<td><a href="<c:url value="/patientVisits/add/"/>${item.id}"
 						class="btn btn-sm btn-info" title="add patient visit"> <i
 							class="fa fa-ticket"></i>
+					</a> <a href="<c:url value="/patients/edit/"/>${item.id}"
+						class="btn btn-sm btn-warning"> <i class="fa fa-edit"></i>
 					</a>
-						<button class="btn btn-sm btn-warning"
-							onclick="getEditingPatient(${item.id})">
-							<i class="fa fa-edit"></i>
+						<button class="btn btn-sm btn-danger"
+							onclick="deletePatient(${item.id})">
+							<i class="fa fa-times"></i>
 						</button></td>
 				</tr>
 			</c:forEach>

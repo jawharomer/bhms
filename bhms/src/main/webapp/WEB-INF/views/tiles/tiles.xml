@@ -80,6 +80,7 @@
 
 
 
+
 	<!-- Patients -->
 	<definition name="patients" extends="adminRoot">
 		<put-attribute name="title" value="Patient" />
@@ -89,12 +90,44 @@
 			inherit="true">
 			<add-attribute value="patients" />
 		</put-list-attribute>
-
 		<put-list-attribute name="requiredJSFiles"
 			inherit="true">
 			<add-attribute value="patients" />
 		</put-list-attribute>
 	</definition>
+
+
+	<!-- Add Patient -->
+	<definition name="addPatient" extends="adminRoot">
+		<put-attribute name="title" value="Patient" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/patient/addPatient.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="addPatient" />
+		</put-list-attribute>
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="addPatient" />
+		</put-list-attribute>
+	</definition>
+
+
+	<!-- Edit Patient -->
+	<definition name="editPatient" extends="adminRoot">
+		<put-attribute name="title" value="Patient" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/patient/editPatient.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="editPatient" />
+		</put-list-attribute>
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="editPatient" />
+		</put-list-attribute>
+	</definition>
+
 
 	<!-- PatientVisits -->
 	<definition name="patientVisits" extends="adminRoot">
@@ -223,11 +256,11 @@
 			<add-attribute value="doctors" />
 		</put-list-attribute>
 	</definition>
-	
-	
-	
-	
-	
+
+
+
+
+
 	<!-- OrderDetails -->
 	<definition name="orderDetails" extends="adminRoot">
 		<put-attribute name="title" value="orderDetails" />
@@ -243,8 +276,8 @@
 			<add-attribute value="orderDetails" />
 		</put-list-attribute>
 	</definition>
-	
-	
+
+
 	<!-- ProductCategories -->
 	<definition name="productCategories" extends="adminRoot">
 		<put-attribute name="title" value="orderDetails" />
@@ -261,8 +294,8 @@
 			<add-attribute value="productCategories" />
 		</put-list-attribute>
 	</definition>
-	
-	
+
+
 	<!-- Vendors -->
 	<definition name="vendors" extends="adminRoot">
 		<put-attribute name="title" value="orderDetails" />

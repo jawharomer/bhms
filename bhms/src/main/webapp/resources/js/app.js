@@ -1,7 +1,7 @@
 var $$ContextURL = "/bhms";
 
 
-$.datepicker.setDefaults({ changeMonth: true,changeYear: true,yearRange: "-100:+10"});
+$.datepicker.setDefaults({dateFormat : "yy-mm-dd", changeMonth: true,changeYear: true,yearRange: "-100:+10"});
 
 function cusConfirm() {
 	var deferred=$.Deferred();
@@ -10,8 +10,7 @@ function cusConfirm() {
 	<p>
 	Are you sure ?
 	</p>
-	`)
-			.dialog({
+	`).dialog({
 				title : 'Confirm window',
 				zIndex : 10000,
 				autoOpen : true,

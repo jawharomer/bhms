@@ -94,13 +94,13 @@ function getEditingPatient(id) {
 
 }
 
-function deleteIncome(id) {
-	console.log("deleteIncome->fired");
+function deletePatient(id) {
+	console.log("deletePatient->fired");
 	console.log("id=" + id);
 
 	$.when(cusConfirm()).done(function() {
 		$.ajax({
-			url : $$ContextURL + '/incomes/delete/' + id,
+			url : $$ContextURL + '/patients/delete/' + id,
 			type : 'POST',
 			success : function(response) {
 				$("#modal-body").html(response);

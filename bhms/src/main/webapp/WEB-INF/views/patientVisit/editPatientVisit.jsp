@@ -127,12 +127,18 @@
 				<tr>
 					<th>P-Code</th>
 					<th>P-Name</th>
+					<th>QYT</th>
 					<th>F</th>
 				</tr>
 				<tr ng-form name="productUsedForm">
-					<th><input ng-model="newProductUsed.code" required name="code"
+					<th><input ng-model="newProductUsed.product.code" required
+						name="code" class="form-control form-control-sm"
+						ng-blur="getProduct()"></th>
+					<th><input ng-model="newProductUsed.product.name"
+						readonly="readonly" required name="name"
 						class="form-control form-control-sm"></th>
-					<th><input ng-model="newProductUsed.name" required name="name"
+					<th><input type="number" min="1"
+						ng-model="newProductUsed.quantity" required name="quantity"
 						class="form-control form-control-sm"></th>
 					<th>
 						<button ng-disabled="productUsedForm.$invalid"
@@ -146,11 +152,12 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="item in patientVisit.patientProductUseds">
-					<td>{{item.code}}</td>
-					<td>{{item.name}}</td>
+					<td>{{item.product.code}}</td>
+					<td>{{item.product.name}}</td>
+					<td>{{item.quantity}}</td>
 					<td>
 						<button class="btn btn-sm btn-danger rounded-circle"
-							ng-click="deleteProductUsed($index)">
+							ng-click="deleteProductUsed(item.id)">
 							<i class="fa fa-times"></i>
 						</button>
 					</td>

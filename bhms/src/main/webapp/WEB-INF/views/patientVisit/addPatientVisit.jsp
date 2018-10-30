@@ -119,45 +119,6 @@
 		</table>
 
 	</div>
-	<div>
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>P-Code</th>
-					<th>P-Name</th>
-					<th>F</th>
-				</tr>
-				<tr ng-form name="productUsedForm">
-					<th><input ng-model="newProductUsed.code" required name="code"
-						class="form-control form-control-sm"></th>
-					<th><input ng-model="newProductUsed.name" required name="name"
-						class="form-control form-control-sm"></th>
-					<th>
-						<button ng-disabled="productUsedForm.$invalid"
-							class="btn btn-sm btn-success rounded-circle"
-							ng-click="addProductUsed()">
-							<i class="fa fa-plus"></i>
-						</button>
-					</th>
-				</tr>
-
-			</thead>
-			<tbody>
-				<tr ng-repeat="item in patientVisit.patientProductUseds">
-					<td>{{item.code}}</td>
-					<td>{{item.name}}</td>
-					<td>
-						<button class="btn btn-sm btn-danger rounded-circle"
-							ng-click="deleteProductUsed($index)">
-							<i class="fa fa-times"></i>
-						</button>
-					</td>
-				</tr>
-
-			</tbody>
-		</table>
-
-	</div>
 
 	<button class="btn btn-success" ng-click="save()">
 		<i class="fa fa-save"></i>

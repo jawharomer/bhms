@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.joh.bhms.model.PatientProductUsed;
 import com.joh.bhms.model.PatientVisit;
 
 public interface PatientVisitService {
@@ -20,5 +21,9 @@ public interface PatientVisitService {
 	void deleteAttachedFile(int id, int attachedFileId);
 
 	Iterable<PatientVisit> findAllByTimeBetween(Date from, Date to);
+
+	void addPatientProductUsed(int id, PatientProductUsed patientProductUsed);
+
+	void deletePatientProductUsed(int id, int productUsedId);
 
 }

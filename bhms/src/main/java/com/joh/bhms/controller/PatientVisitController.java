@@ -27,6 +27,7 @@ import com.joh.bhms.exception.CusDataIntegrityViolationException;
 import com.joh.bhms.model.Doctor;
 import com.joh.bhms.model.Operation;
 import com.joh.bhms.model.Patient;
+import com.joh.bhms.model.PatientProductUsed;
 import com.joh.bhms.model.PatientVisit;
 import com.joh.bhms.service.DoctorService;
 import com.joh.bhms.service.OperationService;
@@ -201,6 +202,29 @@ public class PatientVisitController {
 		model.addAttribute("to", to);
 
 		return "patientProductUseds";
+	}
+
+	@PostMapping(path = "/{id}/patientProductUsed/add")
+	public String addPatientProductUsed(@PathVariable int id, @RequestBody PatientProductUsed patientProductUsed) {
+		logger.info("patientProductUsed->fired");
+		logger.info("id=" + id);
+		logger.info("PatientProductUsed=" + patientProductUsed);
+
+		patientVisitService.addPatientProductUsed(id, patientProductUsed);
+
+		return "success";
+	}
+	
+	
+	@PostMapping(path = "/{id}/patientProductUsed/delete/{patientProductUsedId}")
+	public String deletePatientProductUsed(@PathVariable int id,@PathVariable int patientProductUsedId) {
+		logger.info("deletePatientProductUsed->fired");
+		logger.info("id=" + id);
+		logger.info("patientProductUsedId=" + patientProductUsedId);
+
+		patientVisitService.deletePatientProductUsed(id, patientProductUsedId);
+
+		return "success";
 	}
 
 }

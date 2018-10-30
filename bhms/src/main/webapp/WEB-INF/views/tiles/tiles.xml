@@ -223,5 +223,125 @@
 			<add-attribute value="doctors" />
 		</put-list-attribute>
 	</definition>
+	
+	
+	
+	
+	
+	<!-- OrderDetails -->
+	<definition name="orderDetails" extends="adminRoot">
+		<put-attribute name="title" value="orderDetails" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/orderDetail/orderDetails.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="orderDetails" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="orderDetails" />
+		</put-list-attribute>
+	</definition>
+	
+	
+	<!-- ProductCategories -->
+	<definition name="productCategories" extends="adminRoot">
+		<put-attribute name="title" value="orderDetails" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/productCategory/productCategories.jsp"
+			cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="productCategories" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="productCategories" />
+		</put-list-attribute>
+	</definition>
+	
+	
+	<!-- Vendors -->
+	<definition name="vendors" extends="adminRoot">
+		<put-attribute name="title" value="orderDetails" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/vendor/vendors.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="vendors" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="vendors" />
+		</put-list-attribute>
+	</definition>
+
+
+	<!--GetOrder -->
+	<definition name="getOrder" extends="adminRoot">
+		<put-attribute name="title" value="Order" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/order/getOrder.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+		</put-list-attribute>
+	</definition>
+
+
+	<!--AddOrder -->
+	<definition name="addOrder" extends="adminRoot">
+		<put-attribute name="title" value="orderDetails" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/order/addOrder.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="addOrder" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="addOrder" />
+		</put-list-attribute>
+	</definition>
+
+
+	<!--EditOrder -->
+	<definition name="editOrder" extends="adminRoot">
+		<put-attribute name="title" value="orderDetails" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/order/editOrder.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="editOrder" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="editOrder" />
+		</put-list-attribute>
+	</definition>
+
+	<!--Orders -->
+	<definition name="getAllOrder" extends="adminRoot">
+		<put-attribute name="title" value="Orders" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/order/orders.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="orders" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="orders" />
+		</put-list-attribute>
+	</definition>
 
 </tiles-definitions>

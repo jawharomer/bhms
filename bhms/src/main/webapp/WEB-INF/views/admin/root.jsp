@@ -35,6 +35,23 @@
 			<li class="list-group-item"><a
 				href="<c:url value="/operations"/>">Operations</a></li>
 			<li class="list-group-item"><a href="<c:url value="/doctors"/>">Doctors</a></li>
+
+
+			<li><h4 class="text-info p-1 pl-2">Stock</h4></li>
+			<li class="list-group-item text-info"><a
+				href="<c:url value="/orders/add"/>">Order</a></li>
+			<li class="list-group-item text-info"><a
+				href="<c:url value="/orders"/>?from=${currentDate}&to=${tomorrow}">
+					Orders</a></li>
+
+			<li class="list-group-item text-info"><a
+				href="<c:url value="/orderDetails"/>?from=${currentDate}&to=${tomorrow}">
+					Stock</a></li>
+
+			<li class="list-group-item text-info"><a href="<c:url value="/vendors"/>">Vendors</a></li>
+
+			<li class="list-group-item text-info"><a
+				href="<c:url value="/productCategories"/>">ProductCategories</a></li>
 		</ul>
 	</section>
 

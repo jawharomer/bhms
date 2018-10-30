@@ -6,11 +6,7 @@ app.controller('addPatientVisit', function($scope, $http) {
 	$scope.patientVisit = {};
 
 	$scope.operations = [];
-	$scope.newProductUsed = {
-		id : "",
-		name : "",
-		code : ""
-	};
+	
 	$scope.resetNewProductUsed = angular.copy($scope.newProductUsed);
 
 	$scope.doctors;
@@ -74,18 +70,6 @@ app.controller('addPatientVisit', function($scope, $http) {
 	
 	$scope.deleteDoctor = function(index) {
 		$scope.patientVisit.doctors.splice(index, 1);
-	}
-
-	$scope.addProductUsed = function() {
-		console.log("addProductUsed->fired");
-
-		$scope.patientVisit.patientProductUseds.push($scope.newProductUsed);
-		$scope.newProductUsed = angular.copy($scope.resetNewProductUsed);
-
-	}
-	
-	$scope.deleteProductUsed = function(index) {
-		$scope.patientVisit.patientProductUseds.splice(index, 1);
 	}
 
 	$scope.save = function() {

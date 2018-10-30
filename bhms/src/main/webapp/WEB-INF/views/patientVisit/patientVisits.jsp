@@ -47,6 +47,7 @@
 				<th>T-Price</th>
 				<th>T-Payment</th>
 				<th>T-Unpaid</th>
+				<th>F</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -73,6 +74,15 @@
 							<i class="fa fa-eye"></i>
 					</a> &nbsp; ${totalPayment}</td>
 					<td>${totalPrice-totalPayment}</td>
+
+					<td>
+						<div>
+							<a class="btn btn-sm btn-warning" href="<c:url value="/patientVisits/edit/"/>${item.id}">
+								<i class="fa fa-edit"></i>
+							</a>
+
+						</div>
+					</td>
 
 				</tr>
 			</c:forEach>

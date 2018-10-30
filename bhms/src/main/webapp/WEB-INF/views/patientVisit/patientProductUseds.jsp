@@ -44,8 +44,11 @@
 			<thead>
 				<tr>
 					<th>VisitID</th>
+					<th>PID</th>
 					<th>Patient Name</th>
+					<th>P.Phone</th>
 					<th>Time</th>
+					<th>Quantity</th>
 					<th>Product Code</th>
 					<th>Product Name</th>
 				</tr>
@@ -55,11 +58,14 @@
 					<c:forEach items="${item.patientProductUseds}" var="productItem">
 						<tr>
 							<td>${item.id}</td>
+							<td>${item.patient.id}</td>
 							<td>${item.patient.fullName}</td>
+							<td>${item.patient.address}</td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"
 									value="${item.time}" /></td>
-							<td>${productItem.code}</td>
-							<td>${productItem.name}</td>
+							<td>${productItem.quantity}</td>
+							<td>${productItem.product.code}</td>
+							<td>${productItem.product.name}</td>
 						</tr>
 					</c:forEach>
 				</c:forEach>

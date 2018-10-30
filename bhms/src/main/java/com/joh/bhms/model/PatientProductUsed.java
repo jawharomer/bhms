@@ -1,10 +1,18 @@
 package com.joh.bhms.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,14 +21,19 @@ public class PatientProductUsed {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "I_PATIENT_OPERATION")
+	@Column(name = "I_PATIENT_PRODUCT_USED")
 	private Integer id;
 
-	@Column(name = "PRODUCT_CODE")
-	private String code;
+	@ManyToOne()
+	@JoinColumn(name = "I_PRODUCT")
+	private Product product;
 
-	@Column(name = "PRODUCT_NAME")
-	private String name;
+	@Column(name = "QUANTITY")
+	private Integer quantity;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "PDU_ORDER_DETAILS", joinColumns = @JoinColumn(name = "I_PATIENT_PRODUCT_USED"), inverseJoinColumns = @JoinColumn(name = "I_ORDER_DETAIL"))
+	public List<OrderDetail> orderDetailIds = new ArrayList<>();
 
 	public Integer getId() {
 		return id;
@@ -30,25 +43,34 @@ public class PatientProductUsed {
 		this.id = id;
 	}
 
-	public String getCode() {
-		return code;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
-	public String getName() {
-		return name;
+	public Integer getQuantity() {
+		return quantity;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public List<OrderDetail> getOrderDetailIds() {
+		return orderDetailIds;
+	}
+
+	public void setOrderDetailIds(List<OrderDetail> orderDetailIds) {
+		this.orderDetailIds = orderDetailIds;
 	}
 
 	@Override
 	public String toString() {
-		return "PatientProductUsed [id=" + id + ", code=" + code + ", name=" + name + "]";
+		return "PatientProductUsed [id=" + id + ", product=" + product + ", quantity=" + quantity + ", orderDetailIds="
+				+ orderDetailIds + "]";
 	}
 
 }

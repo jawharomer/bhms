@@ -30,6 +30,15 @@ app.controller('addPatientVisit', function($scope, $http) {
 
 	$scope.selectedOperationNote = "";
 
+	$scope.newProductUsed = {
+		product : {
+			code : "",
+			name : ""
+		},
+		quantity : ""
+	};
+	$scope.resetNewProductUsed = angular.copy($scope.newProductUsed);
+
 	$scope.init = function() {
 		console.log("init->fired");
 		console.log("jsonPatientVisit=" + jsonPatientVisit);
@@ -68,16 +77,74 @@ app.controller('addPatientVisit', function($scope, $http) {
 		$scope.patientVisit.doctors.splice(index, 1);
 	}
 
-	$scope.addProductUsed = function() {
-		console.log("addProductUsed->fired");
+	$scope.getProduct = function() {
+		console.log("getProduct->fired");
+		console.log("$scope.newProductUsed=", $scope.newProductUsed);
 
-		$scope.patientVisit.patientProductUseds.push($scope.newProductUsed);
-		$scope.newProductUsed = angular.copy($scope.resetNewProductUsed);
+		if ($scope.newProductUsed.product.code) {
+
+			$http(
+					{
+						method : 'GET',
+						url : $$ContextURL + '/products/code/'
+								+ $scope.newProductUsed.product.code
+					}).then(function(response) {
+				console.log(response);
+
+				angular.copy(response.data, $scope.newProductUsed.product);
+
+				console.log("$scope.newProductUsed=", $scope.newProductUsed);
+
+			}, function(response) {
+				$("#modal-body").html(response.data);
+				$("#modal").modal("show");
+			});
+
+		}
 
 	}
 
-	$scope.deleteProductUsed = function(index) {
-		$scope.patientVisit.patientProductUseds.splice(index, 1);
+	$scope.addProductUsed = function() {
+		console.log("addProductUsed->fired");
+
+		$http(
+				{
+					method : 'POST',
+					data : $scope.newProductUsed,
+					url : $$ContextURL + '/patientVisits/'
+							+ $scope.patientVisit.id
+							+ '/patientProductUsed/add'
+				}).then(function(response) {
+			console.log(response);
+			$("#modal-body").html(response.data);
+			$("#modal").modal("show");
+		}, function(response) {
+			$("#modal-body").html(response.data);
+			$("#modal").modal("show");
+		});
+
+	}
+
+	$scope.deleteProductUsed = function(patientProductUsedId) {
+		console.log("deleteProductUsed->fired");
+		console.log("patientProductUsedId=", patientProductUsedId);
+
+		$http(
+				{
+					method : 'POST',
+					data : $scope.newProductUsed,
+					url : $$ContextURL + '/patientVisits/'
+							+ $scope.patientVisit.id
+							+ '/patientProductUsed/delete/' + patientProductUsedId
+				}).then(function(response) {
+			console.log(response);
+			$("#modal-body").html(response.data);
+			$("#modal").modal("show");
+		}, function(response) {
+			$("#modal-body").html(response.data);
+			$("#modal").modal("show");
+		});
+		
 	}
 
 	$scope.save = function() {
@@ -104,7 +171,7 @@ app.controller('addPatientVisit', function($scope, $http) {
 
 		var formData = new FormData();
 		formData.append("file", document.getElementById('file').files[0]);
-		
+
 		$http(
 				{
 					method : 'POST',

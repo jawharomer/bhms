@@ -40,7 +40,8 @@ appAddOrder
 							id : "",
 							name : "",
 							productCategory : {
-								id : ""
+								id : "",
+								name : ""
 							}
 						},
 						quantity : "",
@@ -90,6 +91,7 @@ appAddOrder
 						$scope.newOrderDetail.product.name = "";
 						$scope.newOrderDetail.product.id = "";
 						$scope.newOrderDetail.product.productCategory.id = "";
+						$scope.newOrderDetail.product.productCategory.name = "";
 
 						$http(
 								{
@@ -109,6 +111,8 @@ appAddOrder
 
 												//
 												$scope.newOrderDetail.product.productCategory.id = response.data.productCategory.id;
+												$scope.newOrderDetail.product.productCategory.name = response.data.productCategory.name;
+
 											}
 
 										},

@@ -71,6 +71,22 @@ public class PatientVisitController {
 		return "patientVisits";
 	}
 
+	@GetMapping(path = "/nextSession")
+	public String getAllPatientVisitByNextSession(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date to,
+			Model model) {
+		logger.info("getAllPatientVisitByNextSession->fired");
+		logger.info("to=" + to);
+
+		Iterable<PatientVisit> patientVisits = patientVisitService.findAllByNextSessionLessThanEqual(to);
+
+		logger.info("patientVisits=" + patientVisits);
+
+		model.addAttribute("patientVisits", patientVisits);
+		model.addAttribute("to", to);
+
+		return "patientNextSessions";
+	}
+
 	@GetMapping(path = "/add/{id}")
 	public String getAddingPatientVisit(@PathVariable int id, Model model) throws JsonProcessingException {
 		logger.info("getAddingPatientVisit->fired");
@@ -214,10 +230,9 @@ public class PatientVisitController {
 
 		return "success";
 	}
-	
-	
+
 	@PostMapping(path = "/{id}/patientProductUsed/delete/{patientProductUsedId}")
-	public String deletePatientProductUsed(@PathVariable int id,@PathVariable int patientProductUsedId) {
+	public String deletePatientProductUsed(@PathVariable int id, @PathVariable int patientProductUsedId) {
 		logger.info("deletePatientProductUsed->fired");
 		logger.info("id=" + id);
 		logger.info("patientProductUsedId=" + patientProductUsedId);

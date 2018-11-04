@@ -14,7 +14,7 @@
 
 
 <div ng-app="addOrder" ng-controller="addOrder" ng-init="init()">
-	<h2 >Add Order</h2>
+	<h2>Add Order</h2>
 
 	<table class="table table-sm cus-table-borderless">
 		<tbody ng-form="orderForm">
@@ -61,7 +61,8 @@
 						ng-model="newOrderDetail.product.name"
 						class="form-control form-control-sm"></td>
 
-					<td><select ng-disabled="newOrderDetail.product.id" required class="form-control form-control-sm"
+					<td><select ng-disabled="newOrderDetail.product.id" required
+						class="form-control form-control-sm"
 						ng-model="newOrderDetail.product.productCategory.id"
 						ng-options="item.id as item.name for item in productCategories">
 							<option value=""></option>
@@ -92,6 +93,7 @@
 				<tr ng-repeat="item in order.orderDetails">
 					<td>{{item.product.code}}</td>
 					<td>{{item.product.name}}</td>
+					<td>{{item.product.productCategory.name}}</td>
 					<td>{{item.quantity}}</td>
 					<td>{{item.productionDate}}</td>
 					<td>{{item.expirationDate}}</td>

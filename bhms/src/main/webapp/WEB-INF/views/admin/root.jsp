@@ -27,7 +27,9 @@
 				href="<c:url value="/patientVisits"/>?from=${currentDate}&to=${tomorrow}">
 					Patient Visits</a></li>
 
-
+			<li class="list-group-item"><a
+				href="<c:url value="/patientVisits/nextSession"/>?to=${tomorrow}">
+					Next Session</a></li>
 			<li class="list-group-item"><a
 				href="<c:url value="/patientVisits/patientProductUseds"/>?from=${currentDate}&to=${tomorrow}">
 					Patient Product Used</a></li>
@@ -48,7 +50,8 @@
 				href="<c:url value="/orderDetails"/>?from=${currentDate}&to=${tomorrow}">
 					Stock</a></li>
 
-			<li class="list-group-item text-info"><a href="<c:url value="/vendors"/>">Vendors</a></li>
+			<li class="list-group-item text-info"><a
+				href="<c:url value="/vendors"/>">Vendors</a></li>
 
 			<li class="list-group-item text-info"><a
 				href="<c:url value="/productCategories"/>">ProductCategories</a></li>

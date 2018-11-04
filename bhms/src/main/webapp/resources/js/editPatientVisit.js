@@ -1,6 +1,15 @@
 $(document).ready()
 {
-	$("#nextSession").datepicker().datepicker("setDate", $("#nextSession").val());
+	$.datepicker.setDefaults({
+		minDate : 0,
+		dateFormat : "yy-mm-dd",
+		changeMonth : true,
+		changeYear : true,
+		yearRange : "-100:+10"
+	});
+
+	$("#nextSession").datepicker().datepicker("setDate",
+			$("#nextSession").val());
 }
 
 // Angular
@@ -74,6 +83,13 @@ app
 						console.log("jsonPatientVisit=" + jsonPatientVisit);
 						console.log("jsonOperations=" + jsonOperations);
 						$scope.patientVisit = JSON.parse(jsonPatientVisit);
+
+						if ($scope.patientVisit.nextSession) {
+							$scope.patientVisit.hasNextSession = true;
+						} else {
+							$scope.patientVisit.hasNextSession = false;
+						}
+
 						$scope.operations = JSON.parse(jsonOperations);
 						$scope.doctors = JSON.parse(jsonDoctors);
 
@@ -217,6 +233,11 @@ app
 
 					$scope.save = function() {
 						console.log("save->fired");
+
+						if (!$scope.patientVisit.hasNextSession) {
+							$scope.patientVisit.nextSession = null;
+						}
+
 						console
 								.log("$scope.patientVisit=",
 										$scope.patientVisit);

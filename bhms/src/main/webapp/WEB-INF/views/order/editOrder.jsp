@@ -93,6 +93,7 @@
 				<tr ng-repeat="item in order.orderDetails">
 					<td>{{item.product.code}}</td>
 					<td>{{item.product.name}}</td>
+					<td>{{item.product.productCategory.name}}</td>
 					<td>{{item.quantity}}</td>
 					<td>{{item.productionDate}}</td>
 					<td>{{item.expirationDate}}</td>

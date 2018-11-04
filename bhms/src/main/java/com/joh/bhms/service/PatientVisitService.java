@@ -26,4 +26,6 @@ public interface PatientVisitService {
 
 	void deletePatientProductUsed(int id, int productUsedId);
 
+	Iterable<PatientVisit> findAllByNextSessionLessThanEqual(Date to);
+
 }

@@ -64,6 +64,28 @@ public class ReportDAO {
 
 		notificationDs.add(not2);
 
+		// Notification-2
+
+		query = em
+				.createNativeQuery("SELECT COUNT(*) FROM PATIENT_VISITS	WHERE NEXT_SESSION<=CURDATE()-INTERVAL 2 DAY;");
+
+		Object totalNextSessionResult = query.getSingleResult();
+
+		Integer totalNextSession = 0;
+
+		if (totalNextSessionResult != null)
+			totalNextSession = Integer.parseInt("" + totalNextSessionResult);
+
+		//
+		NotificationD not3 = new NotificationD();
+		not3.setTitle("Total number of patient");
+		not3.setEtc("" + totalNextSession);
+		not3.setMessage("Total number of patient should visit in next 2 day");
+
+		not3.setNotificationType(NotificationType.INFO);
+
+		notificationDs.add(not3);
+
 		return notificationDs;
 
 	}

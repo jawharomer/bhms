@@ -9,4 +9,7 @@ import com.joh.bhms.model.PatientVisit;
 
 public interface PatientVisitDAO extends CrudRepository<PatientVisit, Integer> {
 	List<PatientVisit> findAllByTimeBetween(Date from, Date to);
+
+	List<PatientVisit> findAllByNextSessionLessThanEqual(Date to);
+
 }

@@ -14,7 +14,7 @@
 	<table>
 		<tr>
 			<td>Patient</td>
-			
+
 			<td>{{patientVisit.patient.fullName}} <a
 				href="<c:url value="/patients/edit/"/>{{patientVisit.patient.id}} "
 				class="btn btn-sm btn-warning"> <i class="fa fa-edit"></i>
@@ -297,8 +297,10 @@
 	</div>
 
 	<div class="form-inline form-group">
-		<label class="mx-1">Next Session</label> <input required
-			name="nextSession" id="nextSession" readonly="readonly"
+		<label class="mx-1">Next Session</label> <input type="checkbox"
+			ng-model="patientVisit.hasNextSession"> <input
+			ng-show="patientVisit.hasNextSession" required name="nextSession"
+			id="nextSession" readonly="readonly"
 			class="form-control form-control-sm"
 			ng-model="patientVisit.nextSession">
 	</div>

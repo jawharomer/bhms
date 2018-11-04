@@ -24,6 +24,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.joh.bhms.validator.PatientVisitValidation;
@@ -51,6 +52,11 @@ public class PatientVisit {
 
 	@Column(name = "NOTE")
 	private String note;
+
+	@Column(name = "NEXT_SESSION")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date nextSession;
 
 	@ManyToMany()
 	@JoinTable(name = "PATIENT_VISIT_DOCTORS", joinColumns = @JoinColumn(name = "I_VISIT"), inverseJoinColumns = @JoinColumn(name = "I_DOCTOR"))
@@ -167,12 +173,21 @@ public class PatientVisit {
 		this.treatments = treatments;
 	}
 
+	public Date getNextSession() {
+		return nextSession;
+	}
+
+	public void setNextSession(Date nextSession) {
+		this.nextSession = nextSession;
+	}
+
 	@Override
 	public String toString() {
-		return "PatientVisit [id=" + id + ", patient=" + patient + ", time=" + time + ", note=" + note + ", doctors="
-				+ doctors + ", patientOperations=" + patientOperations + ", visitPayments=" + visitPayments
-				+ ", patientProductUseds=" + patientProductUseds + ", attachedFiles=" + attachedFiles
-				+ ", examinations=" + examinations + ", treatments=" + treatments + "]";
+		return "PatientVisit [id=" + id + ", patient=" + patient + ", time=" + time + ", note=" + note
+				+ ", nextSession=" + nextSession + ", doctors=" + doctors + ", patientOperations=" + patientOperations
+				+ ", visitPayments=" + visitPayments + ", patientProductUseds=" + patientProductUseds
+				+ ", attachedFiles=" + attachedFiles + ", examinations=" + examinations + ", treatments=" + treatments
+				+ "]";
 	}
 
 }

@@ -44,6 +44,11 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 		return patientVisitDAO.findAllByTimeBetween(from, to);
 	}
 
+	@Override
+	public Iterable<PatientVisit> findAllByNextSessionLessThanEqual( Date to) {
+		return patientVisitDAO.findAllByNextSessionLessThanEqual(to);
+	}
+
 	@Transactional
 	@Override
 	public PatientVisit save(PatientVisit patientVisit) {

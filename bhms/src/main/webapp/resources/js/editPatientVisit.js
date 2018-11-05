@@ -27,8 +27,10 @@ app
 					$scope.doctors;
 					$scope.selectedDoctor;
 
+					$scope.products;
+
 					//
-					$scope.selectedOperation;
+					$scope.selectedOperation = {};
 					$scope.totalPrice = function() {
 						var total = 0;
 						for (var i = 0; i < $scope.patientVisit.patientOperations.length; i++) {
@@ -93,6 +95,62 @@ app
 						$scope.operations = JSON.parse(jsonOperations);
 						$scope.doctors = JSON.parse(jsonDoctors);
 
+						// S-Operation AutoCompletion
+						var operationAuto = [];
+
+						angular.forEach($scope.operations,
+								function(value, key) {
+									var obj = {
+										label : value.name + " " + value.price,
+										value : value.name,
+										data : value
+									}
+									operationAuto.push(obj);
+								});
+
+						$("#operation-autocomplete").autocomplete({
+							source : operationAuto,
+							select : function(event, ui) {
+								var item = ui.item.data;
+								console.log("selected item =", item);
+
+								$scope.selectedOperation.name = item.name;
+								$scope.selectedOperation.price = item.price;
+
+								$scope.$digest();
+							}
+						});
+
+						// E-Operation AutoCompletion
+
+						$scope.products = JSON.parse(jsonProducts);
+
+						// S-Product AutoCompletion
+						var productAuto = [];
+
+						angular.forEach($scope.products, function(value, key) {
+							var obj = {
+								label : value.name + " " + value.code,
+								value : value.code,
+								data : value
+							}
+							productAuto.push(obj);
+						});
+
+						$("#porduct-autocomplete").autocomplete({
+							source : productAuto,
+							select : function(event, ui) {
+								var item = ui.item.data;
+								console.log("selected item =", item);
+
+								$scope.newProductUsed.product.code = item.code;
+
+								$scope.$digest();
+							}
+						});
+
+						// E-Product AutoCompletion
+
 					};
 					$scope.addOperation = function() {
 						console.log("addOperation->fired");
@@ -125,34 +183,43 @@ app
 						$scope.patientVisit.doctors.splice(index, 1);
 					}
 
-					$scope.getProduct = function() {
+					$scope.getProduct = function(event) {
 						console.log("getProduct->fired");
-						console.log("$scope.newProductUsed=",
-								$scope.newProductUsed);
+						if (event.which == 13) {
+							console.log("$scope.newProductUsed=",
+									$scope.newProductUsed);
 
-						if ($scope.newProductUsed.product.code) {
+							if ($scope.newProductUsed.product.code) {
 
-							$http(
-									{
-										method : 'GET',
-										url : $$ContextURL
-												+ '/products/code/'
-												+ $scope.newProductUsed.product.code
-									}).then(
-									function(response) {
-										console.log(response);
+								$http(
+										{
+											method : 'GET',
+											url : $$ContextURL
+													+ '/products/code/'
+													+ $scope.newProductUsed.product.code
+										})
+										.then(
+												function(response) {
+													console.log(response);
 
-										angular.copy(response.data,
-												$scope.newProductUsed.product);
+													angular
+															.copy(
+																	response.data,
+																	$scope.newProductUsed.product);
+													$( "#product-quantity" ).focus();
+													console
+															.log(
+																	"$scope.newProductUsed=",
+																	$scope.newProductUsed);
 
-										console.log("$scope.newProductUsed=",
-												$scope.newProductUsed);
+												},
+												function(response) {
+													$("#modal-body").html(
+															response.data);
+													$("#modal").modal("show");
+												});
 
-									}, function(response) {
-										$("#modal-body").html(response.data);
-										$("#modal").modal("show");
-									});
-
+							}
 						}
 
 					}

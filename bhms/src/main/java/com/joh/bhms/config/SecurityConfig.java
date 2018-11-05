@@ -34,7 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/login/**", "/logout").permitAll().antMatchers("/**").hasRole("BHMS")
 				.anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/admin").and()
-				.logout().logoutUrl("/logout").logoutSuccessUrl("/login").permitAll().and().exceptionHandling()
+				.logout().deleteCookies("JSESSIONID").logoutUrl("/logout").logoutSuccessUrl("/login").permitAll().and()
+				.rememberMe().key("@#$j232Kdf19)__").tokenValiditySeconds(86400).and().exceptionHandling()
 				.accessDeniedPage("/WEB-INF/views/accessDenied.jsp").and().csrf().disable();
 	}
 

@@ -8,4 +8,6 @@ public interface ProductService {
 
 	Product save(Product product);
 
+	Iterable<Product> findAll();
+
 }

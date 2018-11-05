@@ -1,11 +1,14 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 
 <script type="text/javascript">
 	var jsonPatientVisit = '${jsonPatientVisit}';
-	var jsonOperations = '${jsonOperations}';
+	var jsonOperations = '<spring:escapeBody  javaScriptEscape="true">${jsonOperations}</spring:escapeBody>';
+	var jsonProducts = '<spring:escapeBody  javaScriptEscape="true">${jsonProducts}</spring:escapeBody>';
+
 	var jsonDoctors = '${jsonDoctors}';
 </script>
 
@@ -32,12 +35,8 @@
 				<th>F</th>
 			</tr>
 			<tr ng-form name="form">
-				<th><select class="form-control form-control-sm"
-					name="selectedOperation" required="required"
-					ng-model="selectedOperation">
-						<option value="">Choose</option>
-						<option ng-repeat="item in operations" ng-value="item">{{item.name}}</option>
-				</select></th>
+				<th><input class="form-control form-control-sm"
+					ng-model="selectedOperation.name" id="operation-autocomplete"></th>
 				<th><input ng-disabled="!selectedOperation" type="number"
 					required="required" ng-model="selectedOperation.price" name="price"
 					class="form-control form-control-sm"></th>
@@ -137,13 +136,13 @@
 					<th>F</th>
 				</tr>
 				<tr ng-form name="productUsedForm">
-					<th><input ng-model="newProductUsed.product.code" required
-						name="code" class="form-control form-control-sm"
-						ng-blur="getProduct()"></th>
-					<th><input ng-model="newProductUsed.product.name"
+					<th><input id="porduct-autocomplete"
+						ng-model="newProductUsed.product.code" required name="code"
+						class="form-control form-control-sm" ng-keypress="getProduct($event)"></th>
+					<th><input  ng-model="newProductUsed.product.name"
 						readonly="readonly" required name="name"
 						class="form-control form-control-sm"></th>
-					<th><input type="number" min="1"
+					<th><input id="product-quantity" type="number" min="1"
 						ng-model="newProductUsed.quantity" required name="quantity"
 						class="form-control form-control-sm"></th>
 					<th>

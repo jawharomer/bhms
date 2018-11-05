@@ -12,4 +12,6 @@ public interface PatientVisitDAO extends CrudRepository<PatientVisit, Integer> {
 
 	List<PatientVisit> findAllByNextSessionLessThanEqual(Date to);
 
+	List<PatientVisit> findAllByPatientId(int id);
+
 }

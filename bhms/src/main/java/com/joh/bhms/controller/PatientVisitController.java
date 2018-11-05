@@ -29,10 +29,12 @@ import com.joh.bhms.model.Operation;
 import com.joh.bhms.model.Patient;
 import com.joh.bhms.model.PatientProductUsed;
 import com.joh.bhms.model.PatientVisit;
+import com.joh.bhms.model.Product;
 import com.joh.bhms.service.DoctorService;
 import com.joh.bhms.service.OperationService;
 import com.joh.bhms.service.PatientService;
 import com.joh.bhms.service.PatientVisitService;
+import com.joh.bhms.service.ProductService;
 
 @Controller
 @RequestMapping(path = "/patientVisits")
@@ -51,6 +53,9 @@ public class PatientVisitController {
 
 	@Autowired
 	private PatientVisitService patientVisitService;
+
+	@Autowired
+	private ProductService productService;
 
 	@GetMapping()
 	public String getAllPatientVisit(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
@@ -152,6 +157,11 @@ public class PatientVisitController {
 
 		model.addAttribute("jsonPatientVisit", mapper.writeValueAsString(patientVisit));
 		model.addAttribute("jsonDoctors", mapper.writeValueAsString(doctors));
+
+		Iterable<Product> products = productService.findAll();
+		logger.info("products=" + products);
+		model.addAttribute("jsonProducts", mapper.writeValueAsString(products));
+
 		return "editPatientVisit";
 	}
 
@@ -240,6 +250,20 @@ public class PatientVisitController {
 		patientVisitService.deletePatientProductUsed(id, patientProductUsedId);
 
 		return "success";
+	}
+
+	@GetMapping(path = "/patient/{id}")
+	public String getAllPatientPatientVisits(@PathVariable int id, Model model) {
+		logger.info("getAllPatientPatientVisits->fired");
+		logger.info("patientId=" + id);
+
+		Iterable<PatientVisit> patientVisits = patientVisitService.findAllByPatientId(id);
+
+		logger.info("patientVisits=" + patientVisits);
+
+		model.addAttribute("patientVisits", patientVisits);
+
+		return "patientPatientVisits";
 	}
 
 }

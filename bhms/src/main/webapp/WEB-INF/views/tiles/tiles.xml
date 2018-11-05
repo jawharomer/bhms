@@ -150,7 +150,8 @@
 	<definition name="patientNextSessions" extends="adminRoot">
 		<put-attribute name="title" value="Patient" />
 		<put-attribute name="adminBody"
-			value="/WEB-INF/views/patientVisit/patientNextSessions.jsp" cascade="true" />
+			value="/WEB-INF/views/patientVisit/patientNextSessions.jsp"
+			cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
 			inherit="true">
 			<add-attribute value="patientNextSessions" />
@@ -159,6 +160,27 @@
 		<put-list-attribute name="requiredJSFiles"
 			inherit="true">
 			<add-attribute value="patientNextSessions" />
+		</put-list-attribute>
+	</definition>
+
+
+
+	<!-- PatientVisits -->
+	<definition name="patientPatientVisits" extends="adminRoot">
+		<put-attribute name="title" value="Patient" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/patientVisit/patientPatientVisits.jsp"
+			cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="patientPatientVisits" />
+			<add-attribute value="jquery.fancybox" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="patientPatientVisits" />
+			<add-attribute value="jquery.fancybox" />
 		</put-list-attribute>
 	</definition>
 

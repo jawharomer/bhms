@@ -2,6 +2,7 @@ package com.joh.bhms.service;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,5 +28,7 @@ public interface PatientVisitService {
 	void deletePatientProductUsed(int id, int productUsedId);
 
 	Iterable<PatientVisit> findAllByNextSessionLessThanEqual(Date to);
+
+	List<PatientVisit> findAllByPatientId(int id);
 
 }

@@ -1,6 +1,7 @@
 $(document).ready()
 {
 	$("#birth-date").datepicker().datepicker("setDate", new Date());
+
 }
 
 // Angular
@@ -9,31 +10,30 @@ app = angular.module("addPatient", []);
 app.controller('addPatient', function($scope, $http) {
 
 	$scope.patient;
-	$scope.newAllergy;
 	$scope.newChronicDisease;
 	$scope.newHistoryOperation;
 	$scope.visitReferences;
+	$scope.hasAllergy;
 
 	$scope.init = function() {
 		console.log("init->fired");
 		console.log("jsonPatient=", jsonPatient);
 		$scope.patient = JSON.parse(jsonPatient);
 
-		console.log("patient=" ,$scope.patient);
+		if ($scope.patient.allergy) {
+			$scope.hasAllergy = true;
+		} else {
+			$scope.hasAllergy = false;
+		}
 
 		console.log("jsonVisitReferences=", jsonVisitReferences);
 		$scope.visitReferences = JSON.parse(jsonVisitReferences);
-	}
 
-	$scope.addAllergy = function() {
-		console.log("addAllergy->fired");
-		$scope.patient.allergies.push($scope.newAllergy);
-		$scope.newAllergy = "";
-	}
+		var availableTags = JSON.parse(jsonChronicDiseases);
+		$("#newChronicDisease").autocomplete({
+			source : availableTags
+		});
 
-	$scope.deleteAllergy = function(index) {
-		console.log("deleteAllergy->fired");
-		$scope.patient.allergies.splice(index, 1);
 	}
 
 	$scope.addChronicDisease = function() {
@@ -61,6 +61,10 @@ app.controller('addPatient', function($scope, $http) {
 	$scope.save = function() {
 		console.log("save->fired");
 		console.log("$scope.patient=", $scope.patient);
+
+		if (!$scope.hasAllergy) {
+			$scope.patient.allergy = "";
+		}
 
 		$http({
 			method : 'POST',

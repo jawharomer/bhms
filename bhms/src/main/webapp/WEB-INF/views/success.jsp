@@ -8,5 +8,5 @@
 <script>
 	setTimeout(function() {
 		location.reload();
-	}, 1500);
+	}, 600);
 </script>

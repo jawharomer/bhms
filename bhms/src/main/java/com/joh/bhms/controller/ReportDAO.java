@@ -89,5 +89,15 @@ public class ReportDAO {
 		return notificationDs;
 
 	}
+	
+	public List<String> findAllChronicDisease() {
+		List<String> chronicDiseases = new ArrayList<>();
+		
+		Query query = em.createNativeQuery("SELECT DISTINCT DISEASE_NAME FROM CHRONIC_DISEASES ORDER BY DISEASE_NAME;");
+
+		List<String> totalChronicDisease = query.getResultList();
+		chronicDiseases.addAll(totalChronicDisease);
+		return chronicDiseases;
+	}
 
 }

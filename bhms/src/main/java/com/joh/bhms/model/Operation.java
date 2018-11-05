@@ -20,7 +20,7 @@ public class Operation {
 	private Integer id;
 
 	@NotBlank(message = "name is blank")
-	@Column(name = "OPERATION_NAME")
+	@Column(name = "OPERATION_NAME", unique = true)
 	private String name;
 
 	@NotNull(message = "price is null")

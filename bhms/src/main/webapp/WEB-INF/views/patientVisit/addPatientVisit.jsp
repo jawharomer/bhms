@@ -1,128 +1,208 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 
 <script type="text/javascript">
-	var jsonPatientVisit = '${jsonPatientVisit}';
-	var jsonOperations = '${jsonOperations}';
-	var jsonDoctors = '${jsonDoctors}';
+	var jsonPatient = '<spring:escapeBody  javaScriptEscape="true">${jsonPatient}</spring:escapeBody>';
+	var jsonChronicDiseases = '<spring:escapeBody  javaScriptEscape="true">${jsonChronicDiseases}</spring:escapeBody>';
+	var jsonVisitReferences = '${jsonVisitReferences}';
 </script>
 
-<div id="add-patient-visit-contaner" ng-app="addPatientVisit"
-	ng-controller="addPatientVisit" ng-init="init()">
-	<table>
+<div id="add-patient-contaner" ng-app="addPatient"
+	ng-controller="addPatient" ng-init="init()" ng-form name="form">
+	<h4>Add Patient</h4>
+
+
+
+	<div class="p-1 m-1">
+		<sf:form commandName="patient">
+			<sf:errors path="*"></sf:errors>
+		</sf:form>
+	</div>
+
+	<table class="add-patient-table">
 		<tr>
-			<td>Patient</td>
-			<td>{{patientVisit.patient.fullName}}</td>
+			<td>FullName</td>
+			<td><input name="fullName" required="required"
+				class="form-control form-control-sm" ng-model="patient.fullName"></td>
+		</tr>
+
+
+		<tr>
+			<td>ArabicFullName</td>
+			<td><input name="arabicFullName" required="required"
+				class="form-control form-control-sm"
+				ng-model="patient.arabicFullName"></td>
+		</tr>
+
+		<tr>
+			<td>Phone</td>
+			<td><input required name="phone"
+				class="form-control form-control-sm" ng-model="patient.phone"></td>
+		</tr>
+
+
+		<tr>
+			<td>BirthDate</td>
+			<td><input required name="birthDate" id="birth-date"
+				readonly="readonly" class="form-control form-control-sm"
+				ng-model="patient.birthDate"></td>
+		</tr>
+
+
+		<tr>
+			<td>Address</td>
+			<td><input class="form-control form-control-sm"
+				ng-model="patient.address"></td>
+		</tr>
+
+		<tr>
+			<td>Visit Reference</td>
+			<td><select required name="visitReference"
+				class="form-control form-control-sm"
+				ng-model="patient.visitReference.id"
+				ng-options="a.id as a.reference for a in visitReferences">
+					<option value="">Choose</option>
+			</select></td>
+		</tr>
+
+
+		<tr>
+			<td>MaritalStatus</td>
+			<td class="py-1"><label> <input required="required"
+					name="maritalStatus" type="radio" class="radio-inline"
+					ng-model="patient.maritalStatus" value="Single"> Single
+			</label> <label> <input type="radio" name="maritalStatus"
+					class="radio-inline" ng-model="patient.maritalStatus"
+					value="Married">Married
+			</label> <label> <input type="radio" name="maritalStatus"
+					class="radio-inline" ng-model="patient.maritalStatus"
+					value="Widowed"> Widowed
+			</label> <label> <input type="radio" name="maritalStatus"
+					class="radio-inline" ng-model="patient.maritalStatus"
+					value="Divorced"> Divorced
+			</label>
+		</tr>
+
+
+		<tr>
+			<td>Gender</td>
+			<td><label> <input name="gender" required="required"
+					type="radio" class="radio-inline" ng-model="patient.gender"
+					ng-value="0"> Male
+			</label> <label> <input type="radio" name="gender"
+					class="radio-inline" ng-model="patient.gender" ng-value="0">Female
+			</label></td>
+		</tr>
+
+
+		<tr>
+			<td>Job</td>
+			<td><input class="form-control form-control-sm"
+				ng-model="patient.job"></td>
+		</tr>
+
+
+		<tr>
+			<td>Smoking</td>
+			<td><input type="checkbox" ng-model="patient.smoking"
+				value="true"></td>
+		</tr>
+		<tr>
+			<td>Drinking</td>
+			<td><input type="checkbox" ng-model="patient.drinking"
+				value="true"></td>
+		</tr>
+
+		<tr>
+			<td>Allergy</td>
+			<td>
+				<div class="input-group">
+					<div class="input-group-prepend pr-1">
+						<input ng-model="hasAllergy" type="checkbox">
+					</div>
+					<input ng-show="hasAllergy" class="form-control form-control-sm"
+						ng-model="patient.allergy">
+				</div>
+			</td>
 		</tr>
 	</table>
 
-	<table class="table table-borderd">
-		<thead>
+
+	<div class="border  p-1">
+
+		<h6 class="text-secondary">Chronic Disease</h6>
+
+		<table>
 			<tr>
-				<th>Operation</th>
-				<th>Price</th>
-				<th>Note</th>
-				<th>F</th>
-			</tr>
-			<tr ng-form name="form">
-				<th><select class="form-control form-control-sm"
-					name="selectedOperation" required="required"
-					ng-model="selectedOperation">
-						<option value="">Choose</option>
-						<option ng-repeat="item in operations" ng-value="item">{{item.name}}</option>
-				</select></th>
-				<th><input ng-disabled="!selectedOperation" type="number"
-					required="required" ng-model="selectedOperation.price" name="price"
-					class="form-control form-control-sm"></th>
-				<th><input ng-model="selectedOperationNote"
-					class="form-control form-control-sm"></th>
-				<th>
-					<button ng-disabled="form.$invalid"
-						class="btn btn-sm btn-success rounded-circle"
-						ng-click="addOperation()">
-						<i class="fa fa-plus"></i>
-					</button>
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="item in patientVisit.patientOperations">
-				<td>{{item.operation}}</td>
-				<td>{{item.price}}</td>
-				<td>{{item.note}}</td>
+				<td><input id="newChronicDisease"
+					class="form-control form-control-sm" ng-model="newChronicDisease"></td>
 				<td>
-					<button class="btn btn-sm btn-danger rounded-circle"
-						ng-click="deleteOperation($index)">
-						<i class="fa fa-times"></i>
+					<button class="btn btn-success btn-sm"
+						ng-click="addChronicDisease()" ng-disabled="!newChronicDisease">
+						<i class="fa fa-plus"></i>
 					</button>
 				</td>
 			</tr>
 
-		</tbody>
+			<tr ng-repeat="item in patient.chronicDiseases track by $index">
+				<td>{{item}}</td>
+				<td>
+					<button class="btn btn-sm btn-danger"
+						ng-click="deleteChronicDisease($index)">
+						<i class="fa fa-times"></i>
+					</button>
 
-	</table>
-	<hr>
-	<div class="card card-body bg-secondary">
+				</td>
+			</tr>
+		</table>
+
+	</div>
+
+
+
+	<div class="border  p-1">
+
+		<h6 class="text-secondary">History Operations</h6>
+
 		<table>
 			<tr>
-				<td>Total Price</td>
-				<td>{{totalPrice()|number}}</td>
+				<td><input class="form-control form-control-sm"
+					ng-model="newHistoryOperation"></td>
+				<td>
+					<button class="btn btn-success btn-sm"
+						ng-click="addHistoryOperation()"
+						ng-disabled="!newHistoryOperation">
+						<i class="fa fa-plus"></i>
+					</button>
+				</td>
 			</tr>
-			<tr>
-				<td>Total Payment</td>
-				<td>{{totalPayment()|number}}</td>
+
+			<tr ng-repeat="item in patient.historyOperations track by $index">
+				<td>{{item}}</td>
+				<td>
+					<button class="btn btn-sm btn-danger"
+						ng-click="deleteHistoryOperation($index)">
+						<i class="fa fa-times"></i>
+					</button>
+
+				</td>
 			</tr>
-		</table>
-	</div>
-
-
-	<div>
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>Doctor</th>
-					<th>F</th>
-				</tr>
-				<tr>
-
-					<th><select class="form-control form-control-sm"
-						ng-model="selectedDoctor">
-							<option value="" selected="selected">Choose</option>
-							<option ng-repeat="item in doctors" ng-value="item">
-								{{item.fullName}}</option>
-					</select></th>
-					<th>
-						<button ng-disabled="!selectedDoctor"
-							class="btn btn-sm btn-success rounded-circle"
-							ng-click="addDoctor()">
-							<i class="fa fa-plus"></i>
-						</button>
-
-					</th>
-				</tr>
-
-			</thead>
-			<tbody>
-				<tr ng-repeat="item in patientVisit.doctors">
-					<td>{{item.fullName}}</td>
-					<td>
-						<button class="btn btn-sm btn-danger rounded-circle"
-							ng-click="deleteDoctor($index)">
-							<i class="fa fa-times"></i>
-						</button>
-					</td>
-				</tr>
-			</tbody>
-
 		</table>
 
 	</div>
 
-	<button class="btn btn-success" ng-click="save()">
-		<i class="fa fa-save"></i>
-	</button>
+
+	<div class="p-2">
+		<button class="btn btn-success" ng-disabled="form.$invalid"
+			ng-click="save()">
+			<i class="fa fa-plus"></i>
+		</button>
+
+	</div>
+
 
 
 </div>

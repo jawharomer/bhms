@@ -2,7 +2,7 @@ package com.joh.bhms.service;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.Optional;
+import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -11,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.joh.bhms.dao.OperationDAO;
 import com.joh.bhms.dao.OrderDetailDAO;
 import com.joh.bhms.dao.PatientOperationDAO;
 import com.joh.bhms.dao.PatientVisitDAO;
 import com.joh.bhms.exception.CusDataIntegrityViolationException;
 import com.joh.bhms.model.AttachedFile;
+import com.joh.bhms.model.Operation;
 import com.joh.bhms.model.OrderDetail;
 import com.joh.bhms.model.PatientProductUsed;
 import com.joh.bhms.model.PatientVisit;
@@ -34,6 +36,9 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 	@Autowired
 	private OrderDetailDAO orderDetailDAO;
 
+	@Autowired
+	private OperationDAO operationDAO;
+
 	@Override
 	public PatientVisit findOne(int id) {
 		return patientVisitDAO.findOne(id);
@@ -45,7 +50,7 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 	}
 
 	@Override
-	public Iterable<PatientVisit> findAllByNextSessionLessThanEqual( Date to) {
+	public Iterable<PatientVisit> findAllByNextSessionLessThanEqual(Date to) {
 		return patientVisitDAO.findAllByNextSessionLessThanEqual(to);
 	}
 
@@ -77,6 +82,14 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 		patientVisit.getPatientOperations().stream().forEach(e -> {
 			e.setPatientVisit(savePV);
 			patientOperationDAO.save(e);
+
+			if (operationDAO.findFirstByName(e.getOperation()) == null) {
+				Operation operation = new Operation();
+				operation.setName(e.getOperation());
+				operation.setPrice(e.getPrice());
+				operationDAO.save(operation);
+			}
+
 		});
 		return patientVisit;
 	}
@@ -139,6 +152,11 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 
 		patientVisitDAO.save(patientVisit);
 
+	}
+
+	@Override
+	public List<PatientVisit> findAllByPatientId(int id) {
+		return patientVisitDAO.findAllByPatientId(id);
 	}
 
 }

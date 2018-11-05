@@ -32,7 +32,6 @@ import com.joh.bhms.validator.PatientValidation;
 @Table(name = "PATIENTS")
 public class Patient {
 
-	
 	@Column(name = "I_PATIENT")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -90,10 +89,8 @@ public class Patient {
 	@JoinColumn(name = "I_VISIT_REFERENCE")
 	private VisitReference visitReference;
 
-	@ElementCollection
-	@CollectionTable(name = "PATIENT_ALLERGIES", joinColumns = @JoinColumn(name = "I_PATIENT"))
 	@Column(name = "ALLERGY")
-	private List<String> allergies = new ArrayList<>();
+	private String allergy;
 
 	@ElementCollection
 	@CollectionTable(name = "PATIENT_CHRNOIC_DISEASES", joinColumns = @JoinColumn(name = "I_PATIENT"))
@@ -185,14 +182,6 @@ public class Patient {
 		this.visitReference = visitReference;
 	}
 
-	public List<String> getAllergies() {
-		return allergies;
-	}
-
-	public void setAllergies(List<String> allergies) {
-		this.allergies = allergies;
-	}
-
 	public String getJob() {
 		return job;
 	}
@@ -232,15 +221,21 @@ public class Patient {
 	public void setHistoryOperations(List<String> historyOperations) {
 		this.historyOperations = historyOperations;
 	}
-	
-	
+
+	public String getAllergy() {
+		return allergy;
+	}
+
+	public void setAllergy(String allergy) {
+		this.allergy = allergy;
+	}
 
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", fullName=" + fullName + ", arabicFullName=" + arabicFullName + ", phone="
 				+ phone + ", birthDate=" + birthDate + ", address=" + address + ", maritalStatus=" + maritalStatus
 				+ ", gender=" + gender + ", time=" + time + ", job=" + job + ", smoking=" + smoking + ", drinking="
-				+ drinking + ", visitReference=" + visitReference + ", allergies=" + allergies + ", chronicDiseases="
+				+ drinking + ", visitReference=" + visitReference + ", allergy=" + allergy + ", chronicDiseases="
 				+ chronicDiseases + ", historyOperations=" + historyOperations + "]";
 	}
 

@@ -1,18 +1,20 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 
 <script type="text/javascript">
-	var jsonPatient = '${jsonPatient}';
+	var jsonPatient = '<spring:escapeBody  javaScriptEscape="true">${jsonPatient}</spring:escapeBody>';
+	var jsonChronicDiseases = '<spring:escapeBody  javaScriptEscape="true">${jsonChronicDiseases}</spring:escapeBody>';
 	var jsonVisitReferences = '${jsonVisitReferences}';
 </script>
 
 <div id="add-patient-contaner" ng-app="addPatient"
 	ng-controller="addPatient" ng-init="init()" ng-form name="form">
 	<h4>Add Patient</h4>
-	
-	
+
+
 
 	<div class="p-1 m-1">
 		<sf:form commandName="patient">
@@ -20,7 +22,7 @@
 		</sf:form>
 	</div>
 
-	<table  class="add-patient-table">
+	<table class="add-patient-table">
 		<tr>
 			<td>FullName</td>
 			<td><input name="fullName" required="required"
@@ -59,10 +61,10 @@
 		<tr>
 			<td>Visit Reference</td>
 			<td><select required name="visitReference"
-				class="form-control form-control-sm" name="visitReference"
-				required="required" ng-model="patient.visitReference">
+				class="form-control form-control-sm"
+				ng-model="patient.visitReference.id"
+				ng-options="a.id as a.reference for a in visitReferences">
 					<option value="">Choose</option>
-					<option ng-repeat="item in visitReferences" ng-value="item">{{item.reference}}</option>
 			</select></td>
 		</tr>
 
@@ -88,10 +90,10 @@
 		<tr>
 			<td>Gender</td>
 			<td><label> <input name="gender" required="required"
-					type="radio" name="maritalStatus" class="radio-inline"
-					ng-model="patient.gender" value="0"> Male
-			</label> <label> <input type="radio" name="maritalStatus"
-					class="radio-inline" ng-model="patient.gender" value="1">Female
+					type="radio" class="radio-inline" ng-model="patient.gender"
+					ng-value="0"> Male
+			</label> <label> <input type="radio" name="gender"
+					class="radio-inline" ng-model="patient.gender" ng-value="0">Female
 			</label></td>
 		</tr>
 
@@ -113,37 +115,20 @@
 			<td><input type="checkbox" ng-model="patient.drinking"
 				value="true"></td>
 		</tr>
+
+		<tr>
+			<td>Allergy</td>
+			<td>
+				<div class="input-group">
+					<div class="input-group-prepend pr-1">
+						<input ng-model="hasAllergy" type="checkbox">
+					</div>
+					<input ng-show="hasAllergy" class="form-control form-control-sm"
+						ng-model="patient.allergy">
+				</div>
+			</td>
+		</tr>
 	</table>
-
-	<div class="border  p-1">
-
-		<h6 class="text-secondary">Allergies</h6>
-
-		<table>
-			<tr>
-				<td><input class="form-control form-control-sm"
-					ng-model="newAllergy"></td>
-				<td>
-					<button class="btn btn-success btn-sm" ng-click="addAllergy()"
-						ng-disabled="!newAllergy">
-						<i class="fa fa-plus"></i>
-					</button>
-				</td>
-			</tr>
-
-			<tr ng-repeat="item in patient.allergies track by $index">
-				<td>{{item}}</td>
-				<td>
-					<button class="btn btn-sm btn-danger"
-						ng-click="deleteAllergy($index)">
-						<i class="fa fa-times"></i>
-					</button>
-
-				</td>
-			</tr>
-		</table>
-
-	</div>
 
 
 	<div class="border  p-1">
@@ -152,8 +137,8 @@
 
 		<table>
 			<tr>
-				<td><input class="form-control form-control-sm"
-					ng-model="newChronicDisease"></td>
+				<td><input id="newChronicDisease"
+					class="form-control form-control-sm" ng-model="newChronicDisease"></td>
 				<td>
 					<button class="btn btn-success btn-sm"
 						ng-click="addChronicDisease()" ng-disabled="!newChronicDisease">

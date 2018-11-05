@@ -19,5 +19,11 @@ public class ReportServiceImpl implements ReportService {
 		return reportDAO.findAdminNotifications();
 	}
 	
+	@Override
+	public List<String> findAllChronicDisease() {
+		return reportDAO.findAllChronicDisease();
+	}
+
+	
 	
 }

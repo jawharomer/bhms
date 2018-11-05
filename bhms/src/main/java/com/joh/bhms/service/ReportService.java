@@ -8,4 +8,6 @@ public interface ReportService {
 
 	List<NotificationD> findAdminNotifications();
 
+	List<String> findAllChronicDisease();
+
 }

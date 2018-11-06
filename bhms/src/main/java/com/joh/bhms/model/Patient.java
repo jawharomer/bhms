@@ -92,6 +92,9 @@ public class Patient {
 	@Column(name = "ALLERGY")
 	private String allergy;
 
+	@Column(name = "ALLERGY_NOTE")
+	private String allergyNote;
+
 	@ElementCollection
 	@CollectionTable(name = "PATIENT_CHRNOIC_DISEASES", joinColumns = @JoinColumn(name = "I_PATIENT"))
 	@Column(name = "CHRONIC_DISEASE")
@@ -230,13 +233,22 @@ public class Patient {
 		this.allergy = allergy;
 	}
 
+	public String getAllergyNote() {
+		return allergyNote;
+	}
+
+	public void setAllergyNote(String allergyNote) {
+		this.allergyNote = allergyNote;
+	}
+
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", fullName=" + fullName + ", arabicFullName=" + arabicFullName + ", phone="
 				+ phone + ", birthDate=" + birthDate + ", address=" + address + ", maritalStatus=" + maritalStatus
 				+ ", gender=" + gender + ", time=" + time + ", job=" + job + ", smoking=" + smoking + ", drinking="
-				+ drinking + ", visitReference=" + visitReference + ", allergy=" + allergy + ", chronicDiseases="
-				+ chronicDiseases + ", historyOperations=" + historyOperations + "]";
+				+ drinking + ", visitReference=" + visitReference + ", allergy=" + allergy + ", allergyNote="
+				+ allergyNote + ", chronicDiseases=" + chronicDiseases + ", historyOperations=" + historyOperations
+				+ "]";
 	}
 
 }

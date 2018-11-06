@@ -64,7 +64,6 @@ app
 
 					$scope.newExamination = {
 						name : "",
-						normal : "",
 						result : "",
 						note : ""
 					};
@@ -150,6 +149,14 @@ app
 						});
 
 						// E-Product AutoCompletion
+						
+						// S-Examination AutoCompletion
+						console.log("jsonExaminations=",jsonExaminations);
+						var examinations=JSON.parse(jsonExaminations);
+						$("#examination-name").autocomplete({
+							source:examinations
+						});
+						// E-Examination AutoCompletion
 
 					};
 					$scope.addOperation = function() {

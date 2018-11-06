@@ -72,7 +72,10 @@
 						</c:choose></td>
 
 					<td>${item.visitReference.reference}</td>
-					<td><a href="<c:url value="/patientVisits/add/"/>${item.id}"
+					<td><a
+						href="<c:url value="/patientVisits/patient/"/>${item.id}"
+						class="btn btn-sm btn-warning"> <i class="fa fa-history"></i>
+					</a> <a href="<c:url value="/patientVisits/add/"/>${item.id}"
 						class="btn btn-sm btn-info" title="add patient visit"> <i
 							class="fa fa-ticket"></i>
 					</a> <a href="<c:url value="/patients/edit/"/>${item.id}"

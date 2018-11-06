@@ -2,6 +2,7 @@ package com.joh.bhms.controller;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -35,6 +36,7 @@ import com.joh.bhms.service.OperationService;
 import com.joh.bhms.service.PatientService;
 import com.joh.bhms.service.PatientVisitService;
 import com.joh.bhms.service.ProductService;
+import com.joh.bhms.service.ReportService;
 
 @Controller
 @RequestMapping(path = "/patientVisits")
@@ -56,6 +58,9 @@ public class PatientVisitController {
 
 	@Autowired
 	private ProductService productService;
+
+	@Autowired
+	private ReportService reportService;
 
 	@GetMapping()
 	public String getAllPatientVisit(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
@@ -161,6 +166,10 @@ public class PatientVisitController {
 		Iterable<Product> products = productService.findAll();
 		logger.info("products=" + products);
 		model.addAttribute("jsonProducts", mapper.writeValueAsString(products));
+
+		List<String> examinations = reportService.findAllExamination();
+		logger.info("examinations=" + examinations);
+		model.addAttribute("jsonExaminations", mapper.writeValueAsString(examinations));
 
 		return "editPatientVisit";
 	}

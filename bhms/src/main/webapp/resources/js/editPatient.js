@@ -13,18 +13,11 @@ app.controller('addPatient', function($scope, $http) {
 	$scope.newChronicDisease;
 	$scope.newHistoryOperation;
 	$scope.visitReferences;
-	$scope.hasAllergy;
 
 	$scope.init = function() {
 		console.log("init->fired");
 		console.log("jsonPatient=", jsonPatient);
 		$scope.patient = JSON.parse(jsonPatient);
-
-		if ($scope.patient.allergy) {
-			$scope.hasAllergy = true;
-		} else {
-			$scope.hasAllergy = false;
-		}
 
 		console.log("jsonVisitReferences=", jsonVisitReferences);
 		$scope.visitReferences = JSON.parse(jsonVisitReferences);
@@ -61,9 +54,9 @@ app.controller('addPatient', function($scope, $http) {
 	$scope.save = function() {
 		console.log("save->fired");
 		console.log("$scope.patient=", $scope.patient);
-
-		if (!$scope.hasAllergy) {
-			$scope.patient.allergy = "";
+		
+		if($scope.patient.allergy=="No"){
+			$scope.patient.allergyNote="";
 		}
 
 		$http({

@@ -8,7 +8,7 @@
 	var jsonPatientVisit = '${jsonPatientVisit}';
 	var jsonOperations = '<spring:escapeBody  javaScriptEscape="true">${jsonOperations}</spring:escapeBody>';
 	var jsonProducts = '<spring:escapeBody  javaScriptEscape="true">${jsonProducts}</spring:escapeBody>';
-
+	var jsonExaminations = '<spring:escapeBody  javaScriptEscape="true">${jsonExaminations}</spring:escapeBody>';
 	var jsonDoctors = '${jsonDoctors}';
 </script>
 
@@ -21,6 +21,9 @@
 			<td>{{patientVisit.patient.fullName}} <a
 				href="<c:url value="/patients/edit/"/>{{patientVisit.patient.id}} "
 				class="btn btn-sm btn-warning"> <i class="fa fa-edit"></i>
+			</a> <a
+				href="<c:url value="/patientVisits/patient/"/>{{patientVisit.patient.id}} "
+				class="btn btn-sm btn-warning"> <i class="fa fa-history"></i>
 			</a>
 			</td>
 		</tr>
@@ -138,8 +141,9 @@
 				<tr ng-form name="productUsedForm">
 					<th><input id="porduct-autocomplete"
 						ng-model="newProductUsed.product.code" required name="code"
-						class="form-control form-control-sm" ng-keypress="getProduct($event)"></th>
-					<th><input  ng-model="newProductUsed.product.name"
+						class="form-control form-control-sm"
+						ng-keypress="getProduct($event)"></th>
+					<th><input ng-model="newProductUsed.product.name"
 						readonly="readonly" required name="name"
 						class="form-control form-control-sm"></th>
 					<th><input id="product-quantity" type="number" min="1"
@@ -180,16 +184,13 @@
 			<thead>
 				<tr>
 					<th>Name</th>
-					<th>Normal</th>
 					<th>Result</th>
 					<th>Note</th>
 					<th>F</th>
 				</tr>
 				<tr ng-form name="examinationForm">
-					<th><input ng-model="newExamination.name" required name="name"
+					<th><input id="examination-name" ng-model="newExamination.name" required name="name"
 						class="form-control form-control-sm"></th>
-					<th><input ng-model="newExamination.normal" required
-						name="normal" class="form-control form-control-sm"></th>
 					<th><input ng-model="newExamination.result" required
 						name="result" class="form-control form-control-sm"></th>
 
@@ -208,7 +209,6 @@
 			<tbody>
 				<tr ng-repeat="item in patientVisit.examinations">
 					<td>{{item.name}}</td>
-					<td>{{item.normal}}</td>
 					<td>{{item.result}}</td>
 					<td class="cus-note-td" title="{{item.note}}">{{item.note}}</td>
 					<td>

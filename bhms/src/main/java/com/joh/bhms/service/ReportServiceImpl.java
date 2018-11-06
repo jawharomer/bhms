@@ -23,6 +23,12 @@ public class ReportServiceImpl implements ReportService {
 	public List<String> findAllChronicDisease() {
 		return reportDAO.findAllChronicDisease();
 	}
+	
+	@Override
+	public List<String> findAllExamination() {
+		return reportDAO.findAllExamination();
+	}
+
 
 	
 	

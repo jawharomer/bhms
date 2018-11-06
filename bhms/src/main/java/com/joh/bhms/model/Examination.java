@@ -8,19 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "EXAMINATIONS")
+@Table(name = "PATIENT_EXAMINATIONS")
 public class Examination {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "I_EXAMINATION")
+	@Column(name = "I_PATIENT_EXAMINATION")
 	private Integer id;
 
 	@Column(name = "EXAMINATION_NAME")
 	private String name;
-
-	@Column(name = "NORMAL")
-	private String normal;
 
 	@Column(name = "RESULT")
 	private String result;
@@ -44,14 +41,6 @@ public class Examination {
 		this.name = name;
 	}
 
-	public String getNormal() {
-		return normal;
-	}
-
-	public void setNormal(String normal) {
-		this.normal = normal;
-	}
-
 	public String getResult() {
 		return result;
 	}
@@ -70,8 +59,7 @@ public class Examination {
 
 	@Override
 	public String toString() {
-		return "Examination [id=" + id + ", name=" + name + ", normal=" + normal + ", result=" + result + ", note="
-				+ note + "]";
+		return "Examination [id=" + id + ", name=" + name + ", result=" + result + ", note=" + note + "]";
 	}
 
 }

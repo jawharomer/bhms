@@ -117,7 +117,6 @@
 				<tr>
 					<th>Date</th>
 					<th>Name</th>
-					<th>Normal</th>
 					<th>Result</th>
 					<th>Note</th>
 				</tr>
@@ -129,7 +128,6 @@
 							<td><fmt:formatDate value="${patientVisit.time }"
 									pattern="yyyy-MM-dd" /></td>
 							<td>${examination.name }</td>
-							<td>${examination.normal }</td>
 							<td>${examination.result}</td>
 							<td class="cus-note-td">${examination.note}</td>
 						</tr>

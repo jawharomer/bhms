@@ -117,15 +117,21 @@
 		</tr>
 
 		<tr>
-			<td>Allergy</td>
-			<td>
-				<div class="input-group">
-					<div class="input-group-prepend pr-1">
-						<input ng-model="hasAllergy" type="checkbox">
-					</div>
-					<input ng-show="hasAllergy" class="form-control form-control-sm"
-						ng-model="patient.allergy">
+			<td class="text-info border-top">Allergy</td>
+			<td class="text-info border-top">
+				<div>
+					<label> <input name="allergy" type="radio"
+						class="radio-inline" ng-model="patient.allergy" value="Yes">Yes
+					</label> <label><input name="allergy" type="radio"
+						class="radio-inline" ng-model="patient.allergy" value="No">No
+					</label> <label><input name="allergy" type="radio"
+						class="radio-inline" ng-model="patient.allergy" value="Unkown">
+						Unkown </label>
 				</div>
+				<div>
+					<input ng-hide="!patient.allergy||patient.allergy=='No'" placeholder="Allergy Note" ng-model="patient.allergyNote" class="form-control form-control-sm">
+				</div>
+
 			</td>
 		</tr>
 	</table>

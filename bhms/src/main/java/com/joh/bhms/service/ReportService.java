@@ -10,4 +10,6 @@ public interface ReportService {
 
 	List<String> findAllChronicDisease();
 
+	List<String> findAllExamination();
+
 }

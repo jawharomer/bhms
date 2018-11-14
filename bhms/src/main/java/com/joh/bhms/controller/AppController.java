@@ -15,4 +15,10 @@ public class AppController {
 		return "login";
 	}
 
+	@GetMapping("/")
+	public String root() {
+		logger.info("root->fired");
+		return "redirect:/admin";
+	}
+
 }

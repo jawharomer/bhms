@@ -19,6 +19,7 @@ import com.joh.bhms.exception.CusDataIntegrityViolationException;
 import com.joh.bhms.model.AttachedFile;
 import com.joh.bhms.model.Operation;
 import com.joh.bhms.model.OrderDetail;
+import com.joh.bhms.model.PatientOperation;
 import com.joh.bhms.model.PatientProductUsed;
 import com.joh.bhms.model.PatientVisit;
 
@@ -68,9 +69,15 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 	@Transactional
 	@Override
 	public PatientVisit update(PatientVisit patientVisit) {
-		if (patientVisitDAO.findOne(patientVisit.getId()) == null) {
+		PatientVisit oldPatientVisit = patientVisitDAO.findOne(patientVisit.getId());
+		if (oldPatientVisit == null) {
 			throw new EntityNotFoundException();
 		}
+
+		// Remove old PatientOperations
+		oldPatientVisit.getPatientOperations().stream().forEach(e -> {
+			patientOperationDAO.delete(e.getId());
+		});
 
 		// Prevent update AttachedFiles
 		patientVisit.setAttachedFiles(patientVisitDAO.findOne(patientVisit.getId()).getAttachedFiles());
@@ -79,6 +86,7 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 		patientVisit.setPatientProductUseds(patientVisitDAO.findOne(patientVisit.getId()).getPatientProductUseds());
 
 		final PatientVisit savePV = patientVisitDAO.save(patientVisit);
+
 		patientVisit.getPatientOperations().stream().forEach(e -> {
 			e.setPatientVisit(savePV);
 			patientOperationDAO.save(e);

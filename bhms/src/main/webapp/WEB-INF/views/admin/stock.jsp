@@ -71,7 +71,7 @@
 				<th>StockLevel</th>
 				<th>Cost</th>
 				<th>Price</th>
-				<th class="cus-not-search"></th>
+				<th class="cus-not-search">&nbsp;</th>
 			</tr>
 		</tfoot>
 

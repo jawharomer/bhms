@@ -12,6 +12,7 @@ app.controller('addPatientVisit', function($scope, $http) {
 	$scope.doctors;
 	$scope.selectedDoctor;
 	$scope.doctorRatio=0;
+	
 
 	//
 	$scope.selectedOperation;

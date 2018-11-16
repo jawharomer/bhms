@@ -4,11 +4,11 @@
 
 <div id="section-to-print">
 	<div class="py-2 d-print-none">
-		<h3>Doctor Visit Payments-Dr.${doctor.fullName}</h3>
+		<h3>Visit Payments-Dr.${doctor.fullName}</h3>
 	</div>
 
 	<div>
-		<form action="<c:url value="/patientVisits" />">
+		<form action="<c:url value="/visitPayments/doctors/" />${doctor.id}">
 			<table>
 				<tr>
 					<td class="text-left">From</td>

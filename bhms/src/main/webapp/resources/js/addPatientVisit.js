@@ -10,6 +10,7 @@ app.controller('addPatientVisit', function($scope, $http) {
 	$scope.resetNewProductUsed = angular.copy($scope.newProductUsed);
 
 	$scope.doctors;
+	
 	$scope.selectedDoctor;
 	$scope.doctorRatio=0;
 	

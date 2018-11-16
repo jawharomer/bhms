@@ -6,11 +6,12 @@ app.controller('addPatientVisit', function($scope, $http) {
 	$scope.patientVisit = {};
 
 	$scope.operations = [];
-	
+
 	$scope.resetNewProductUsed = angular.copy($scope.newProductUsed);
 
 	$scope.doctors;
 	$scope.selectedDoctor;
+	$scope.doctorRatio=0;
 
 	//
 	$scope.selectedOperation;
@@ -41,7 +42,7 @@ app.controller('addPatientVisit', function($scope, $http) {
 		$scope.doctors = JSON.parse(jsonDoctors);
 
 	};
-	
+
 	$scope.addOperation = function() {
 		console.log("addOperation->fired");
 		var item = {};
@@ -60,16 +61,34 @@ app.controller('addPatientVisit', function($scope, $http) {
 		$scope.patientVisit.patientOperations.splice(index, 1);
 	}
 
-	$scope.addDoctor = function() {
-		console.log("addDoctor->fired");
-		if ($scope.patientVisit.doctors.indexOf($scope.selectedDoctor) == -1) {
-			$scope.patientVisit.doctors.push($scope.selectedDoctor);
+	$scope.addPatientDoctor = function() {
+		var newPatientDoctor = {
+			doctor : $scope.selectedDoctor,
+			ratio : $scope.doctorRatio
+		};
+
+		console.log("newPatientDoctor=", newPatientDoctor);
+
+		var isExist = false;
+
+		angular.forEach($scope.patientVisit.patientDoctors, function(v, k) {
+			console.log("newPatientDoctor=", newPatientDoctor);
+			console.log("v=", v);
+			if (newPatientDoctor.doctor.id == v.doctor.id) {
+				isExist = true;
+			}
+		});
+		if (!isExist) {
+			$scope.patientVisit.patientDoctors.push(newPatientDoctor);
+		} else {
+			alert("Already added");
 		}
+
 		$scope.selectedDoctor = null;
+		$scope.doctorRatio = null;
 	}
-	
-	$scope.deleteDoctor = function(index) {
-		$scope.patientVisit.doctors.splice(index, 1);
+	$scope.deletePatientDoctor = function(index) {
+		$scope.patientVisit.patientDoctors.splice(index, 1);
 	}
 
 	$scope.save = function() {

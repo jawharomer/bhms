@@ -78,25 +78,26 @@
 	</div>
 
 
-	<div>
+	<div class="py-1">
 		<table class="table table-bordered">
 			<thead>
 				<tr>
 					<th>Doctor</th>
 					<th>F</th>
 				</tr>
-				<tr>
 
-					<th><select class="form-control form-control-sm"
-						ng-model="selectedDoctor">
+				<tr ng-form name="newPatientDoctorForm">
+
+					<th><select required name="doctor"
+						class="form-control form-control-sm" ng-model="selectedDoctor">
 							<option value="" selected="selected">Choose</option>
 							<option ng-repeat="item in doctors" ng-value="item">
 								{{item.fullName}}</option>
 					</select></th>
 					<th>
-						<button ng-disabled="!selectedDoctor"
+						<button ng-disabled="newPatientDoctorForm.$invalid"
 							class="btn btn-sm btn-success rounded-circle"
-							ng-click="addDoctor()">
+							ng-click="addPatientDoctor()">
 							<i class="fa fa-plus"></i>
 						</button>
 
@@ -105,11 +106,11 @@
 
 			</thead>
 			<tbody>
-				<tr ng-repeat="item in patientVisit.doctors">
-					<td>{{item.fullName}}</td>
+				<tr ng-repeat="item in patientVisit.patientDoctors">
+					<td>{{item.doctor.fullName}}</td>
 					<td>
 						<button class="btn btn-sm btn-danger rounded-circle"
-							ng-click="deleteDoctor($index)">
+							ng-click="deletePatientDoctor($index)">
 							<i class="fa fa-times"></i>
 						</button>
 					</td>

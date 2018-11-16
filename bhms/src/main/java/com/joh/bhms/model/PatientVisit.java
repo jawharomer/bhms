@@ -58,13 +58,14 @@ public class PatientVisit {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date nextSession;
 
-	@ManyToMany()
-	@JoinTable(name = "PATIENT_VISIT_DOCTORS", joinColumns = @JoinColumn(name = "I_VISIT"), inverseJoinColumns = @JoinColumn(name = "I_DOCTOR"))
-	private List<Doctor> doctors = new ArrayList<>();
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name = "I_PATIENT_VISIT")
+	private List<PatientDoctor> patientDoctors = new ArrayList<>();
 
 	@OneToMany(mappedBy = "patientVisit")
 	private List<PatientOperation> patientOperations = new ArrayList<>();
 
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@OneToMany(mappedBy = "patientVisit")
 	private List<VisitPayment> visitPayments = new ArrayList<>();
 
@@ -117,12 +118,12 @@ public class PatientVisit {
 		this.note = note;
 	}
 
-	public List<Doctor> getDoctors() {
-		return doctors;
+	public List<PatientDoctor> getPatientDoctors() {
+		return patientDoctors;
 	}
 
-	public void setDoctors(List<Doctor> doctors) {
-		this.doctors = doctors;
+	public void setPatientDoctors(List<PatientDoctor> patientDoctors) {
+		this.patientDoctors = patientDoctors;
 	}
 
 	public List<PatientOperation> getPatientOperations() {
@@ -184,10 +185,10 @@ public class PatientVisit {
 	@Override
 	public String toString() {
 		return "PatientVisit [id=" + id + ", patient=" + patient + ", time=" + time + ", note=" + note
-				+ ", nextSession=" + nextSession + ", doctors=" + doctors + ", patientOperations=" + patientOperations
-				+ ", visitPayments=" + visitPayments + ", patientProductUseds=" + patientProductUseds
-				+ ", attachedFiles=" + attachedFiles + ", examinations=" + examinations + ", treatments=" + treatments
-				+ "]";
+				+ ", nextSession=" + nextSession + ", patientDoctors=" + patientDoctors + ", patientOperations="
+				+ patientOperations + ", patientProductUseds="
+				+ patientProductUseds + ", attachedFiles=" + attachedFiles + ", examinations=" + examinations
+				+ ", treatments=" + treatments + "]";
 	}
 
 }

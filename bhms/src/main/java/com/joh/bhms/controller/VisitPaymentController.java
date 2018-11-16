@@ -1,11 +1,13 @@
 package com.joh.bhms.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,9 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.joh.bhms.model.Doctor;
 import com.joh.bhms.model.PatientVisit;
 import com.joh.bhms.model.VisitPayment;
+import com.joh.bhms.service.DoctorService;
 import com.joh.bhms.service.PatientVisitService;
 import com.joh.bhms.service.VisitPaymentService;
 
@@ -31,6 +36,9 @@ public class VisitPaymentController {
 
 	@Autowired
 	private PatientVisitService patientVisitService;
+
+	@Autowired
+	private DoctorService doctorService;
 
 	@GetMapping(path = "/patientVisit/{id}")
 	public String getAllVisitPatientPayment(@PathVariable int id, Model model) {
@@ -79,6 +87,31 @@ public class VisitPaymentController {
 			return "success";
 		}
 
+	}
+
+	@GetMapping(path = "/doctors/{id}")
+	public String getAllDoctorVisitPayment(@PathVariable int id,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date to, Model model) {
+		logger.info("getAllDoctorVisitPayment->fired");
+
+		logger.info("doctorId=" + id);
+
+		logger.info("from=" + from);
+		logger.info("to=" + to);
+
+		Doctor doctor = doctorService.findOne(id);
+		logger.info("doctor=" + doctor);
+
+		List<VisitPayment> visitPayments = visitPaymentService.findAllByDoctorId(id);
+
+		model.addAttribute("visitPayments", visitPayments);
+
+		model.addAttribute("from", from);
+		model.addAttribute("to", to);
+		model.addAttribute("doctor", doctor);
+
+		return "doctorVisitPayments";
 	}
 
 }

@@ -26,6 +26,16 @@ app
 
 					$scope.doctors;
 					$scope.selectedDoctor;
+					$scope.doctorRatio;
+
+					$scope.doctorTotalRatio = function() {
+						var totalRatio = 0;
+						for (var i = 0; i < $scope.patientVisit.patientDoctors.length; i++) {
+							totalRatio += $scope.patientVisit.patientDoctors[i].ratio;
+						}
+						return totalRatio;
+
+					}
 
 					$scope.products;
 
@@ -149,12 +159,12 @@ app
 						});
 
 						// E-Product AutoCompletion
-						
+
 						// S-Examination AutoCompletion
-						console.log("jsonExaminations=",jsonExaminations);
-						var examinations=JSON.parse(jsonExaminations);
+						console.log("jsonExaminations=", jsonExaminations);
+						var examinations = JSON.parse(jsonExaminations);
 						$("#examination-name").autocomplete({
-							source:examinations
+							source : examinations
 						});
 						// E-Examination AutoCompletion
 
@@ -177,17 +187,39 @@ app
 						$scope.patientVisit.patientOperations.splice(index, 1);
 					}
 
-					$scope.addDoctor = function() {
-						console.log("addDoctor->fired");
-						if ($scope.patientVisit.doctors
-								.indexOf($scope.selectedDoctor) == -1) {
-							$scope.patientVisit.doctors
-									.push($scope.selectedDoctor);
+					$scope.addPatientDoctor = function() {
+						var newPatientDoctor = {
+							doctor : $scope.selectedDoctor,
+							ratio : $scope.doctorRatio
+						};
+
+						console.log("newPatientDoctor=", newPatientDoctor);
+
+						var isExist = false;
+
+						angular
+								.forEach(
+										$scope.patientVisit.patientDoctors,
+										function(v, k) {
+											console.log("newPatientDoctor=",
+													newPatientDoctor);
+											console.log("v=", v);
+											if (newPatientDoctor.doctor.id == v.doctor.id) {
+												isExist = true;
+											}
+										});
+						if (!isExist) {
+							$scope.patientVisit.patientDoctors
+									.push(newPatientDoctor);
+						} else {
+							alert("Already added");
 						}
+
 						$scope.selectedDoctor = null;
+						$scope.doctorRatio = null;
 					}
-					$scope.deleteDoctor = function(index) {
-						$scope.patientVisit.doctors.splice(index, 1);
+					$scope.deletePatientDoctor = function(index) {
+						$scope.patientVisit.patientDoctors.splice(index, 1);
 					}
 
 					$scope.getProduct = function(event) {
@@ -213,7 +245,8 @@ app
 															.copy(
 																	response.data,
 																	$scope.newProductUsed.product);
-													$( "#product-quantity" ).focus();
+													$("#product-quantity")
+															.focus();
 													console
 															.log(
 																	"$scope.newProductUsed=",

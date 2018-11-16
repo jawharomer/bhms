@@ -10,4 +10,6 @@ public interface VisitPaymentService {
 
 	VisitPayment save(VisitPayment visitPayment);
 
+	List<VisitPayment> findAllByDoctorId(int id);
+
 }

@@ -21,7 +21,7 @@
 	<table class="table table-borderd">
 		<thead>
 			<tr>
-				<th>Operation</th>
+				<th>Procedures</th>
 				<th>Price</th>
 				<th>Note</th>
 				<th>F</th>

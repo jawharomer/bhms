@@ -1,14 +1,20 @@
 package com.joh.bhms.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,6 +40,7 @@ public class VisitPayment {
 	// Do not put in toString()
 	@ManyToOne()
 	@JoinColumn(name = "I_PATIENT_VISIT", nullable = false)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private PatientVisit patientVisit;
 
 	@NotNull(message = "payment amount is null")
@@ -48,6 +55,11 @@ public class VisitPayment {
 	@CreationTimestamp
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	private Date time;
+
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name = "VISIT_PAYMENT_PATIENT_DOCTORS", joinColumns = {
+			@JoinColumn(name = "I_VISIT_PAYMENT") }, inverseJoinColumns = { @JoinColumn(name = "I_PATIENT_DOCTOR") })
+	private List<PatientDoctor> patientDoctors = new ArrayList<>();
 
 	public Integer getId() {
 		return id;
@@ -87,6 +99,14 @@ public class VisitPayment {
 
 	public PatientVisit getPatientVisit() {
 		return patientVisit;
+	}
+
+	public List<PatientDoctor> getPatientDoctors() {
+		return patientDoctors;
+	}
+
+	public void setPatientDoctors(List<PatientDoctor> patientDoctors) {
+		this.patientDoctors = patientDoctors;
 	}
 
 	@Override

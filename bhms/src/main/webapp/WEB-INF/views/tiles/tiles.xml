@@ -6,7 +6,7 @@
 	<!-- Base Definition -->
 	<definition name="base-definition"
 		template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
-		<put-attribute name="title" value="" />
+		<put-attribute name="title" value="BHMS" />
 		<put-attribute name="header"
 			value="/WEB-INF/views/tiles/template/defaultHeader.jsp" />
 		<put-attribute name="pageCSS" value=""></put-attribute>
@@ -27,7 +27,7 @@
 
 	<!-- Admin page -->
 	<definition name="adminRoot" extends="base-definition">
-		<put-attribute name="title" value="Stock" />
+		<put-attribute name="title" value="BHMS" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/root.jsp" />
 		<put-attribute name="adminBody" value="" cascade="true" />
@@ -66,7 +66,7 @@
 
 	<!-- Notifications -->
 	<definition name="notifications" extends="adminRoot">
-		<put-attribute name="title" value="orderDetails" />
+		<put-attribute name="title" value="BHMS" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/admin/notifications.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
@@ -261,6 +261,24 @@
 	</definition>
 
 
+	<!-- DoctorVisitPayments -->
+	<definition name="doctorVisitPayments" extends="adminRoot">
+		<put-attribute name="title" value="AddPatienVisit" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/visitPayment/doctorVisitPayments.jsp"
+			cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="doctorVisitPayments" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="doctorVisitPayments" />
+		</put-list-attribute>
+	</definition>
+
+
 
 	<!-- Operations -->
 	<definition name="operations" extends="adminRoot">
@@ -415,5 +433,22 @@
 			<add-attribute value="orders" />
 		</put-list-attribute>
 	</definition>
+
+
+	<!-- Appointments -->
+	<definition name="appointments" extends="adminRoot">
+		<put-attribute name="title" value="Patient" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/appointment/appointments.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="appointments" />
+		</put-list-attribute>
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="appointments" />
+		</put-list-attribute>
+	</definition>
+
 
 </tiles-definitions>

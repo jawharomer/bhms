@@ -1,6 +1,7 @@
 package com.joh.bhms.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import com.joh.bhms.dao.OperationDAO;
 import com.joh.bhms.dao.OrderDetailDAO;
 import com.joh.bhms.dao.PatientOperationDAO;
 import com.joh.bhms.dao.PatientVisitDAO;
+import com.joh.bhms.dao.VisitPaymentDAO;
 import com.joh.bhms.exception.CusDataIntegrityViolationException;
 import com.joh.bhms.model.AttachedFile;
 import com.joh.bhms.model.Operation;
@@ -22,6 +24,7 @@ import com.joh.bhms.model.OrderDetail;
 import com.joh.bhms.model.PatientOperation;
 import com.joh.bhms.model.PatientProductUsed;
 import com.joh.bhms.model.PatientVisit;
+import com.joh.bhms.model.VisitPayment;
 
 @Service
 public class PatientVisitServiceImpl implements PatientVisitService {
@@ -39,6 +42,9 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 
 	@Autowired
 	private OperationDAO operationDAO;
+
+	@Autowired
+	private VisitPaymentDAO visitPaymentDAO;
 
 	@Override
 	public PatientVisit findOne(int id) {
@@ -73,6 +79,13 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 		if (oldPatientVisit == null) {
 			throw new EntityNotFoundException();
 		}
+
+		// Keep All Doctors from All Today Payments
+		List<VisitPayment> visitPayments = visitPaymentDAO.findAllAtToday(patientVisit.getId());
+		visitPayments.stream().forEach(e -> {
+			e.setPatientDoctors(new ArrayList<>(patientVisit.getPatientDoctors()));
+			visitPaymentDAO.save(e);
+		});
 
 		// Remove old PatientOperations
 		oldPatientVisit.getPatientOperations().stream().forEach(e -> {

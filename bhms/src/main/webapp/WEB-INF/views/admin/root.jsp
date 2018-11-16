@@ -17,6 +17,9 @@
 		<ul class="list-group">
 			<li class="list-group-item"><a href="<c:url value="/admin"/>">
 					Dashboard</a></li>
+			<li class="list-group-item"><a
+				href="<c:url value="/appointments"/>?from=${currentDate}&to=${tomorrow}">
+					Appointments</a></li>
 
 
 			<li class="list-group-item"><a
@@ -35,7 +38,7 @@
 					Patient Product Used</a></li>
 
 			<li class="list-group-item"><a
-				href="<c:url value="/operations"/>">Operations</a></li>
+				href="<c:url value="/operations"/>">Investigations</a></li>
 			<li class="list-group-item"><a href="<c:url value="/doctors"/>">Doctors</a></li>
 
 

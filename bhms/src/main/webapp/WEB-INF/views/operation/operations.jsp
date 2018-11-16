@@ -4,7 +4,7 @@
 
 <div>
 	<div class="py-2">
-		<h3>Operations</h3>
+		<h3>Investigations</h3>
 		<button class="btn btn-success" onclick="getAddingOperation()">
 			<i class="fa fa-plus"></i>
 		</button>

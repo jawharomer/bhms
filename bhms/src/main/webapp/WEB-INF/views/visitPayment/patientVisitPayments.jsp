@@ -1,6 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 
 <div id="section-to-print">
 	<div class="py-2 d-print-none">
@@ -26,6 +28,18 @@
 				<td>Patient Name</td>
 				<td>${patientVisit.patient.fullName}</td>
 			</tr>
+
+			<tr>
+				<td>Procedures</td>
+				<td><c:forEach items="${patientVisit.patientOperations}"
+						var="item" varStatus="loop">
+				${item.operation }
+				<c:if
+							test="${loop.index!=fn:length(patientVisit.patientOperations)-1}">
+,
+						</c:if>
+					</c:forEach></td>
+			</tr>
 		</table>
 	</div>
 
@@ -36,7 +50,7 @@
 				<th>Payment Amount</th>
 				<th>Time</th>
 				<th>Note</th>
-				<th>F</th>
+				<th class="d-print-none">F</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -46,7 +60,14 @@
 					<td>${item.paymentAmount}</td>
 					<td><fmt:formatDate value="${item.time}"
 							pattern="yyyy-MM-dd hh:mm:ss" /></td>
-					<td>${item.note}</td>
+					<td class="cus-note-td" title="${item.note}">${item.note}</td>
+					<td class="d-print-none">
+						<button class="btn btn-sm btn-danger"
+							onclick="deleteVisitPayment(${item.id})">
+							<i class="fa fa-times"></i>
+						</button>
+
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>

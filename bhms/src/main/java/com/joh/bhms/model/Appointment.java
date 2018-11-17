@@ -37,7 +37,7 @@ public class Appointment {
 	@Column(name = "PHONE")
 	private String phone;
 
-	@Column(name = "PROCEDURE")
+	@Column(name = "APPOINTMENT_PROCEDURE")
 	private String procedure;
 
 	@NotNull(message = "Date is  null")

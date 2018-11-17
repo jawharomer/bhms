@@ -12,4 +12,6 @@ public interface VisitPaymentService {
 
 	List<VisitPayment> findAllByDoctorId(int id);
 
+	void delete(int id);
+
 }

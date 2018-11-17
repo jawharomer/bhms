@@ -89,6 +89,17 @@ public class VisitPaymentController {
 
 	}
 
+	@PostMapping(path = "/delete/{id}")
+	public String deleteVisitPayment(@PathVariable int id, Model model) {
+		logger.info("deleteVisitPayment->fired");
+		logger.info("id=" + id);
+
+		visitPaymentService.delete(id);
+
+		return "success";
+
+	}
+
 	@GetMapping(path = "/doctors/{id}")
 	public String getAllDoctorVisitPayment(@PathVariable int id,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,

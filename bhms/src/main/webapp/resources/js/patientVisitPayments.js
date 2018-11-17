@@ -16,3 +16,24 @@ function getAddingVisitPayment(patientVisitId) {
 	});
 
 }
+
+function deleteVisitPayment(id) {
+	console.log("deleteVisitPayment->fired");
+	console.log("id=" + id);
+
+	$.when(cusConfirm()).done(function() {
+		$.ajax({
+			url : $$ContextURL + "/visitPayments/delete/" + id,
+			type : 'POST',
+			success : function(response) {
+				$("#modal-body").html(response);
+				$("#modal").modal("show");
+			},
+			error : function(response) {
+				$("#modal-body").html(response.responseText);
+				$("#modal").modal("show");
+			}
+		});
+	});
+
+}

@@ -33,10 +33,15 @@ public class VisitPaymentServiceImpl implements VisitPaymentService {
 		visitPayment.setPatientDoctors(new ArrayList<>(patientVisit.getPatientDoctors()));
 		return visitPaymentDAO.save(visitPayment);
 	}
-	
+
 	@Override
 	public List<VisitPayment> findAllByDoctorId(int id) {
 		return visitPaymentDAO.findAllByDoctorId(id);
+	}
+
+	@Override
+	public void delete(int id) {
+		visitPaymentDAO.delete(id);
 	}
 
 }

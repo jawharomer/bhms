@@ -64,6 +64,7 @@
 				<th>#</th>
 				<th>Full Name</th>
 				<th>Phone</th>
+				<th>Procedure</th>
 				<th>Date</th>
 				<th>Time</th>
 				<th class="cus-not-export">F</th>
@@ -75,6 +76,7 @@
 					<td>${item.id }</td>
 					<td>${item.fullName}</td>
 					<td>${item.phone}</td>
+					<td>${item.procedure}</td>
 					<td>${item.date}</td>
 					<td><fmt:formatDate value="${item.time}" pattern="hh:mm a" /></td>
 					<td><button class="btn btn-sm btn-warning"

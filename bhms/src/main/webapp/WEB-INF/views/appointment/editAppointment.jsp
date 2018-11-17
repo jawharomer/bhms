@@ -26,9 +26,16 @@
 				</tr>
 
 				<tr>
+					<td>Procedure</td>
+					<td><sf:input cssClass="form-control form-control-sm"
+							path="procedure" /></td>
+					<td><sf:errors path="procedure" /></td>
+				</tr>
+
+				<tr>
 					<td>Date</td>
-					<td><sf:input readonly="true" cssClass="form-control form-control-sm"
-							path="date" /></td>
+					<td><sf:input readonly="true"
+							cssClass="form-control form-control-sm" path="date" /></td>
 					<td><sf:errors path="date" /></td>
 				</tr>
 

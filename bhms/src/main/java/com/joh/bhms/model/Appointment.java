@@ -37,6 +37,9 @@ public class Appointment {
 	@Column(name = "PHONE")
 	private String phone;
 
+	@Column(name = "PROCEDURE")
+	private String procedure;
+
 	@NotNull(message = "Date is  null")
 	@Column(name = "APPOINTMENT_DATE")
 	@Temporal(TemporalType.DATE)
@@ -90,10 +93,18 @@ public class Appointment {
 		this.time = time;
 	}
 
+	public String getProcedure() {
+		return procedure;
+	}
+
+	public void setProcedure(String procedure) {
+		this.procedure = procedure;
+	}
+
 	@Override
 	public String toString() {
-		return "Appointment [id=" + id + ", fullName=" + fullName + ", phone=" + phone + ", date=" + date + ", time="
-				+ time + "]";
+		return "Appointment [id=" + id + ", fullName=" + fullName + ", phone=" + phone + ", procedure=" + procedure
+				+ ", date=" + date + ", time=" + time + "]";
 	}
 
 }

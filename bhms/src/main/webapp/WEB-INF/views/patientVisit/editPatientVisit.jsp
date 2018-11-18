@@ -10,6 +10,7 @@
 	var jsonProducts = '<spring:escapeBody  javaScriptEscape="true">${jsonProducts}</spring:escapeBody>';
 	var jsonExaminations = '<spring:escapeBody  javaScriptEscape="true">${jsonExaminations}</spring:escapeBody>';
 	var jsonDoctors = '${jsonDoctors}';
+	var histry = "";
 </script>
 
 <div id="add-patient-visit-contaner" ng-app="addPatientVisit"
@@ -134,6 +135,7 @@
 
 	</div>
 
+
 	<div>
 		<h5 class="text-warning">Product Used</h5>
 		<table class="table table-bordered">
@@ -142,6 +144,7 @@
 					<th>P-Code</th>
 					<th>P-Name</th>
 					<th>QYT</th>
+					<th>COST</th>
 					<th>F</th>
 				</tr>
 				<tr ng-form name="productUsedForm">
@@ -155,6 +158,7 @@
 					<th><input id="product-quantity" type="number" min="1"
 						ng-model="newProductUsed.quantity" required name="quantity"
 						class="form-control form-control-sm"></th>
+					<th>&nbsp;</th>
 					<th>
 						<button ng-disabled="productUsedForm.$invalid"
 							class="btn btn-sm btn-success rounded-circle"
@@ -170,6 +174,7 @@
 					<td>{{item.product.code}}</td>
 					<td>{{item.product.name}}</td>
 					<td>{{item.quantity}}</td>
+					<td>{{item.cost}}</td>
 					<td>
 						<button class="btn btn-sm btn-danger rounded-circle"
 							ng-click="deleteProductUsed(item.id)">
@@ -182,7 +187,6 @@
 		</table>
 
 	</div>
-
 
 	<div>
 		<h5 class="text-info">Investigation</h5>
@@ -311,7 +315,8 @@
 			ng-model="patientVisit.nextSession">
 	</div>
 
-	<button class="btn btn-warning" ng-click="save()" ng-disabled="doctorTotalRatio()!=1">
+	<button class="btn btn-warning" ng-click="save()"
+		ng-disabled="doctorTotalRatio()!=1">
 		<i class="fa fa-save"></i>
 	</button>
 

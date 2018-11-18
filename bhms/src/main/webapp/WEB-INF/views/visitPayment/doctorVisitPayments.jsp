@@ -41,6 +41,7 @@
 						<th>Phone</th>
 						<th>Procedures</th>
 						<th>Payment Time</th>
+						<th>P-Cost</th>
 						<th>Amount</th>
 						<th>Ratio</th>
 						<th>Income</th>
@@ -61,11 +62,24 @@
 
 							<td><fmt:formatDate value="${item.time}"
 									pattern="yyyy-MM-dd hh:mm:ss" /></td>
+
+							<td><c:set var="cost" value="${0}" /> <fmt:formatDate
+									var="paymentDate" value="${item.time}" pattern="yyyy-MM-dd" />
+								<c:forEach items="${item.patientVisit.patientProductUseds}"
+									var="productUsed">
+									<fmt:formatDate var="productUsedDate"
+										value="${productUsed.time}" pattern="yyyy-MM-dd" />
+									<c:if test="${paymentDate==productUsedDate}">
+										<c:set var="cost" value="${cost+productUsed.cost}" />
+									</c:if>
+								</c:forEach> ${cost }</td>
 							<td>${item.paymentAmount}</td>
 							<c:forEach items="${item.patientDoctors}" var="pd">
 								<c:if test="${pd.doctor.id==doctor.id}">
 									<td>${pd.ratio}</td>
-									<td>${item.paymentAmount*pd.ratio}</td>
+									<td><fmt:formatNumber maxFractionDigits="3">
+									${(item.paymentAmount-cost)*pd.ratio}
+									</fmt:formatNumber></td>
 								</c:if>
 							</c:forEach>
 						</tr>
@@ -78,6 +92,7 @@
 						<th>Phone</th>
 						<th>Procedures</th>
 						<th>Payment Time</th>
+						<th>Cost</th>
 						<th>Amount</th>
 						<th>Ratio</th>
 						<th>Income</th>

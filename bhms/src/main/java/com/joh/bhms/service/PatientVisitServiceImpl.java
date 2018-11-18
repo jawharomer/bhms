@@ -1,6 +1,8 @@
 package com.joh.bhms.service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -141,6 +143,7 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 	public void addPatientProductUsed(int id, PatientProductUsed patientProductUsed) {
 		PatientVisit patientVisit = patientVisitDAO.findOne(id);
 
+		double cost = 0;
 		for (int i = 0; i < patientProductUsed.getQuantity(); i++) {
 
 			OrderDetail orderDetail = orderDetailDAO.findByProductCode(patientProductUsed.getProduct().getCode());
@@ -150,9 +153,14 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 						"out of stock with code=" + patientProductUsed.getProduct().getCode());
 			}
 
+			cost += (orderDetail.getPaymentAmount() / orderDetail.getQuantity());
+
 			orderDetailDAO.stockDown(orderDetail.getId());
 			patientProductUsed.getOrderDetailIds().add(orderDetail);
 		}
+
+		Double roundredCost = BigDecimal.valueOf(cost).setScale(3, RoundingMode.HALF_UP).doubleValue();
+		patientProductUsed.setCost(roundredCost);
 
 		patientVisit.getPatientProductUseds().add(patientProductUsed);
 

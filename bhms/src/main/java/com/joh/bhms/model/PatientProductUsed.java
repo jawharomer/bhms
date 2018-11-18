@@ -1,6 +1,7 @@
 package com.joh.bhms.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,6 +15,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "PATIENT_PRODUCT_USED")
@@ -34,6 +40,15 @@ public class PatientProductUsed {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "PDU_ORDER_DETAILS", joinColumns = @JoinColumn(name = "I_PATIENT_PRODUCT_USED"), inverseJoinColumns = @JoinColumn(name = "I_ORDER_DETAIL"))
 	public List<OrderDetail> orderDetailIds = new ArrayList<>();
+
+	@Column(name = "COST")
+	private Double cost;
+
+	@Column(name = "PATIENT_PRODUCT_USED_TIME", updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
+	@ColumnDefault("CURRENT_TIMESTAMP")
+	private Date time;
 
 	public Integer getId() {
 		return id;
@@ -67,10 +82,26 @@ public class PatientProductUsed {
 		this.orderDetailIds = orderDetailIds;
 	}
 
+	public Double getCost() {
+		return cost;
+	}
+
+	public void setCost(Double cost) {
+		this.cost = cost;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
+	}
+
 	@Override
 	public String toString() {
 		return "PatientProductUsed [id=" + id + ", product=" + product + ", quantity=" + quantity + ", orderDetailIds="
-				+ orderDetailIds + "]";
+				+ orderDetailIds + ", cost=" + cost + ", time=" + time + "]";
 	}
 
 }

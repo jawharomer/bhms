@@ -36,6 +36,7 @@
 			<tr>
 				<th>#</th>
 				<th>FullName</th>
+				<th>Phone</th>
 				<th>Next Session</th>
 				<th>T-Price</th>
 				<th>T-Payment</th>
@@ -48,6 +49,7 @@
 				<tr>
 					<td>${item.id}</td>
 					<td>${item.patient.fullName}</td>
+					<td>${item.patient.phone}</td>
 					<td><fmt:formatDate value="${item.nextSession}"
 							pattern="yyyy-MM-dd" /></td>
 

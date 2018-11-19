@@ -1,5 +1,7 @@
 package com.joh.bhms.service;
 
+import java.util.List;
+
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,11 @@ public class DoctorServiceImpl implements DoctorService {
 	@Override
 	public Iterable<Doctor> findAll() {
 		return doctorDAO.findAll();
+	}
+
+	@Override
+	public List<Doctor> findAllExceptAdmin() {
+		return doctorDAO.findAllExceptAdmin();
 	}
 
 	@Override

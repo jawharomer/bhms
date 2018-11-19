@@ -38,7 +38,7 @@
 					Patient Product Used</a></li>
 
 			<li class="list-group-item"><a
-				href="<c:url value="/operations"/>">Investigations</a></li>
+				href="<c:url value="/operations"/>">Procedures</a></li>
 			<li class="list-group-item"><a href="<c:url value="/doctors"/>">Doctors</a></li>
 
 

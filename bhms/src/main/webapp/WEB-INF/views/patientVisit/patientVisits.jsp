@@ -77,9 +77,15 @@
 
 					<td>
 						<div>
-							<a class="btn btn-sm btn-warning" href="<c:url value="/patientVisits/edit/"/>${item.id}">
-								<i class="fa fa-edit"></i>
+							<a class="btn btn-sm btn-warning"
+								href="<c:url value="/patientVisits/edit/"/>${item.id}"> <i
+								class="fa fa-edit"></i>
 							</a>
+
+							<button class="btn btn-sm btn-danger"
+								onclick="deletePatientVisit(${item.id})">
+								<i class="fa fa-times"></i>
+							</button>
 
 						</div>
 					</td>

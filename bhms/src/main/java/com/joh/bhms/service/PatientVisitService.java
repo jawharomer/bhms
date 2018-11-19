@@ -31,4 +31,6 @@ public interface PatientVisitService {
 
 	List<PatientVisit> findAllByPatientId(int id);
 
+	void delete(int id);
+
 }

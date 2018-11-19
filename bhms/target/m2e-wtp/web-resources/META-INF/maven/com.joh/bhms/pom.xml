@@ -20,9 +20,7 @@
 		<apachetiles.version>3.0.5</apachetiles.version>
 		<jackson.library>2.7.5</jackson.library>
 		<springsecurity.version>4.0.4.RELEASE</springsecurity.version>
-		<apache.commons.io.version>
-			2.5
-		</apache.commons.io.version>
+		<apache.commons.io.version>2.5</apache.commons.io.version>
 	</properties>
 
 	<dependencies>
@@ -190,6 +188,9 @@
 			<artifactId>commons-io</artifactId>
 			<version>${apache.commons.io.version}</version>
 		</dependency>
+
+
+
 
 
 

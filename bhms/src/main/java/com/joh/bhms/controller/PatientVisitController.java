@@ -111,7 +111,7 @@ public class PatientVisitController {
 
 		Iterable<Operation> operations = operationService.findAll();
 
-		Iterable<Doctor> doctors = doctorService.findAll();
+		Iterable<Doctor> doctors = doctorService.findAllExceptAdmin();
 
 		model.addAttribute("jsonOperations", mapper.writeValueAsString(operations));
 
@@ -156,7 +156,7 @@ public class PatientVisitController {
 
 		Iterable<Operation> operations = operationService.findAll();
 
-		Iterable<Doctor> doctors = doctorService.findAll();
+		Iterable<Doctor> doctors = doctorService.findAllExceptAdmin();
 
 		model.addAttribute("jsonOperations", mapper.writeValueAsString(operations));
 
@@ -190,6 +190,15 @@ public class PatientVisitController {
 			return "success";
 		}
 
+	}
+
+	@PostMapping(path = "/delete/{id}")
+	public String deletePatientVisit(@PathVariable int id) {
+		logger.info("deletePatientVisit->fired");
+		logger.info("id=" + id);
+
+		patientVisitService.delete(id);
+		return "success";
 	}
 
 	@PostMapping(path = "/{id}/attachedFile")

@@ -1,5 +1,6 @@
 package com.joh.bhms.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +32,9 @@ import com.joh.bhms.validator.PatientVisitValidation;
 
 @Entity
 @Table(name = "PATIENT_VISITS")
-public class PatientVisit {
+public class PatientVisit implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -58,7 +61,7 @@ public class PatientVisit {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date nextSession;
 
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "I_PATIENT_VISIT")
 	private List<PatientDoctor> patientDoctors = new ArrayList<>();
 
@@ -186,9 +189,8 @@ public class PatientVisit {
 	public String toString() {
 		return "PatientVisit [id=" + id + ", patient=" + patient + ", time=" + time + ", note=" + note
 				+ ", nextSession=" + nextSession + ", patientDoctors=" + patientDoctors + ", patientOperations="
-				+ patientOperations + ", patientProductUseds="
-				+ patientProductUseds + ", attachedFiles=" + attachedFiles + ", examinations=" + examinations
-				+ ", treatments=" + treatments + "]";
+				+ patientOperations + ", patientProductUseds=" + patientProductUseds + ", attachedFiles="
+				+ attachedFiles + ", examinations=" + examinations + ", treatments=" + treatments + "]";
 	}
 
 }

@@ -87,8 +87,7 @@
 
 
 	<div class="py-1">
-		<span ng-class="{'text-danger':doctorTotalRatio()!=1}">
-			TotalRatio={{doctorTotalRatio()}} </span>
+		<span> TotalRatio={{doctorTotalRatio()}} </span>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -121,7 +120,7 @@
 			<tbody>
 				<tr ng-repeat="item in patientVisit.patientDoctors">
 					<td>{{item.doctor.fullName}}</td>
-					<td>{{item.ratio}}</td>
+					<td>{{item.ratio|number:3}}</td>
 					<td>
 						<button class="btn btn-sm btn-danger rounded-circle"
 							ng-click="deletePatientDoctor($index)">
@@ -315,8 +314,7 @@
 			ng-model="patientVisit.nextSession">
 	</div>
 
-	<button class="btn btn-warning" ng-click="save()"
-		ng-disabled="doctorTotalRatio()!=1">
+	<button class="btn btn-warning" ng-click="save()">
 		<i class="fa fa-save"></i>
 	</button>
 

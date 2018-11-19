@@ -12,8 +12,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.SerializationUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.joh.bhms.dao.DoctorDAO;
 import com.joh.bhms.dao.OperationDAO;
 import com.joh.bhms.dao.OrderDetailDAO;
 import com.joh.bhms.dao.PatientOperationDAO;
@@ -21,8 +23,10 @@ import com.joh.bhms.dao.PatientVisitDAO;
 import com.joh.bhms.dao.VisitPaymentDAO;
 import com.joh.bhms.exception.CusDataIntegrityViolationException;
 import com.joh.bhms.model.AttachedFile;
+import com.joh.bhms.model.Doctor;
 import com.joh.bhms.model.Operation;
 import com.joh.bhms.model.OrderDetail;
+import com.joh.bhms.model.PatientDoctor;
 import com.joh.bhms.model.PatientOperation;
 import com.joh.bhms.model.PatientProductUsed;
 import com.joh.bhms.model.PatientVisit;
@@ -47,6 +51,9 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 
 	@Autowired
 	private VisitPaymentDAO visitPaymentDAO;
+
+	@Autowired
+	private DoctorDAO doctorDAO;
 
 	@Override
 	public PatientVisit findOne(int id) {
@@ -82,7 +89,39 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 			throw new EntityNotFoundException();
 		}
 
-		// Keep All Doctors from All Today Payments
+		// Update all VisitPayments's Doctors at today payment
+		// 1-Should update doctors before update visitPayments Adding (Admin-Center) to
+		// doctor ratio
+
+		// Remove old one
+
+		patientVisit.getPatientDoctors().removeIf(i -> {
+			if (i.getDoctor().getId() == 1) {
+				return true;
+			}
+			return false;
+		});
+
+		double otherDoctorRatio = 0;
+
+		for (PatientDoctor patientDoctor : patientVisit.getPatientDoctors()) {
+			otherDoctorRatio += patientDoctor.getRatio();
+		}
+
+		// Adding New Admin-Center
+
+		PatientDoctor adminCenter = new PatientDoctor();
+		adminCenter.setRatio(1 - otherDoctorRatio);
+
+		Doctor doctor = doctorDAO.findOne(1);// I Assume Admin center is Id=1
+		if (doctor == null || !doctor.getFullName().toLowerCase().contains("admin")) {
+			throw new CusDataIntegrityViolationException(
+					"Doctor Admin Center not found the Doctor (Admin-Center) must be created (at least contain 'admin' word) and the ID must be 1");
+		}
+
+		adminCenter.setDoctor(doctor);
+		patientVisit.getPatientDoctors().add(adminCenter);
+
 		List<VisitPayment> visitPayments = visitPaymentDAO.findAllAtToday(patientVisit.getId());
 		visitPayments.stream().forEach(e -> {
 			e.setPatientDoctors(new ArrayList<>(patientVisit.getPatientDoctors()));
@@ -114,7 +153,40 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 			}
 
 		});
+
 		return patientVisit;
+	}
+
+	@Transactional
+	@Override
+	public void delete(int id) {
+		PatientVisit patientVisit = patientVisitDAO.findOne(id);
+
+		List<VisitPayment> visitPayments = new ArrayList<>(patientVisit.getVisitPayments());
+
+		List<PatientProductUsed> patientProductUseds = new ArrayList<>(patientVisit.getPatientProductUseds());
+
+		List<AttachedFile> attachedFiles = new ArrayList<>(patientVisit.getAttachedFiles());
+
+		List<PatientOperation> patientOperations = new ArrayList<>(patientVisit.getPatientOperations());
+
+		visitPayments.stream().forEach(i -> {
+			visitPaymentDAO.delete(i.getId());
+		});
+
+		patientProductUseds.stream().forEach(i -> {
+			deletePatientProductUsed(patientVisit.getId(), i.getId());
+		});
+
+		attachedFiles.stream().forEach(i -> {
+			deleteAttachedFile(patientVisit.getId(), i.getId());
+		});
+
+		patientOperations.stream().forEach(i -> {
+			patientOperationDAO.delete(i.getId());
+		});
+
+		patientVisitDAO.delete(id);
 	}
 
 	@Transactional
@@ -150,7 +222,7 @@ public class PatientVisitServiceImpl implements PatientVisitService {
 
 			if (orderDetail == null) {
 				throw new CusDataIntegrityViolationException(
-						"out of stock with code=" + patientProductUsed.getProduct().getCode());
+						"out of stock  (or you may have expire) with code=" + patientProductUsed.getProduct().getCode());
 			}
 
 			cost += (orderDetail.getPaymentAmount() / orderDetail.getQuantity());

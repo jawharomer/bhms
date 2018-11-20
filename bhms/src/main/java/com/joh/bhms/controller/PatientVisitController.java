@@ -81,6 +81,25 @@ public class PatientVisitController {
 		return "patientVisits";
 	}
 
+	@GetMapping(path = "/detail")
+	public String getAllPatientVisitDetail(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date to, Model model) {
+		logger.info("getAllPatientVisit->fired");
+
+		logger.info("from=" + from);
+		logger.info("to=" + to);
+
+		Iterable<PatientVisit> patientVisits = patientVisitService.findAllByTimeBetween(from, to);
+
+		logger.info("patientVisits=" + patientVisits);
+
+		model.addAttribute("patientVisits", patientVisits);
+		model.addAttribute("from", from);
+		model.addAttribute("to", to);
+
+		return "patientVisitsDetail";
+	}
+
 	@GetMapping(path = "/nextSession")
 	public String getAllPatientVisitByNextSession(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date to,
 			Model model) {

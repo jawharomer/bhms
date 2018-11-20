@@ -144,6 +144,23 @@
 			<add-attribute value="patientVisits" />
 		</put-list-attribute>
 	</definition>
+	
+	
+	<!-- PatientVisitsDetail -->
+	<definition name="patientVisitsDetail" extends="adminRoot">
+		<put-attribute name="title" value="Patient" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/patientVisit/patientVisitsDetail.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="patientVisitsDetail" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="patientVisitsDetail" />
+		</put-list-attribute>
+	</definition>
 
 
 	<!-- PatientNextSessions -->

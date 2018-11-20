@@ -2,15 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-
 <div>
 	<div class="py-2">
-		<h3>Patient Visits</h3>
+		<h3>Visits Detail</h3>
 	</div>
 
 	<div>
-		<form action="<c:url value="/patientVisits" />">
+		<form action="<c:url value="/patientVisits/detail" />">
 			<table>
 				<tr>
 					<td class="text-left">From</td>
@@ -42,12 +40,14 @@
 		<thead>
 			<tr>
 				<th>#</th>
-				<th>FullName</th>
+				<th>P.Name</th>
 				<th>Time</th>
+				<th>Procedures</th>
 				<th>T-Price</th>
+				<th>ProductUsed</th>
+				<th>Cost</th>
 				<th>T-Payment</th>
-				<th>T-Unpaid</th>
-				<th>F</th>
+				<th>Doctors</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -57,39 +57,27 @@
 					<td>${item.patient.fullName}</td>
 					<td><fmt:formatDate value="${item.time}"
 							pattern="yyyy-MM-dd hh:mm:ss" /></td>
-
 					<c:set var="totalPrice" value="${0}" />
-					<c:forEach items="${item.patientOperations}" var="oItem">
-						<c:set var="totalPrice" value="${totalPrice+oItem.price}" />
-					</c:forEach>
+					<td><c:forEach items="${item.patientOperations}" var="oItem">${oItem.operation},
+							<c:set var="totalPrice" value="${totalPrice+oItem.price}" />
+						</c:forEach></td>
 					<td>${totalPrice}</td>
-
+					<c:set var="cost" value="${0}" />
+					<td><c:forEach items="${item.patientProductUseds}"
+							var="productUsed">
+							<c:set var="cost" value="${cost+productUsed.cost}" />
+							${productUsed.product.name},
+						</c:forEach></td>
+					<td>${cost}</td>
 					<c:set var="totalPayment" value="${0}" />
 					<c:forEach items="${item.visitPayments}" var="pItem">
 						<c:set var="totalPayment"
 							value="${totalPayment+pItem.paymentAmount}" />
 					</c:forEach>
-					<td><a class="btn btn-sm btn-info"
-						href="<c:url value="/visitPayments/patientVisit/" />${item.id}">
-							<i class="fa fa-eye"></i>
-					</a> &nbsp; ${totalPayment}</td>
-					<td>${totalPrice-totalPayment}</td>
-
-					<td>
-						<div>
-							<a class="btn btn-sm btn-warning"
-								href="<c:url value="/patientVisits/edit/"/>${item.id}"> <i
-								class="fa fa-edit"></i>
-							</a>
-
-							<button class="btn btn-sm btn-danger"
-								onclick="deletePatientVisit(${item.id})">
-								<i class="fa fa-times"></i>
-							</button>
-
-						</div>
-					</td>
-
+					<td>${totalPayment}</td>
+					<td><c:forEach items="${item.patientDoctors}" var="pdItem">
+					${pdItem.doctor.fullName},
+					</c:forEach></td>
 				</tr>
 			</c:forEach>
 		</tbody>

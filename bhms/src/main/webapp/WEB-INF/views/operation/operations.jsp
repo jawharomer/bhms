@@ -3,15 +3,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div>
+
 	<div class="py-2">
 		<h3>Procedures</h3>
 		<button class="btn btn-success" onclick="getAddingOperation()">
 			<i class="fa fa-plus"></i>
 		</button>
-
 	</div>
 
-	<table class="table table-bordered">
+	<table id="operations-table" class="display nowrap">
 		<thead>
 			<tr>
 				<th>#</th>

@@ -1,3 +1,30 @@
+$(document).ready()
+{
+	// S-DataTable
+	var table = $('#operations-table').DataTable({
+		paginate : false,
+		dom : 'Bfrtip',
+		buttons : [ {
+			extend : "excel",
+			charset : 'UTF-8',
+			className : "btn btn-sm  btn-outline-info",
+			exportOptions : {
+				columns : ':not(.cus-not-export)'
+			}
+		}, {
+			extend : "csv",
+			charset : 'UTF-8',
+			className : "btn btn-sm btn-outline-info",
+			exportOptions : {
+				columns : ':not(.cus-not-export)'
+			}
+		} ],
+		bInfo : false
+	});
+	// E-DataTable
+
+}
+
 function getAddingOperation() {
 	console.log("getAddingOperation->fired");
 	$.ajax({

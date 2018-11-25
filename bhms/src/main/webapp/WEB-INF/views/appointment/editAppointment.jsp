@@ -26,10 +26,30 @@
 				</tr>
 
 				<tr>
-					<td>Procedure</td>
-					<td><sf:input cssClass="form-control form-control-sm"
-							path="procedure" /></td>
-					<td><sf:errors path="procedure" /></td>
+					<td>Visit Case</td>
+					<td>
+						<table>
+							<tr>
+								<td>Control</td>
+								<td><sf:radiobutton path="visitCase" value="Control" /></td>
+							</tr>
+
+							<tr>
+								<td>Hair Removal Laser</td>
+								<td><sf:radiobutton path="visitCase" value="Hair Removal Laser" /></td>
+							</tr>
+
+							<tr>
+								<td>Next Session</td>
+								<td><sf:radiobutton path="visitCase" value="Next Session" /></td>
+							</tr>
+							<tr>
+								<td>Doctor Visit</td>
+								<td><sf:radiobutton path="visitCase" value="Doctor Visit" /></td>
+							</tr>
+						</table>
+					</td>
+					<td><sf:errors path="visitCase" /></td>
 				</tr>
 
 				<tr>

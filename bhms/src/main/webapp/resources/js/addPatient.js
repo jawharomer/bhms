@@ -54,9 +54,9 @@ app.controller('addPatient', function($scope, $http) {
 	$scope.save = function() {
 		console.log("save->fired");
 		console.log("$scope.patient=", $scope.patient);
-		
-		if($scope.patient.allergy=="No"){
-			$scope.patient.allergyNote="";
+
+		if ($scope.patient.allergy == "No") {
+			$scope.patient.allergyNote = "";
 		}
 
 		$http({
@@ -64,13 +64,14 @@ app.controller('addPatient', function($scope, $http) {
 			data : $scope.patient,
 			url : $$ContextURL + '/patients/add'
 		}).then(function(response) {
-			$("#modal-body").html(response.data);
-			$("#modal").modal("show");
-		}, function(response) {
 			console.log(response);
 			document.open();
 			document.write(response.data);
 			document.close();
+		}, function(response) {
+
+			$("#modal-body").html(response.data);
+			$("#modal").modal("show");
 		});
 
 	}

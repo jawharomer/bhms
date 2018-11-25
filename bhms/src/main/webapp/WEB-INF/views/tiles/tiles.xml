@@ -312,6 +312,23 @@
 			<add-attribute value="operations" />
 		</put-list-attribute>
 	</definition>
+	
+	
+	<!-- Operations -->
+	<definition name="doctorIncomes" extends="adminRoot">
+		<put-attribute name="title" value="AddPatienVisit" />
+		<put-attribute name="adminBody"
+			value="/WEB-INF/views/income/doctorIncomes.jsp" cascade="true" />
+		<put-list-attribute name="requiredCSSFiles"
+			inherit="true">
+			<add-attribute value="doctorIncomes" />
+		</put-list-attribute>
+
+		<put-list-attribute name="requiredJSFiles"
+			inherit="true">
+			<add-attribute value="doctorIncomes" />
+		</put-list-attribute>
+	</definition>
 
 
 

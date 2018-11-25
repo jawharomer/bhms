@@ -28,6 +28,11 @@
 			</a>
 			</td>
 		</tr>
+
+		<tr class="text-info">
+			<td>Visit Case</td>
+			<td>{{patientVisit.visitCase}}</td>
+		</tr>
 	</table>
 
 	<table class="table table-borderd">

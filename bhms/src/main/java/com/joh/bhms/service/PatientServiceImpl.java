@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.joh.bhms.dao.PatientDAO;
+import com.joh.bhms.exception.CusDataIntegrityViolationException;
 import com.joh.bhms.model.Patient;
 
 @Service
@@ -21,16 +22,20 @@ public class PatientServiceImpl implements PatientService {
 
 	@Override
 	public Patient save(Patient patient) {
-		return patientDAO.save(patient);
+		try {
+			return patientDAO.save(patient);
+		} catch (Exception e) {
+			throw new CusDataIntegrityViolationException("This patient is already exists");
+		}
 	}
-	
+
 	@Override
 	public Patient findOne(int id) {
 		return patientDAO.findOne(id);
 	}
-	
+
 	@Override
 	public void delete(int id) {
-		 patientDAO.delete(id);
+		patientDAO.delete(id);
 	}
 }

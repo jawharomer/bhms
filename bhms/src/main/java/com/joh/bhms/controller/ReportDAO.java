@@ -1,14 +1,17 @@
 package com.joh.bhms.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 import org.springframework.stereotype.Component;
 
+import com.joh.bhms.domain.model.DoctorIncomeD;
 import com.joh.bhms.domain.model.NotificationD;
 import com.joh.bhms.domain.model.NotificationD.NotificationType;
 
@@ -108,6 +111,47 @@ public class ReportDAO {
 		List<String> totalExaminations = query.getResultList();
 		examinations.addAll(totalExaminations);
 		return totalExaminations;
+	}
+
+	public List<DoctorIncomeD> findAllDoctorIncome(Date from, Date to) {
+		List<DoctorIncomeD> doctorIncomeDs = new ArrayList<>();
+
+		Query query = em.createNativeQuery("SELECT I_DOCTOR,FULL_NAME,SUM(RATIO*TOTAL_INCOME) INCOME FROM\n"
+				+ "VISIT_PAYMENT_PATIENT_DOCTORS VPPD\n" + "INNER JOIN \n"
+				+ "(SELECT I_VISIT_PAYMENT,IFNULL(SUM(PAYMENT_AMOUNT),0)-IFNULL(SUM(COST),0)  TOTAL_INCOME FROM VISIT_PAYMENTS VP\n"
+				+ "INNER JOIN PATIENT_VISITS PV USING(I_PATIENT_VISIT)\n"
+				+ "LEFT OUTER JOIN PATIENT_PRODUCT_USED PDU ON PV.I_PATIENT_VISIT=PDU.I_PATIENT_VISIT\n"
+				+ "AND DATE(PAYMENT_TIME)=DATE(PATIENT_PRODUCT_USED_TIME)\n"
+				+ "WHERE PAYMENT_TIME BETWEEN :from AND :to\n" + "GROUP BY I_VISIT_PAYMENT) VT\n"
+				+ "USING (I_VISIT_PAYMENT)\n" + "INNER JOIN PATIENT_DOCTORS PD  USING(I_PATIENT_DOCTOR)\n"
+				+ "INNER JOIN DOCTORS USING(I_DOCTOR)\n" + "GROUP BY I_DOCTOR;");
+
+		query.setParameter("from", from, TemporalType.DATE);
+		query.setParameter("to", to, TemporalType.DATE);
+
+		List<Object[]> resultRows = query.getResultList();
+
+		for (Object columns[] : resultRows) {
+			DoctorIncomeD doctorIncomeD = new DoctorIncomeD();
+
+			doctorIncomeD.setDoctorId("" + columns[0]);
+			doctorIncomeD.setFullName("" + columns[1]);
+			doctorIncomeD.setIncome(Double.parseDouble("" + columns[2]));
+			doctorIncomeDs.add(doctorIncomeD);
+
+		}
+		return doctorIncomeDs;
+	}
+
+	public double findProductUsedCost(Date from, Date to) {
+
+		Query query = em.createNativeQuery("SELECT IFNULL(SUM(COST),0) FROM \n" + "VISIT_PAYMENTS VP\n"
+				+ "INNER JOIN PATIENT_VISITS PV USING(I_PATIENT_VISIT)\n" + "INNER JOIN \n"
+				+ "PATIENT_PRODUCT_USED PDO USING(I_PATIENT_VISIT)\n" + "WHERE PAYMENT_TIME BETWEEN :from AND :to ");
+
+		query.setParameter("from", from, TemporalType.DATE);
+		query.setParameter("to", to, TemporalType.DATE);
+		return Double.parseDouble("" + query.getSingleResult());
 	}
 
 }

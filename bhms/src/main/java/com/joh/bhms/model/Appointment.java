@@ -37,8 +37,8 @@ public class Appointment {
 	@Column(name = "PHONE")
 	private String phone;
 
-	@Column(name = "APPOINTMENT_PROCEDURE")
-	private String procedure;
+	@Column(name = "VISIT_CASE")
+	private String visitCase;
 
 	@NotNull(message = "Date is  null")
 	@Column(name = "APPOINTMENT_DATE")
@@ -93,17 +93,17 @@ public class Appointment {
 		this.time = time;
 	}
 
-	public String getProcedure() {
-		return procedure;
+	public String getVisitCase() {
+		return visitCase;
 	}
 
-	public void setProcedure(String procedure) {
-		this.procedure = procedure;
+	public void setVisitCase(String visitCase) {
+		this.visitCase = visitCase;
 	}
 
 	@Override
 	public String toString() {
-		return "Appointment [id=" + id + ", fullName=" + fullName + ", phone=" + phone + ", procedure=" + procedure
+		return "Appointment [id=" + id + ", fullName=" + fullName + ", phone=" + phone + ", visitCase=" + visitCase
 				+ ", date=" + date + ", time=" + time + "]";
 	}
 

@@ -45,7 +45,9 @@
 				href="<c:url value="/patientVisits/detail"/>?from=${currentDate}&to=${tomorrow}">
 					Visits Detail</a></li>
 
-
+			<li class="list-group-item text-warning"><a
+				href="<c:url value="/incomes/doctors"/>?from=${currentDate}&to=${tomorrow}">
+					Doctor Incomes</a></li>
 
 			<li><h4 class="text-info p-1 pl-2">Stock</h4></li>
 			<li class="list-group-item text-info"><a

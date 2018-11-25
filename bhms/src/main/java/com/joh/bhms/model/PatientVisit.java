@@ -41,6 +41,9 @@ public class PatientVisit implements Serializable {
 	@Column(name = "I_PATIENT_VISIT")
 	private Integer id;
 
+	@Column(name = "VISIT_CASE")
+	private String visitCase;
+
 	@Valid
 	@NotNull(groups = { PatientVisitValidation.Insert.class })
 	@ManyToOne()
@@ -185,12 +188,25 @@ public class PatientVisit implements Serializable {
 		this.nextSession = nextSession;
 	}
 
+	public String getVisitCase() {
+		return visitCase;
+	}
+
+	public void setVisitCase(String visitCase) {
+		this.visitCase = visitCase;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
-		return "PatientVisit [id=" + id + ", patient=" + patient + ", time=" + time + ", note=" + note
-				+ ", nextSession=" + nextSession + ", patientDoctors=" + patientDoctors + ", patientOperations="
-				+ patientOperations + ", patientProductUseds=" + patientProductUseds + ", attachedFiles="
-				+ attachedFiles + ", examinations=" + examinations + ", treatments=" + treatments + "]";
+		return "PatientVisit [id=" + id + ", patient=" + patient + ", visitCase=" + visitCase + ", time=" + time
+				+ ", note=" + note + ", nextSession=" + nextSession + ", patientDoctors=" + patientDoctors
+				+ ", patientOperations=" + patientOperations + ", patientProductUseds=" + patientProductUseds
+				+ ", attachedFiles=" + attachedFiles + ", examinations=" + examinations + ", treatments=" + treatments
+				+ "]";
 	}
 
 }

@@ -118,8 +118,8 @@ public class PatientController {
 			return "addPatient";
 
 		} else {
-			patientService.save(patient);
-			return "success";
+			patient = patientService.save(patient);
+			return "redirect:/patientVisits/add/" + patient.getId();
 		}
 
 	}

@@ -38,7 +38,7 @@
 	<hr>
 
 
-	<table id="patients-table" class="display nowrap">
+	<table id="patient-visits-table" class="display nowrap">
 		<thead>
 			<tr>
 				<th>#</th>

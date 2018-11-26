@@ -62,7 +62,7 @@ app.controller('addPatient', function($scope, $http) {
 		$http({
 			method : 'POST',
 			data : $scope.patient,
-			url : $$ContextURL + '/patients/add'
+			url : $$ContextURL + '/patients/update'
 		}).then(function(response) {
 			$("#modal-body").html(response.data);
 			$("#modal").modal("show");

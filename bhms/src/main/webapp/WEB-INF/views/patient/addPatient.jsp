@@ -91,7 +91,7 @@
 			<td>Gender</td>
 			<td><label> <input name="gender" required="required"
 					type="radio" class="radio-inline" ng-model="patient.gender"
-					ng-value="0"> Male
+					ng-value="1"> Male
 			</label> <label> <input type="radio" name="gender"
 					class="radio-inline" ng-model="patient.gender" ng-value="0">Female
 			</label></td>

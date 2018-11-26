@@ -148,6 +148,38 @@ public class PatientController {
 		return "editPatient";
 	}
 
+	@PostMapping(path = "/update")
+	public String update(@RequestBody @Valid Patient patient, BindingResult result, HttpServletResponse response,
+			Model model) throws JsonProcessingException {
+		logger.info("addPatient->fired");
+
+		logger.info("patient=" + patient);
+
+		logger.info("errors=" + result.getAllErrors());
+
+		if (result.hasErrors()) {
+
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
+			ObjectMapper mapper = new ObjectMapper();
+
+			Iterable<VisitReference> visitReferences = visitReferenceService.findAll();
+			List<String> chronicDiseases = reportService.findAllChronicDisease();
+			logger.info("chronicDiseases=" + chronicDiseases);
+
+			model.addAttribute("jsonPatient", mapper.writeValueAsString(patient));
+			model.addAttribute("jsonVisitReferences", mapper.writeValueAsString(visitReferences));
+			model.addAttribute("jsonChronicDiseases", mapper.writeValueAsString(chronicDiseases));
+
+			return "editPatient";
+
+		} else {
+			patient = patientService.update(patient);
+			return "success";
+		}
+
+	}
+
 	@PostMapping(path = "/delete/{id}")
 	private String deletePatient(@PathVariable int id) {
 		logger.info("deletePatient->fired");

@@ -30,6 +30,13 @@ public class PatientServiceImpl implements PatientService {
 	}
 
 	@Override
+	public Patient update(Patient patient) {
+		if (patientDAO.findOne(patient.getId()) == null)
+			throw new CusDataIntegrityViolationException("Patient not found");
+		return patientDAO.save(patient);
+	}
+
+	@Override
 	public Patient findOne(int id) {
 		return patientDAO.findOne(id);
 	}

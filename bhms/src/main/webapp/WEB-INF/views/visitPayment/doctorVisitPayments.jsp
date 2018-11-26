@@ -41,6 +41,7 @@
 						<th>Phone</th>
 						<th>Procedures</th>
 						<th>Payment Time</th>
+						<th>Product Used</th>
 						<th>P-Cost</th>
 						<th>Amount</th>
 						<th>Ratio</th>
@@ -71,8 +72,10 @@
 										value="${productUsed.time}" pattern="yyyy-MM-dd" />
 									<c:if test="${paymentDate==productUsedDate}">
 										<c:set var="cost" value="${cost+productUsed.cost}" />
+										${productUsed.product.code},
 									</c:if>
-								</c:forEach> ${cost }</td>
+								</c:forEach>
+							<td>${cost }</td>
 							<td>${item.paymentAmount}</td>
 							<c:forEach items="${item.patientDoctors}" var="pd">
 								<c:if test="${pd.doctor.id==doctor.id}">
@@ -92,6 +95,7 @@
 						<th>Phone</th>
 						<th>Procedures</th>
 						<th>Payment Time</th>
+						<th>Product Used</th>
 						<th>Cost</th>
 						<th>Amount</th>
 						<th>Ratio</th>

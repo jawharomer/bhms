@@ -2,6 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<script>
+	var reportTitle = '<fmt:formatDate value="${from}" pattern="yyyy-MM-dd"/>_To_<fmt:formatDate value="${to}" pattern="yyyy-MM-dd"/>';
+</script>
+
+
 <div>
 	<div class="py-2">
 		<h3>Doctor Incomes</h3>
@@ -27,6 +32,7 @@
 					<td><input class="btn btn-outline-info" type="submit"
 						value="View" /></td>
 				</tr>
+
 			</table>
 		</form>
 
@@ -34,9 +40,12 @@
 	</div>
 
 	<hr>
-	
+
 	<div class="text-danger">
-		<h5>Total Cost:${ productUsedCost}</h5>
+		<h5>
+			Total Cost:
+			<fmt:formatNumber value="${productUsedCost}" maxFractionDigits="3" />
+		</h5>
 	</div>
 
 	<table id="doctor-incomes-table" class="display nowrap">
@@ -52,9 +61,18 @@
 				<tr>
 					<td>${item.doctorId}</td>
 					<td>${item.fullName}</td>
-					<td>${item.income}</td>
+					<td><fmt:formatNumber value="${item.income}"
+							maxFractionDigits="3" /></td>
 				</tr>
 			</c:forEach>
+			<c:if test="${productUsedCost!=0.0}">
+				<tr class="text-danger">
+					<td>0</td>
+					<td>Total Cost</td>
+					<td><fmt:formatNumber value="${productUsedCost}"
+							maxFractionDigits="3" /></td>
+				</tr>
+			</c:if>
 		</tbody>
 	</table>
 

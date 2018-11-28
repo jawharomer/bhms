@@ -2,6 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<script>
+	var reportTitle = '<fmt:formatDate value="${from}" pattern="yyyy-MM-dd"/>_To_<fmt:formatDate value="${to}" pattern="yyyy-MM-dd"/>';
+</script>
+
 <div>
 	<div class="py-2">
 		<h3>Visits Detail</h3>
@@ -36,7 +40,7 @@
 	<hr>
 
 
-	<table id="patients-table" class="display nowrap">
+	<table id="patient-visit-detail-table" class="display nowrap">
 		<thead>
 			<tr>
 				<th>#</th>

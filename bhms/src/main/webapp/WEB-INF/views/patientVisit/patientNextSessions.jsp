@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<script>
+	var reportTitle = 'To_<fmt:formatDate value="${to}" pattern="yyyy-MM-dd"/>';
+</script>
 
 <div>
 	<div class="py-2">

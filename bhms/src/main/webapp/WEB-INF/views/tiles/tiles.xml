@@ -66,7 +66,7 @@
 
 	<!-- Notifications -->
 	<definition name="notifications" extends="adminRoot">
-		<put-attribute name="title" value="BHMS" />
+		<put-attribute name="title" value="Notifications" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/admin/notifications.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
@@ -83,7 +83,7 @@
 
 	<!-- Patients -->
 	<definition name="patients" extends="adminRoot">
-		<put-attribute name="title" value="Patient" />
+		<put-attribute name="title" value="Patients" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/patient/patients.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
@@ -99,7 +99,7 @@
 
 	<!-- Add Patient -->
 	<definition name="addPatient" extends="adminRoot">
-		<put-attribute name="title" value="Patient" />
+		<put-attribute name="title" value="Add Patient" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/patient/addPatient.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
@@ -115,7 +115,7 @@
 
 	<!-- Edit Patient -->
 	<definition name="editPatient" extends="adminRoot">
-		<put-attribute name="title" value="Patient" />
+		<put-attribute name="title" value="Edit Patient" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/patient/editPatient.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
@@ -131,7 +131,7 @@
 
 	<!-- PatientVisits -->
 	<definition name="patientVisits" extends="adminRoot">
-		<put-attribute name="title" value="Patient" />
+		<put-attribute name="title" value="Patient Visits" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/patientVisit/patientVisits.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
@@ -144,13 +144,14 @@
 			<add-attribute value="patientVisits" />
 		</put-list-attribute>
 	</definition>
-	
-	
+
+
 	<!-- PatientVisitsDetail -->
 	<definition name="patientVisitsDetail" extends="adminRoot">
-		<put-attribute name="title" value="Patient" />
+		<put-attribute name="title" value="Patient Visit Detail" />
 		<put-attribute name="adminBody"
-			value="/WEB-INF/views/patientVisit/patientVisitsDetail.jsp" cascade="true" />
+			value="/WEB-INF/views/patientVisit/patientVisitsDetail.jsp"
+			cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
 			inherit="true">
 			<add-attribute value="patientVisitsDetail" />
@@ -165,7 +166,7 @@
 
 	<!-- PatientNextSessions -->
 	<definition name="patientNextSessions" extends="adminRoot">
-		<put-attribute name="title" value="Patient" />
+		<put-attribute name="title" value="Patient Next Session" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/patientVisit/patientNextSessions.jsp"
 			cascade="true" />
@@ -184,7 +185,7 @@
 
 	<!-- PatientVisits -->
 	<definition name="patientPatientVisits" extends="adminRoot">
-		<put-attribute name="title" value="Patient" />
+		<put-attribute name="title" value="Patient Visits" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/patientVisit/patientPatientVisits.jsp"
 			cascade="true" />
@@ -204,7 +205,7 @@
 
 	<!-- PatientProductUsed -->
 	<definition name="patientProductUseds" extends="adminRoot">
-		<put-attribute name="title" value="Patient" />
+		<put-attribute name="title" value="Patient Product Used" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/patientVisit/patientProductUseds.jsp"
 			cascade="true" />
@@ -223,7 +224,7 @@
 
 	<!-- AddPatientVisit -->
 	<definition name="addPatientVisit" extends="adminRoot">
-		<put-attribute name="title" value="AddPatienVisit" />
+		<put-attribute name="title" value="Add Patient Visit" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/patientVisit/addPatientVisit.jsp"
 			cascade="true" />
@@ -241,7 +242,7 @@
 
 	<!-- EditPatientVisit -->
 	<definition name="editPatientVisit" extends="adminRoot">
-		<put-attribute name="title" value="EditPatienVisit" />
+		<put-attribute name="title" value="Edit Patient Visit" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/patientVisit/editPatientVisit.jsp"
 			cascade="true" />
@@ -262,7 +263,8 @@
 
 	<!-- PatientVisitPayments -->
 	<definition name="patientVisitPayments" extends="adminRoot">
-		<put-attribute name="title" value="AddPatienVisit" />
+		<put-attribute name="title"
+			value="Patient Visit Payments" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/visitPayment/patientVisitPayments.jsp"
 			cascade="true" />
@@ -280,7 +282,8 @@
 
 	<!-- DoctorVisitPayments -->
 	<definition name="doctorVisitPayments" extends="adminRoot">
-		<put-attribute name="title" value="AddPatienVisit" />
+		<put-attribute name="title"
+			value="Doctor's Patient Payments" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/visitPayment/doctorVisitPayments.jsp"
 			cascade="true" />
@@ -299,7 +302,7 @@
 
 	<!-- Operations -->
 	<definition name="operations" extends="adminRoot">
-		<put-attribute name="title" value="AddPatienVisit" />
+		<put-attribute name="title" value="Procedures" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/operation/operations.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
@@ -312,11 +315,11 @@
 			<add-attribute value="operations" />
 		</put-list-attribute>
 	</definition>
-	
-	
+
+
 	<!-- Operations -->
 	<definition name="doctorIncomes" extends="adminRoot">
-		<put-attribute name="title" value="AddPatienVisit" />
+		<put-attribute name="title" value="Doctor Incomes" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/income/doctorIncomes.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
@@ -334,7 +337,7 @@
 
 	<!-- Doctors -->
 	<definition name="doctors" extends="adminRoot">
-		<put-attribute name="title" value="AddPatienVisit" />
+		<put-attribute name="title" value="Doctors" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/doctor/doctors.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
@@ -354,7 +357,7 @@
 
 	<!-- OrderDetails -->
 	<definition name="orderDetails" extends="adminRoot">
-		<put-attribute name="title" value="orderDetails" />
+		<put-attribute name="title" value="Order Details" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/orderDetail/orderDetails.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
@@ -371,7 +374,7 @@
 
 	<!-- ProductCategories -->
 	<definition name="productCategories" extends="adminRoot">
-		<put-attribute name="title" value="orderDetails" />
+		<put-attribute name="title" value="Product Categories" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/productCategory/productCategories.jsp"
 			cascade="true" />
@@ -389,7 +392,7 @@
 
 	<!-- Vendors -->
 	<definition name="vendors" extends="adminRoot">
-		<put-attribute name="title" value="orderDetails" />
+		<put-attribute name="title" value="Vendors" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/vendor/vendors.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
@@ -421,7 +424,7 @@
 
 	<!--AddOrder -->
 	<definition name="addOrder" extends="adminRoot">
-		<put-attribute name="title" value="orderDetails" />
+		<put-attribute name="title" value="Add Order" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/order/addOrder.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
@@ -438,7 +441,7 @@
 
 	<!--EditOrder -->
 	<definition name="editOrder" extends="adminRoot">
-		<put-attribute name="title" value="orderDetails" />
+		<put-attribute name="title" value="Edit Order" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/order/editOrder.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"
@@ -471,7 +474,7 @@
 
 	<!-- Appointments -->
 	<definition name="appointments" extends="adminRoot">
-		<put-attribute name="title" value="Patient" />
+		<put-attribute name="title" value="Appointments" />
 		<put-attribute name="adminBody"
 			value="/WEB-INF/views/appointment/appointments.jsp" cascade="true" />
 		<put-list-attribute name="requiredCSSFiles"

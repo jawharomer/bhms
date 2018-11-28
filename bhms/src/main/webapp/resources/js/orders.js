@@ -23,18 +23,24 @@ $(document).ready()
 		dom : 'Bfrtip',
 		buttons : [ {
 			extend : "excel",
+			messageTop : reportTitle,
+			filename : reportTitle,
 			className : "btn btn-sm  btn-outline-info",
 			exportOptions : {
 				columns : ':not(.cus-not-export)'
 			}
 		}, {
 			extend : "csv",
+			messageTop : reportTitle,
+			filename : reportTitle,
 			className : "btn btn-sm btn-outline-info",
 			exportOptions : {
 				columns : ':not(.cus-not-export)'
 			}
 		}, {
 			extend : "pdf",
+			messageTop : reportTitle,
+			filename : reportTitle,
 			className : "btn btn-sm btn-outline-info",
 			exportOptions : {
 				columns : ':not(.cus-not-export)'
@@ -59,7 +65,6 @@ $(document).ready()
 
 }
 
-
 function deleteOrder(id) {
 	console.log("deleteOrder->fired");
 	console.log("id=" + id);
@@ -78,4 +83,3 @@ function deleteOrder(id) {
 	});
 
 }
-

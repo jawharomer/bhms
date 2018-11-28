@@ -18,6 +18,12 @@ $(document).ready()
 			exportOptions : {
 				columns : ':not(.cus-not-export)'
 			}
+		}, {
+			extend : "pdf",
+			className : "btn btn-sm btn-outline-info",
+			exportOptions : {
+				columns : ':not(.cus-not-export)'
+			}
 		} ],
 		bInfo : false
 	});

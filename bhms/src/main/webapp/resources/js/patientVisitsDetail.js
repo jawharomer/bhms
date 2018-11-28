@@ -7,6 +7,35 @@ $(document).ready()
 	$("#to").datepicker({
 		dateFormat : "yy-mm-dd"
 	}).datepicker("setDate", $("#to").val());
+	
+	// S-DataTable
+	var table = $('#patient-visit-detail-table').DataTable({
+		paginate : false,
+		dom : 'Bfrtip',
+		buttons : [ {
+			extend : "excel",
+			charset : 'UTF-8',
+			className : "btn btn-sm  btn-outline-info",
+			exportOptions : {
+				columns : ':not(.cus-not-export)'
+			}
+		}, {
+			extend : "csv",
+			charset : 'UTF-8',
+			className : "btn btn-sm btn-outline-info",
+			exportOptions : {
+				columns : ':not(.cus-not-export)'
+			}
+		}, {
+			extend : "pdf",
+			className : "btn btn-sm btn-outline-info",
+			exportOptions : {
+				columns : ':not(.cus-not-export)'
+			}
+		} ],
+		bInfo : false
+	});
+	// E-DataTable
 
 }
 

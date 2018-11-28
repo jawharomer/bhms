@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+
 <div>
 
 	<div class="py-2">
@@ -17,7 +18,7 @@
 				<th>#</th>
 				<th>Name</th>
 				<th>Price</th>
-				<th>F</th>
+				<th class="cus-not-export">F</th>
 			</tr>
 		</thead>
 		<tbody>

@@ -14,6 +14,8 @@ $(document).ready()
 		dom : 'Bfrtip',
 		buttons : [ {
 			extend : "excel",
+			messageTop :reportTitle,
+			filename :reportTitle,
 			charset : 'UTF-8',
 			className : "btn btn-sm  btn-outline-info",
 			exportOptions : {
@@ -21,6 +23,8 @@ $(document).ready()
 			}
 		}, {
 			extend : "csv",
+			messageTop :reportTitle,
+			filename :reportTitle,
 			charset : 'UTF-8',
 			className : "btn btn-sm btn-outline-info",
 			exportOptions : {

@@ -55,6 +55,7 @@
 			</tr>
 		</thead>
 		<tbody>
+			<c:set var="sumTotalPayment" value="${0}" />
 			<c:forEach items="${patientVisits}" var="item">
 				<tr>
 					<td>${item.id}</td>
@@ -78,7 +79,9 @@
 						<c:set var="totalPayment"
 							value="${totalPayment+pItem.paymentAmount}" />
 					</c:forEach>
-					<td>${totalPayment}</td>
+					<td>${totalPayment}<c:set var="sumTotalPayment"
+							value="${sumTotalPayment+totalPayment}" />
+					</td>
 					<td><c:forEach items="${item.patientDoctors}" var="pdItem">
 					${pdItem.doctor.fullName},
 					</c:forEach></td>
@@ -86,5 +89,10 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div class="p-1">
+		Sum Total Payment :
+		<fmt:formatNumber maxFractionDigits="3"> ${sumTotalPayment}
+	</fmt:formatNumber>
+	</div>
 
 </div>

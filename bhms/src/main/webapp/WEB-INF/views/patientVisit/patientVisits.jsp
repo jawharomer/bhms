@@ -54,6 +54,8 @@
 			</tr>
 		</thead>
 		<tbody>
+			<c:set var="sumTotalPayment" value="${0}" />
+
 			<c:forEach items="${patientVisits}" var="item">
 				<tr>
 					<td>${item.id}</td>
@@ -75,7 +77,8 @@
 					<td><a class="btn btn-sm btn-info"
 						href="<c:url value="/visitPayments/patientVisit/" />${item.id}">
 							<i class="fa fa-eye"></i>
-					</a> &nbsp; ${totalPayment}</td>
+					</a> &nbsp; ${totalPayment} <c:set var="sumTotalPayment"
+							value="${sumTotalPayment+totalPayment}" /></td>
 					<td>${totalPrice-totalPayment}</td>
 
 					<td>
@@ -97,5 +100,11 @@
 			</c:forEach>
 		</tbody>
 	</table>
+
+	<div class="p-1">
+		Sum Total Payment :
+		<fmt:formatNumber maxFractionDigits="3"> ${sumTotalPayment}
+	</fmt:formatNumber>
+	</div>
 
 </div>
